@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _workerType: 32768
-  _model: {fileID: 5022602860645237092, guid: 304f7a7b51039564ba3d6932c18bd115, type: 3}
+  _model: {fileID: 5022602860645237092, guid: ff28f33472f932249b52e69556b26bb4, type: 3}
   _image: {fileID: 2800000, guid: cc24d7d0809e8a24d893acbefcc9ce16, type: 3}
   _uiPreview: {fileID: 592167456}
   _markerPrefab: {fileID: 4415512426944027992, guid: c0a66e314564a5c4c95eaf9c9c3943fc, type: 3}

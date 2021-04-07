@@ -30,7 +30,7 @@ public sealed class StaticImageTest : MonoBehaviour
         }
 
         // Inference
-        var model = ModelLoader.Load(_model);
+        var model = ModelLoader.Load(_model, true);
         using var worker = WorkerFactory.CreateWorker(_workerType, model);
 
         using (var tensor = new Tensor(1, 192, 192, 3, source))
