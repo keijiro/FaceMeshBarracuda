@@ -22,6 +22,8 @@ public sealed class StaticImageTest : MonoBehaviour
 
     void Start()
     {
+        _uiPreview.texture = _image;
+
         using var detector = new BlazeFace.FaceDetector(_blazeFace);
         detector.ProcessImage(_image, 0.5f);
 
@@ -34,12 +36,13 @@ public sealed class StaticImageTest : MonoBehaviour
 
         Graphics.Blit(_image, _cropRT, cropScale, cropOffset);
 
-        _uiPreview.texture = _cropRT;
 
         _builder = new FaceMesh.MeshBuilder(_faceMesh);
         _builder.ProcessImage(_cropRT);
 
         _material = new Material(_shader);
+        _material.SetVector("_Scale", cropScale);
+        _material.SetVector("_Offset", cropOffset);
         _material.SetBuffer("_Vertices", _builder.VertexBuffer);
     }
 

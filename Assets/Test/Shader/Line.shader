@@ -4,11 +4,14 @@ Shader "MediaPipe/FaceMesh/Line"
 
     #include "UnityCG.cginc"
 
+    float2 _Scale, _Offset;
     Buffer<float4> _Vertices;
 
     float4 Vertex(uint vid : SV_VertexID) : SV_Position
     {
-        return UnityObjectToClipPos(float4(_Vertices[vid].xy - 0.5, 0, 1));
+        float2 p = _Vertices[vid].xy;
+        p = p * _Scale + _Offset;
+        return UnityObjectToClipPos(float4(p - 0.5, 0, 1));
     }
 
     float4 Fragment(float4 vertex : SV_Position) : SV_Target

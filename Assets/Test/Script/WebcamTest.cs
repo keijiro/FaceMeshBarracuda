@@ -48,6 +48,8 @@ public sealed class WebcamTest : MonoBehaviour
 
     void Update()
     {
+        _previewUI.texture = _webcam.Texture;
+
         _detector.ProcessImage(_webcam.Texture, 0.5f);
 
         var detection = _detector.Detections.FirstOrDefault();
@@ -59,9 +61,10 @@ public sealed class WebcamTest : MonoBehaviour
 
         Graphics.Blit(_webcam.Texture, _cropRT, cropScale, cropOffset);
 
-        _previewUI.texture = _cropRT;
-
         _builder.ProcessImage(_cropRT);
+
+        _material.SetVector("_Scale", cropScale);
+        _material.SetVector("_Offset", cropOffset);
         _material.SetBuffer("_Vertices", _builder.VertexBuffer);
 
         Graphics.DrawMesh(_template, transform.localToWorldMatrix, _material, 0);
