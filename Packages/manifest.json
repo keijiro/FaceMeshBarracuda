@@ -1,7 +1,14 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "Keijiro",
+      "url": "https://registry.npmjs.com",
+      "scopes": [ "jp.keijiro" ]
+    }
+  ],
   "dependencies": {
-    "com.unity.barracuda": "1.3.3-preview",
     "com.unity.ugui": "1.0.0",
-    "com.unity.modules.audio": "1.0.0"
+    "com.unity.modules.audio": "1.0.0",
+    "jp.keijiro.mediapipe.blazeface": "1.0.0"
   }
 }
