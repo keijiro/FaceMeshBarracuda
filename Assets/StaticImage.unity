@@ -166,8 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db190f720990f854e9e530d29d216d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _workerType: 32768
-  _model: {fileID: 5022602860645237092, guid: 9c6a164060344014289ecfbafe7440a3, type: 3}
+  _resources: {fileID: 11400000, guid: 5229689f14aedca45a64a936134b5567, type: 2}
   _image: {fileID: 2800000, guid: a63fbed9f8e751845b1d1f5ea46c8e4b, type: 3}
   _uiPreview: {fileID: 592167456}
   _markerPrefab: {fileID: 4415512426944027992, guid: c0a66e314564a5c4c95eaf9c9c3943fc, type: 3}
