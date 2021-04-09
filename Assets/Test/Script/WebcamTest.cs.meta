@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b3cdfba61eef7d947b34a247461d0c6d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _blazeFace: {fileID: 11400000, guid: bffd9847cd5fccc4e82026bcc7ae255a, type: 2}
+  - _faceMesh: {fileID: 11400000, guid: 5229689f14aedca45a64a936134b5567, type: 2}
+  - _webcam: {instanceID: 0}
+  - _shader: {fileID: 4800000, guid: c16b1636d246e1d48b47645c695faa99, type: 3}
+  - _template: {fileID: 4300000, guid: f70d4adbd1e797c4795038776542bdf8, type: 2}
+  - _previewUI: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
