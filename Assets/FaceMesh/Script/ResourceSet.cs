@@ -1,13 +1,13 @@
 using UnityEngine;
 using Unity.Barracuda;
 
-namespace FaceMesh {
+namespace MediaPipe.FaceMesh {
 
 //
 // ScriptableObject class used to hold references to internal assets
 //
 [CreateAssetMenu(fileName = "FaceMesh",
-                 menuName = "ScriptableObjects/FaceMesh Resource Set")]
+                 menuName = "ScriptableObjects/MediaPipe/FaceMesh Resource Set")]
 public sealed class ResourceSet : ScriptableObject
 {
     public NNModel model;
@@ -15,4 +15,4 @@ public sealed class ResourceSet : ScriptableObject
     public ComputeShader postprocess;
 }
 
-} // namespace FaceMesh
+} // namespace MediaPipe.FaceMesh

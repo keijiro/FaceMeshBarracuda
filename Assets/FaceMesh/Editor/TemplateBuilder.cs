@@ -3,17 +3,17 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace FaceMesh {
+namespace MediaPipe.FaceMesh {
 
 //
 // This tool is only needed to create the template mesh.
 // We can exclude it whenever we use the default template.
 //
-//#if DO_NOT_COMPILE
+#if DO_NOT_COMPILE
 
 static class TemplateBuilder
 {
-    [MenuItem("Assets/Create/Face Mesh/Create")]
+    [MenuItem("Assets/Create/MediaPipe/Face Mesh/Create")]
     static void CreateTemplateMesh()
     {
         ProjectWindowUtil.CreateAsset(BuildLineMesh(), "LineTemplate.asset");
@@ -215,6 +215,6 @@ static class TemplateBuilder
     };
 }
 
-//#endif
+#endif
 
-} // namespace FaceMesh
+} // namespace MediaPipe.FaceMesh

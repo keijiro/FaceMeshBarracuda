@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Barracuda;
 using UnityEngine;
 
-namespace FaceMesh {
+namespace MediaPipe.FaceMesh {
 
 //
 // Main face mesh builder class
@@ -116,4 +116,4 @@ public sealed class MeshBuilder : System.IDisposable
     #endregion
 }
 
-} // namespace FaceMesh
+} // namespace MediaPipe.FaceMesh

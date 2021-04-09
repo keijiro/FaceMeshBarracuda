@@ -1,4 +1,4 @@
-Shader "FaceMesh/Line"
+Shader "MediaPipe/FaceMesh/Line"
 {
     CGINCLUDE
 

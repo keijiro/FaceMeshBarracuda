@@ -1,7 +1,7 @@
 using Unity.Barracuda;
 using UnityEngine;
 
-namespace FaceMesh {
+namespace MediaPipe.FaceMesh {
 
 static class IWorkerExtensions
 {
@@ -22,4 +22,4 @@ static class IWorkerExtensions
     }
 }
 
-} // namespace FaceMesh
+} // namespace MediaPipe.FaceMesh
