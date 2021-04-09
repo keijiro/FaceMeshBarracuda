@@ -4,6 +4,8 @@
 // Postprocessor (tensor to vertex list conversion)
 //
 
+#define VERTEX_COUNT 468
+
 // Input
 Texture2D<float> _Tensor;
 
@@ -13,7 +15,7 @@ RWBuffer<float4> _Vertices;
 [numthreads(52, 1, 1)]
 void Postprocess(uint id : SV_DispatchThreadID)
 {
-    uint offs = id * 3;
+    uint offs = (VERTEX_COUNT - 1 - id) * 3;
 
     float x =     _Tensor[uint2(0, offs + 2)] / 192;
     float y = 1 - _Tensor[uint2(0, offs + 1)] / 192;

@@ -9,23 +9,31 @@ public sealed class StaticImageTest : MonoBehaviour
     [SerializeField] ResourceSet _resources = null;
     [SerializeField] Texture2D _image = null;
     [SerializeField] UI.RawImage _uiPreview = null;
-    [SerializeField] RectTransform _markerPrefab = null;
+    [SerializeField] Shader _shader = null;
+    [SerializeField] Mesh _template = null;
+
+    MeshBuilder _builder;
+    Material _material;
 
     void Start()
     {
-        using var builder = new MeshBuilder(_resources);
+        _uiPreview.texture = _image;
 
-        builder.ProcessImage(_image);
+        _builder = new MeshBuilder(_resources);
+        _builder.ProcessImage(_image);
 
-        var rectSize = ((RectTransform)_uiPreview.transform).rect.size;
-
-        foreach (var v in builder.VertexArray)
-        {
-            var m = Instantiate(_markerPrefab, _uiPreview.transform);
-            ((RectTransform)m.transform).anchoredPosition
-              = new Vector2(v.x, v.y) * rectSize;
-        }
+        _material = new Material(_shader);
+        _material.SetBuffer("_Vertices", _builder.VertexBuffer);
     }
+
+    void OnDestroy()
+    {
+        _builder.Dispose();
+        Destroy(_material);
+    }
+
+    void Update()
+      => Graphics.DrawMesh(_template, transform.localToWorldMatrix, _material, 0);
 }
 
 } // namespace FaceMesh
