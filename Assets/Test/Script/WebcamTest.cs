@@ -48,7 +48,7 @@ public sealed class WebcamTest : MonoBehaviour
         Destroy(_material);
     }
 
-    void Update()
+    void LateUpdate()
     {
         _previewUI.texture = _webcam.Texture;
 
