@@ -14,6 +14,7 @@ public sealed class WebcamTest : MonoBehaviour
     [SerializeField] WebcamInput _webcam = null;
     [SerializeField] Shader _shader = null;
     [SerializeField] Mesh _template = null;
+    [SerializeField] Texture _texture = null;
     [Space]
     [SerializeField] UI.RawImage _previewUI = null;
 
@@ -36,6 +37,7 @@ public sealed class WebcamTest : MonoBehaviour
         _builder = new FaceMesh.MeshBuilder(_faceMesh);
         _cropRT = new RenderTexture(192, 192, 0);
         _material = new Material(_shader);
+        _material.mainTexture = _texture;
     }
 
     void OnDestroy()
