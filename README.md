@@ -17,8 +17,8 @@ About the ONNX file
 -------------------
 
 The ONNX model file contained in this repository was converted using the
-[following Colab notebook]. It's also used to solve some ONNX compatibility
+[this Colab notebook]. It's also used to solve some ONNX compatibility
 issues. Please check the notebook for further details.
 
-[following Colab notebook]:
+[this Colab notebook]:
   https://colab.research.google.com/drive/1C6zEB3__gcHEWnWRm-b4jIA0srA1gkyq?usp=sharing
