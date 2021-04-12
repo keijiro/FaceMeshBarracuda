@@ -22,3 +22,13 @@ issues. Please check the notebook for further details.
 
 [this Colab notebook]:
   https://colab.research.google.com/drive/1C6zEB3__gcHEWnWRm-b4jIA0srA1gkyq?usp=sharing
+
+Acknowledgements
+----------------
+
+This repository contains some stock photos from [Pexels]. [[1]][Test1],
+[[2]][Test2]
+
+[Pexels]: https://www.pexels.com/
+[Test1]: https://www.pexels.com/photo/a-happy-woman-in-black-and-white-shirt-3780866/
+[Test2]: https://www.pexels.com/photo/young-woman-winking-while-getting-a-slice-of-pizza-7142955/
