@@ -8,14 +8,19 @@ public sealed class WebcamTest : MonoBehaviour
 {
     #region Editable attributes
 
+    [SerializeField] WebcamInput _webcam = null;
     [SerializeField] BlazeFace.ResourceSet _blazeFace = null;
     [SerializeField] FaceMesh.ResourceSet _faceMesh = null;
     [Space]
-    [SerializeField] WebcamInput _webcam = null;
-    [SerializeField] Shader _shader = null;
-    [SerializeField] Mesh _template = null;
-    [SerializeField] Texture _texture = null;
+    [SerializeField] Mesh _faceTemplate = null;
+    [SerializeField] Texture _faceTexture = null;
+    [SerializeField] Shader _faceShader = null;
     [Space]
+    [SerializeField] Mesh _wireTemplate = null;
+    [SerializeField] Shader _wireShader = null;
+    [Space]
+    [SerializeField] UI.RawImage _mainUI = null;
+    [SerializeField] UI.RawImage _cropUI = null;
     [SerializeField] UI.RawImage _previewUI = null;
 
     #endregion
@@ -24,8 +29,11 @@ public sealed class WebcamTest : MonoBehaviour
 
     BlazeFace.FaceDetector _detector;
     FaceMesh.MeshBuilder _builder;
+
+    Material _faceMaterial;
+    Material _wireMaterial;
+
     RenderTexture _cropRT;
-    Material _material;
 
     #endregion
 
@@ -35,41 +43,58 @@ public sealed class WebcamTest : MonoBehaviour
     {
         _detector = new BlazeFace.FaceDetector(_blazeFace);
         _builder = new FaceMesh.MeshBuilder(_faceMesh);
+
+        _faceMaterial = new Material(_faceShader);
+        _wireMaterial = new Material(_wireShader);
+
         _cropRT = new RenderTexture(192, 192, 0);
-        _material = new Material(_shader);
-        _material.mainTexture = _texture;
     }
 
     void OnDestroy()
     {
         _detector.Dispose();
         _builder.Dispose();
+
+        Destroy(_faceMaterial);
+        Destroy(_wireMaterial);
+
         Destroy(_cropRT);
-        Destroy(_material);
     }
 
     void LateUpdate()
     {
-        _previewUI.texture = _webcam.Texture;
-
+        // Face detection
         _detector.ProcessImage(_webcam.Texture, 0.5f);
 
+        // Use the first detection. Break if no detection.
         var detection = _detector.Detections.FirstOrDefault();
         if (detection.score == 0) return;
 
-        var cropScale = new Vector2(detection.extent.x,
-                                    detection.extent.y) * 1.5f;
-        var cropOffset = detection.center - cropScale / 2;
+        // Face region cropping
+        var scale = detection.extent * 1.5f;
+        var offset = detection.center - scale * 0.5f;
+        Graphics.Blit(_webcam.Texture, _cropRT, scale, offset);
 
-        Graphics.Blit(_webcam.Texture, _cropRT, cropScale, cropOffset);
-
+        // Face landmark detection
         _builder.ProcessImage(_cropRT);
 
-        _material.SetVector("_Scale", cropScale);
-        _material.SetVector("_Offset", cropOffset);
-        _material.SetBuffer("_Vertices", _builder.VertexBuffer);
+        // Visualization (face)
+        _faceMaterial.mainTexture = _faceTexture;
+        _faceMaterial.SetVector("_Scale", scale);
+        _faceMaterial.SetVector("_Offset", offset - new Vector2(0.25f, 0));
+        _faceMaterial.SetBuffer("_Vertices", _builder.VertexBuffer);
+        Graphics.DrawMesh(_faceTemplate, Matrix4x4.identity, _faceMaterial, 0);
 
-        Graphics.DrawMesh(_template, transform.localToWorldMatrix, _material, 0);
+        // Visualization (wire)
+        _wireMaterial.SetVector("_Scale", Vector2.one * 0.5f);
+        _wireMaterial.SetVector("_Offset", new Vector2(0.75f, 0));
+        _wireMaterial.SetBuffer("_Vertices", _builder.VertexBuffer);
+        Graphics.DrawMesh(_wireTemplate, Matrix4x4.identity, _wireMaterial, 0);
+
+        // UI update
+        _mainUI.texture = _webcam.Texture;
+        _cropUI.texture = _cropRT;
+        _previewUI.texture = _webcam.Texture;
     }
 
     #endregion
