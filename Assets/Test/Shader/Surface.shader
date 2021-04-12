@@ -18,8 +18,9 @@ Shader "Hidden/MediaPipe/FaceMesh/Surface"
                 out float4 outVertex : SV_Position,
                 out float2 outUV : TEXCOORD0)
     {
-        float2 p = _Vertices[vid].xy * _Scale + _Offset;
-        outVertex = UnityObjectToClipPos(float4(p - 0.5, 0, 1));
+        float4 v = _Vertices[vid];
+        v.xy = v.xy * _Scale + _Offset - 0.5;
+        outVertex = UnityObjectToClipPos(float4(v.xyz, 1));
         outUV = uv;
     }
 
@@ -34,7 +35,7 @@ Shader "Hidden/MediaPipe/FaceMesh/Surface"
     SubShader
     {
         Tags { "Queue" = "Overlay" }
-        ZTest Always Cull Off
+        Cull Off
         Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
