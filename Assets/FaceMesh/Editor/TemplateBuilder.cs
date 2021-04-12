@@ -29,6 +29,7 @@ static class TemplateBuilder
         mesh.SetVertices(new Vector3[MeshBuilder.VertexCount]);
         mesh.SetIndices(IndexList, MeshTopology.Triangles, 0);
         mesh.SetUVs(0, uvList);
+        mesh.bounds = new Bounds(Vector3.zero, Vector3.one);
         return mesh;
     }
 
@@ -52,6 +53,7 @@ static class TemplateBuilder
         var mesh = new Mesh();
         mesh.SetVertices(new Vector3[MeshBuilder.VertexCount]);
         mesh.SetIndices(flatten.ToArray(), MeshTopology.Lines, 0);
+        mesh.bounds = new Bounds(Vector3.zero, Vector3.one);
         return mesh;
     }
 
@@ -60,6 +62,7 @@ static class TemplateBuilder
         var mesh = new Mesh();
         mesh.SetVertices(new Vector3[MeshBuilder.VertexCount]);
         mesh.SetIndices(new int[MeshBuilder.VertexCount], MeshTopology.Points, 0);
+        mesh.bounds = new Bounds(Vector3.zero, Vector3.one);
         return mesh;
     }
 
