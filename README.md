@@ -1,7 +1,7 @@
 FaceMeshBarracuda
 =================
 
-![gif](https://i.imgur.com/ETl9jA5.gif)
+![gif](https://i.imgur.com/1n7pnZC.gif)
 
 **FaceMeshBarracuda** is a facial landmark detector that runs the
 [MediaPipe Face Mesh] model on the [Unity Barracuda] neural network inference
