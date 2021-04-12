@@ -26,7 +26,7 @@ Shader "Hidden/MediaPipe/FaceMesh/Surface"
     float4 Fragment(float4 vertex : SV_Position,
                     float2 uv : TEXCOORD0) : SV_Target
     {
-        return tex2D(_MainTex, 1 - uv);
+        return tex2D(_MainTex, uv);
     }
 
     ENDCG
