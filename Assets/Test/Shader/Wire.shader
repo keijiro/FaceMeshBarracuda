@@ -4,14 +4,11 @@ Shader "Hidden/MediaPipe/FaceMesh/Wire"
 
     #include "UnityCG.cginc"
 
-    float2 _Scale, _Offset;
     Buffer<float4> _Vertices;
 
     float4 Vertex(uint vid : SV_VertexID) : SV_Position
     {
-        float2 p = _Vertices[vid].xy;
-        p = p * _Scale + _Offset;
-        return UnityObjectToClipPos(float4(p - 0.5, 0, 1));
+        return UnityObjectToClipPos(_Vertices[vid]);
     }
 
     float4 Fragment(float4 vertex : SV_Position) : SV_Target

@@ -9,18 +9,15 @@ Shader "Hidden/MediaPipe/FaceMesh/Surface"
 
     #include "UnityCG.cginc"
 
-    float2 _Scale, _Offset;
-    Buffer<float4> _Vertices;
     sampler2D _MainTex;
+    Buffer<float4> _Vertices;
 
     void Vertex(uint vid : SV_VertexID,
                 float2 uv : TEXCOORD0,
                 out float4 outVertex : SV_Position,
                 out float2 outUV : TEXCOORD0)
     {
-        float4 v = _Vertices[vid];
-        v.xy = v.xy * _Scale + _Offset - 0.5;
-        outVertex = UnityObjectToClipPos(float4(v.xyz, 1));
+        outVertex = UnityObjectToClipPos(_Vertices[vid]);
         outUV = uv;
     }
 
