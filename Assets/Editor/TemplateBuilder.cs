@@ -1,20 +1,14 @@
-//
-// This tool is only needed to create the template mesh.
-// We can exclude it whenever we use the default template.
-//
-#define EXCLUDE_TEMPLATE_BUILDER
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-#if !EXCLUDE_TEMPLATE_BUILDER
-
-namespace MediaPipe.FaceMesh {
+namespace MediaPipe {
 
 static class TemplateBuilder
 {
+    const int VertexCount = FaceMesh.MeshBuilder.VertexCount;
+
     [MenuItem("Assets/Create/MediaPipe/Face Mesh/Create Template Meshes")]
     static void CreateTemplateMeshes()
     {
@@ -26,7 +20,7 @@ static class TemplateBuilder
     static Mesh BuildMesh()
     {
         var mesh = new Mesh();
-        mesh.SetVertices(new Vector3[MeshBuilder.VertexCount]);
+        mesh.SetVertices(new Vector3[VertexCount]);
         mesh.SetIndices(IndexList, MeshTopology.Triangles, 0);
         mesh.SetUVs(0, uvList);
         mesh.bounds = new Bounds(Vector3.zero, Vector3.one);
@@ -51,7 +45,7 @@ static class TemplateBuilder
           pairs.Distinct().SelectMany(p => new[]{ p.Item1, p.Item2 });
 
         var mesh = new Mesh();
-        mesh.SetVertices(new Vector3[MeshBuilder.VertexCount]);
+        mesh.SetVertices(new Vector3[VertexCount]);
         mesh.SetIndices(flatten.ToArray(), MeshTopology.Lines, 0);
         mesh.bounds = new Bounds(Vector3.zero, Vector3.one);
         return mesh;
@@ -60,8 +54,8 @@ static class TemplateBuilder
     static Mesh BuildPointMesh()
     {
         var mesh = new Mesh();
-        mesh.SetVertices(new Vector3[MeshBuilder.VertexCount]);
-        mesh.SetIndices(new int[MeshBuilder.VertexCount], MeshTopology.Points, 0);
+        mesh.SetVertices(new Vector3[VertexCount]);
+        mesh.SetIndices(new int[VertexCount], MeshTopology.Points, 0);
         mesh.bounds = new Bounds(Vector3.zero, Vector3.one);
         return mesh;
     }
@@ -763,6 +757,4 @@ static class TemplateBuilder
     };
 }
 
-} // namespace MediaPipe.FaceMesh
-
-#endif
+} // namespace MediaPipe

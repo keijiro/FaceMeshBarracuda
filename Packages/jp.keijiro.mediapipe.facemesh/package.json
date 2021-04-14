@@ -1,0 +1,13 @@
+{
+  "author": "Keijiro Takahashi",
+  "dependencies": { "com.unity.barracuda": "1.3.3-preview" },
+  "description": "MediaPipe face landmark detection neural network model for Unity Barracuda",
+  "displayName": "MediaPipe Face Mesh",
+  "keywords": [ "unity" ],
+  "license": "Apache-2.0",
+  "name": "jp.keijiro.mediapipe.facemesh",
+  "repository": "github:keijiro/FaceMeshBarracuda",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "version": "1.0.0"
+}

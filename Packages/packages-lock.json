@@ -45,6 +45,14 @@
       },
       "url": "https://registry.npmjs.com"
     },
+    "jp.keijiro.mediapipe.facemesh": {
+      "version": "file:jp.keijiro.mediapipe.facemesh",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.barracuda": "1.3.3-preview"
+      }
+    },
     "com.unity.modules.audio": {
       "version": "1.0.0",
       "depth": 0,
