@@ -10,7 +10,7 @@
 Texture2D<float> _Tensor;
 
 // Output
-RWBuffer<float4> _Vertices;
+RWStructuredBuffer<float4> _Vertices;
 
 [numthreads(52, 1, 1)]
 void Postprocess(uint id : SV_DispatchThreadID)

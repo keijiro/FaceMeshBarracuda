@@ -10,7 +10,7 @@ Shader "Hidden/MediaPipe/FaceMesh/Surface"
     #include "UnityCG.cginc"
 
     sampler2D _MainTex;
-    Buffer<float4> _Vertices;
+    StructuredBuffer<float4> _Vertices;
 
     void Vertex(uint vid : SV_VertexID,
                 float2 uv : TEXCOORD0,

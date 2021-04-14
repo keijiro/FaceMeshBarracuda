@@ -11,7 +11,7 @@
 sampler2D _Texture;
 
 // Output
-RWBuffer<float> _Tensor;
+RWStructuredBuffer<float> _Tensor;
 
 [numthreads(8, 8, 1)]
 void Preprocess(uint3 id : SV_DispatchThreadID)

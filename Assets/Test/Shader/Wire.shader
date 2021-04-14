@@ -4,7 +4,7 @@ Shader "Hidden/MediaPipe/FaceMesh/Wire"
 
     #include "UnityCG.cginc"
 
-    Buffer<float4> _Vertices;
+    StructuredBuffer<float4> _Vertices;
 
     float4 Vertex(uint vid : SV_VertexID) : SV_Position
     {
