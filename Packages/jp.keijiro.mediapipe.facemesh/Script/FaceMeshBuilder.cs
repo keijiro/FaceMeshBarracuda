@@ -5,9 +5,9 @@ using UnityEngine;
 namespace MediaPipe.FaceMesh {
 
 //
-// Main face mesh builder class
+// Face mesh builder class
 //
-public sealed class MeshBuilder : System.IDisposable
+public sealed class FaceMeshBuilder : System.IDisposable
 {
     #region Public accessors
 
@@ -23,7 +23,7 @@ public sealed class MeshBuilder : System.IDisposable
 
     #region Public methods
 
-    public MeshBuilder(ResourceSet resources)
+    public FaceMeshBuilder(ResourceSet resources)
     {
         _resources = resources;
         AllocateObjects();

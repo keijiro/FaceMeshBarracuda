@@ -11,14 +11,14 @@ public sealed class StaticImageTest : MonoBehaviour
     [SerializeField] Mesh _template = null;
     [SerializeField] UI.RawImage _uiPreview = null;
 
-    FaceMesh.MeshBuilder _builder;
+    FaceMesh.FaceMeshBuilder _builder;
     Material _material;
 
     void Start()
     {
         _uiPreview.texture = _image;
 
-        _builder = new FaceMesh.MeshBuilder(_faceMesh);
+        _builder = new FaceMesh.FaceMeshBuilder(_faceMesh);
         _builder.ProcessImage(_image);
 
         _material = new Material(_shader);

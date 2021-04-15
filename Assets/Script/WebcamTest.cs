@@ -30,7 +30,7 @@ public sealed class WebcamTest : MonoBehaviour
     #region Private members
 
     BlazeFace.FaceDetector _detector;
-    FaceMesh.MeshBuilder _builder;
+    FaceMesh.FaceMeshBuilder _builder;
 
     Material _faceMaterial;
     Material _wireMaterial;
@@ -55,7 +55,7 @@ public sealed class WebcamTest : MonoBehaviour
     void Start()
     {
         _detector = new BlazeFace.FaceDetector(_blazeFace);
-        _builder = new FaceMesh.MeshBuilder(_faceMesh);
+        _builder = new FaceMesh.FaceMeshBuilder(_faceMesh);
 
         _faceMaterial = new Material(_faceShader);
         _wireMaterial = new Material(_wireShader);

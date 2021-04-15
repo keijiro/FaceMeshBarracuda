@@ -7,7 +7,7 @@ namespace MediaPipe {
 
 static class TemplateBuilder
 {
-    const int VertexCount = FaceMesh.MeshBuilder.VertexCount;
+    const int VertexCount = FaceMesh.FaceMeshBuilder.VertexCount;
 
     [MenuItem("Assets/Create/MediaPipe/Face Mesh/Create Template Meshes")]
     static void CreateTemplateMeshes()
