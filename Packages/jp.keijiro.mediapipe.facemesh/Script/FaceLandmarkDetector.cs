@@ -7,7 +7,7 @@ namespace MediaPipe.FaceMesh {
 //
 // Face mesh builder class
 //
-public sealed class FaceMeshBuilder : System.IDisposable
+public sealed class FaceLandmarkDetector : System.IDisposable
 {
     #region Public accessors
 
@@ -23,7 +23,7 @@ public sealed class FaceMeshBuilder : System.IDisposable
 
     #region Public methods
 
-    public FaceMeshBuilder(ResourceSet resources)
+    public FaceLandmarkDetector(ResourceSet resources)
     {
         _resources = resources;
         AllocateObjects();
