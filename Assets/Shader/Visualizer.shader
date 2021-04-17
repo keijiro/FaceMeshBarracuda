@@ -11,6 +11,7 @@ Shader "Hidden/MediaPipe/FaceMesh/Visualizer"
 
     sampler2D _MainTex;
     StructuredBuffer<float4> _Vertices;
+    float4x4 _XForm;
 
     //
     // Textured surface rendering
@@ -42,7 +43,40 @@ Shader "Hidden/MediaPipe/FaceMesh/Visualizer"
 
     float4 FragmentWire(float4 vertex : SV_Position) : SV_Target
     {
-        return float4(1, 1, 1, 0.8);
+        return float4(1, 1, 1, 0.5);
+    }
+
+    //
+    // Keypoint marking
+    //
+
+    float4 VertexMark(uint vid : SV_VertexID) : SV_Position
+    {
+        const uint vindices[] = {
+            1,           // noteTip
+            205,         // rightCheek
+            425,         // leftCheek
+            33, 133,     // rightEyeLower0
+            263, 362,    // leftEyeLower0
+            168,         // midwayBetweenEyes
+            78, 13, 308, // lipsUpperInner
+            14,          // lipsLowerInner
+            70, 55,      // rightEyebrowUpper
+            300, 285     // leftEyebrowUpper
+        };
+
+        float4 p = _Vertices[vindices[vid / 4 % 16]];
+
+        uint tid = vid & 3;
+        p.x += ((tid & 1) - 0.5) * (tid < 2) * 0.05;
+        p.y += ((tid & 1) - 0.5) * (tid > 1) * 0.05;
+
+        return UnityObjectToClipPos(mul(_XForm, float4(p.xy, 0, 1)));
+    }
+
+    float4 FragmentMark(float4 vertex : SV_Position) : SV_Target
+    {
+        return float4(1, 0, 0, 1);
     }
 
     ENDCG
@@ -61,10 +95,18 @@ Shader "Hidden/MediaPipe/FaceMesh/Visualizer"
         }
         Pass
         {
-            Blend SrcAlpha One
+            ZTest Always ZWrite Off Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex VertexWire
             #pragma fragment FragmentWire
+            ENDCG
+        }
+        Pass
+        {
+            ZTest Always ZWrite Off Blend SrcAlpha OneMinusSrcAlpha
+            CGPROGRAM
+            #pragma vertex VertexMark
+            #pragma fragment FragmentMark
             ENDCG
         }
     }

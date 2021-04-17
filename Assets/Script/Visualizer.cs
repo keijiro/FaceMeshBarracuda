@@ -99,7 +99,7 @@ public sealed class Visualizer : MonoBehaviour
 
     void OnRenderObject()
     {
-        // Visualization (face)
+        // Textured surface rendering
         var mf = Matrix4x4.Translate(new Vector3(-0.75f, -0.5f, 0)) *
                  _cropMatrix;
 
@@ -109,7 +109,7 @@ public sealed class Visualizer : MonoBehaviour
 
         Graphics.DrawMeshNow(_faceTemplate, mf);
 
-        // Visualization (wire)
+        // Wireframe mesh rendering
         var mw = Matrix4x4.Translate(new Vector2(0.25f, -0.5f)) *
                  Matrix4x4.Scale(new Vector3(0.5f, 0.5f, 1));
 
@@ -117,6 +117,12 @@ public sealed class Visualizer : MonoBehaviour
         _faceMaterial.SetPass(1);
 
         Graphics.DrawMeshNow(_wireTemplate, mw);
+
+        // Keypoint marking
+        _faceMaterial.SetBuffer("_Vertices", _landmarkDetector.VertexBuffer);
+        _faceMaterial.SetMatrix("_XForm", mw);
+        _faceMaterial.SetPass(2);
+        Graphics.DrawProceduralNow(MeshTopology.Lines, 400, 1);
     }
 
     #endregion
