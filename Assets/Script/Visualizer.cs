@@ -13,12 +13,10 @@ public sealed class Visualizer : MonoBehaviour
     [SerializeField] FaceMesh.ResourceSet _faceMesh = null;
     [Space]
     [SerializeField] Mesh _faceTemplate = null;
-    [SerializeField] Texture _faceTexture = null;
-    [SerializeField] Shader _faceShader = null;
-    [Space]
     [SerializeField] Mesh _wireTemplate = null;
-    [SerializeField] Shader _wireShader = null;
+    [SerializeField] Texture _faceTexture = null;
     [Space]
+    [SerializeField] Shader _faceShader = null;
     [SerializeField] Shader _cropShader = null;
     [Space]
     [SerializeField] UI.RawImage _mainUI = null;
@@ -33,20 +31,10 @@ public sealed class Visualizer : MonoBehaviour
     FaceMesh.FaceLandmarkDetector _landmarkDetector;
 
     Material _faceMaterial;
-    Material _wireMaterial;
     Material _cropMaterial;
 
+    Matrix4x4 _cropMatrix;
     RenderTexture _cropRT;
-
-    Matrix4x4 MakeBlitMatrix(Vector2 offset, float rotation, Vector2 scale)
-    {
-        return
-          Matrix4x4.Translate(offset) *
-          Matrix4x4.Scale(new Vector3(scale.x, scale.y, 1)) *
-          Matrix4x4.Translate(new Vector3(0.5f, 0.5f, 0)) *
-          Matrix4x4.Rotate(Quaternion.Euler(0, 0, rotation)) *
-          Matrix4x4.Translate(new Vector3(-0.5f, -0.5f, 0));
-    }
 
     #endregion
 
@@ -58,7 +46,6 @@ public sealed class Visualizer : MonoBehaviour
         _landmarkDetector = new FaceMesh.FaceLandmarkDetector(_faceMesh);
 
         _faceMaterial = new Material(_faceShader);
-        _wireMaterial = new Material(_wireShader);
         _cropMaterial = new Material(_cropShader);
 
         _cropRT = new RenderTexture(192, 192, 0);
@@ -70,7 +57,6 @@ public sealed class Visualizer : MonoBehaviour
         _landmarkDetector.Dispose();
 
         Destroy(_faceMaterial);
-        Destroy(_wireMaterial);
         Destroy(_cropMaterial);
 
         Destroy(_cropRT);
@@ -91,28 +77,46 @@ public sealed class Visualizer : MonoBehaviour
         var angle = Vector2.Angle(Vector2.up, detection.nose - detection.mouth);
         if (detection.nose.x > detection.mouth.x) angle *= -1;
 
+        // Crop matrix calculation
+        _cropMatrix = Matrix4x4.Translate(offset) *
+                      Matrix4x4.Scale(new Vector3(scale.x, scale.y, 1)) *
+                      Matrix4x4.Translate(new Vector3(0.5f, 0.5f, 0)) *
+                      Matrix4x4.Rotate(Quaternion.Euler(0, 0, angle)) *
+                      Matrix4x4.Translate(new Vector3(-0.5f, -0.5f, 0));
+
         // Face region cropping
-        _cropMaterial.SetMatrix("_Xform", MakeBlitMatrix(offset, angle, scale));
+        _cropMaterial.SetMatrix("_Xform", _cropMatrix);
         Graphics.Blit(_webcam.Texture, _cropRT, _cropMaterial, 0);
 
         // Face landmark detection
         _landmarkDetector.ProcessImage(_cropRT);
 
-        // Visualization (face)
-        var mf = MakeBlitMatrix(offset - new Vector2(0.75f, 0.5f), angle, scale);
-        _faceMaterial.mainTexture = _faceTexture;
-        _faceMaterial.SetBuffer("_Vertices", _landmarkDetector.VertexBuffer);
-        Graphics.DrawMesh(_faceTemplate, mf, _faceMaterial, 0);
-
-        // Visualization (wire)
-        var mw = MakeBlitMatrix(new Vector2(0.25f, -0.5f), 0, Vector2.one * 0.5f);
-        _wireMaterial.SetBuffer("_Vertices", _landmarkDetector.VertexBuffer);
-        Graphics.DrawMesh(_wireTemplate, mw, _wireMaterial, 0);
-
         // UI update
         _mainUI.texture = _webcam.Texture;
         _cropUI.texture = _cropRT;
         _previewUI.texture = _webcam.Texture;
+    }
+
+    void OnRenderObject()
+    {
+        // Visualization (face)
+        var mf = Matrix4x4.Translate(new Vector3(-0.75f, -0.5f, 0)) *
+                 _cropMatrix;
+
+        _faceMaterial.mainTexture = _faceTexture;
+        _faceMaterial.SetBuffer("_Vertices", _landmarkDetector.VertexBuffer);
+        _faceMaterial.SetPass(0);
+
+        Graphics.DrawMeshNow(_faceTemplate, mf);
+
+        // Visualization (wire)
+        var mw = Matrix4x4.Translate(new Vector2(0.25f, -0.5f)) *
+                 Matrix4x4.Scale(new Vector3(0.5f, 0.5f, 1));
+
+        _faceMaterial.SetBuffer("_Vertices", _landmarkDetector.VertexBuffer);
+        _faceMaterial.SetPass(1);
+
+        Graphics.DrawMeshNow(_wireTemplate, mw);
     }
 
     #endregion

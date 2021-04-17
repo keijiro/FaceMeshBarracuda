@@ -243,10 +243,9 @@ MonoBehaviour:
   _blazeFace: {fileID: 11400000, guid: bffd9847cd5fccc4e82026bcc7ae255a, type: 2}
   _faceMesh: {fileID: 11400000, guid: 5229689f14aedca45a64a936134b5567, type: 2}
   _faceTemplate: {fileID: 4300000, guid: 6b01ad57f42b7e04d99b74c19b9e0dc1, type: 2}
+  _wireTemplate: {fileID: 4300000, guid: 4d1b450bb6d281641af6c72e8b37cfcb, type: 2}
   _faceTexture: {fileID: 2800000, guid: 08707d5c61af48c4c81c1f9fd3386c8c, type: 3}
   _faceShader: {fileID: 4800000, guid: cc0a1120a03754a469d6ac7f6cfe4947, type: 3}
-  _wireTemplate: {fileID: 4300000, guid: 4d1b450bb6d281641af6c72e8b37cfcb, type: 2}
-  _wireShader: {fileID: 4800000, guid: c16b1636d246e1d48b47645c695faa99, type: 3}
   _cropShader: {fileID: 4800000, guid: 0707a703efcc309409026258e0b5ca28, type: 3}
   _mainUI: {fileID: 592167456}
   _cropUI: {fileID: 1024084759}
