@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MediaPipe {
 
-public sealed class WebcamTest : MonoBehaviour
+public sealed class Visualizer : MonoBehaviour
 {
     #region Editable attributes
 

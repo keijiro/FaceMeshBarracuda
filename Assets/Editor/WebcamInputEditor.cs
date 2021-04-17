@@ -10,11 +10,13 @@ sealed class WebcamInputEditor : Editor
 
     SerializedProperty _deviceName;
     SerializedProperty _resolution;
+    SerializedProperty _dummyImage;
 
     void OnEnable()
     {
         _deviceName = serializedObject.FindProperty("_deviceName");
         _resolution = serializedObject.FindProperty("_resolution");
+        _dummyImage = serializedObject.FindProperty("_dummyImage");
     }
 
     void ShowDeviceSelector(Rect rect)
@@ -45,6 +47,7 @@ sealed class WebcamInputEditor : Editor
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.PropertyField(_resolution);
+        EditorGUILayout.PropertyField(_dummyImage);
 
         serializedObject.ApplyModifiedProperties();
     }

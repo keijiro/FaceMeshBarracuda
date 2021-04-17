@@ -8,6 +8,7 @@ public sealed class WebcamInput : MonoBehaviour
 
     [SerializeField] string _deviceName = "";
     [SerializeField] Vector2Int _resolution = new Vector2Int(1920, 1080);
+    [SerializeField] Texture2D _dummyImage = null;
 
     #endregion
 
@@ -20,7 +21,8 @@ public sealed class WebcamInput : MonoBehaviour
 
     #region Public properties
 
-    public Texture Texture => _buffer;
+    public Texture Texture
+      => _dummyImage != null ? (Texture)_dummyImage : (Texture)_buffer;
 
     #endregion
 
@@ -28,6 +30,7 @@ public sealed class WebcamInput : MonoBehaviour
 
     void Start()
     {
+        if (_dummyImage != null) return;
         _webcam = new WebCamTexture(_deviceName, _resolution.x, _resolution.y);
         _buffer = new RenderTexture(_resolution.x, _resolution.y, 0);
         _webcam.Play();
@@ -35,12 +38,13 @@ public sealed class WebcamInput : MonoBehaviour
 
     void OnDestroy()
     {
-        Destroy(_webcam);
-        Destroy(_buffer);
+        if (_webcam != null) Destroy(_webcam);
+        if (_buffer != null) Destroy(_buffer);
     }
 
     void Update()
     {
+        if (_dummyImage != null) return;
         if (!_webcam.didUpdateThisFrame) return;
 
         var aspect1 = (float)_webcam.width / _webcam.height;

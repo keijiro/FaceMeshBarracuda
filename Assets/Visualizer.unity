@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 511049528}
   - component: {fileID: 511049527}
   m_Layer: 0
-  m_Name: Test
+  m_Name: Visualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deviceName: 
   _resolution: {x: 1080, y: 1080}
+  _dummyImage: {fileID: 0}
 --- !u!1 &592167453
 GameObject:
   m_ObjectHideFlags: 0
