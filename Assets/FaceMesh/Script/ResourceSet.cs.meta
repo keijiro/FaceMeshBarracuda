@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bb62816c52a9de24c88e1dfc07c85dd7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - blazeFace: {fileID: 11400000, guid: bffd9847cd5fccc4e82026bcc7ae255a, type: 2}
+  - faceLandmark: {fileID: 11400000, guid: 5229689f14aedca45a64a936134b5567, type: 2}
+  - iris: {fileID: 11400000, guid: 7b060838327dd104592c2e9b214a255a, type: 2}
+  - preprocessShader: {fileID: 4800000, guid: 0707a703efcc309409026258e0b5ca28, type: 3}
+  - postprocessCompute: {fileID: 7200000, guid: 0e399cd9bccec8742a7c123a162bc0b2, type: 3}
+  - faceMeshTemplate: {fileID: 4300000, guid: 6b01ad57f42b7e04d99b74c19b9e0dc1, type: 2}
+  - faceLineTemplate: {fileID: 4300000, guid: 4d1b450bb6d281641af6c72e8b37cfcb, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
