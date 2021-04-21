@@ -1,5 +1,5 @@
 using MediaPipe.BlazeFace;
-using MediaPipe.FaceMesh;
+using MediaPipe.FaceLandmark;
 using MediaPipe.Iris;
 using UnityEngine;
 
@@ -43,7 +43,7 @@ sealed partial class FacePipeline : System.IDisposable
         _faceDetector = new FaceDetector(_resources.blazeFace);
 
         _landmarkDetector =
-          (new FaceLandmarkDetector(_resources.faceMesh),
+          (new FaceLandmarkDetector(_resources.faceLandmark),
            new EyeLandmarkDetector(_resources.iris),
            new EyeLandmarkDetector(_resources.iris));
 
