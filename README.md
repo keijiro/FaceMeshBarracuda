@@ -8,7 +8,7 @@ neural network predictor pipeline to generate the approximate geometry of a
 human face.
 
 FaceMeshBarracuda is heavily based on the [MediaPipe Face Mesh] package.
-Although it's not a straght port of the original package, it uses the same
+Although it is not a straight port of the original package, it uses the same
 pre-trained models and structures.
 
 [MediaPipe Face Mesh]:
@@ -19,9 +19,6 @@ Related projects
 
 FaceMeshBarracuda uses the following sub-packages:
 
-- [BlazeFaceBarracuda (lightweight face detector)]
-  (https://github.com/keijiro/BlazeFaceBarracuda)
-- [IrisBarracuda (eye landmark detector)]
-  (https://github.com/keijiro/IrisBarracuda)
-- [FaceLandmarkBarracuda (face landmark detector)]
-  (https://github.com/keijiro/FaceLandmarkBarracuda)
+- [BlazeFaceBarracuda (lightweight face detector)](https://github.com/keijiro/BlazeFaceBarracuda)
+- [IrisBarracuda (eye landmark detector)](https://github.com/keijiro/IrisBarracuda)
+- [FaceLandmarkBarracuda (face landmark detector)](https://github.com/keijiro/FaceLandmarkBarracuda)
