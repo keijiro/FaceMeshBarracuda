@@ -3,9 +3,9 @@ FaceMeshBarracuda
 
 ![gif](https://i.imgur.com/OKFWkug.gif)
 
-**FaceMeshBarracuda** is a lightweight facial capture package providing a
-neural network predictor pipeline to generate the approximate geometry of a
-human face.
+**FaceMeshBarracuda** is a lightweight facial capture package for Unity that
+provides a neural network predictor pipeline to generate the approximate
+geometry of a human face.
 
 FaceMeshBarracuda is heavily based on the [MediaPipe Face Mesh] package.
 Although it is not a straight port of the original package, it uses the same
