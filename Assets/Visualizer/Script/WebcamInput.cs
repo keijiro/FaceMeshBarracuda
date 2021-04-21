@@ -22,7 +22,7 @@ public sealed class WebcamInput : MonoBehaviour
     #region Public properties
 
     public Texture Texture
-      => _dummyImage != null ? _dummyImage : _buffer;
+      => _dummyImage != null ? (Texture)_dummyImage : (Texture)_buffer;
 
     #endregion
 
