@@ -1,12 +1,16 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Visualizer/Script/WebcamInput.cs">
+﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Library/PackageCache/.del-18590nsaOWXckoT7X/Runtime/NetworkAnimator.cs">
     <Files>
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="11" Column="26" />
-      <File FileName="Assets/Visualizer/Script/WebcamInput.cs" Line="25" Column="33" />
+      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="12" Column="12" />
+      <File FileName="Assets/Visualizer/Script/WebcamInput.cs" Line="24" Column="20" />
+      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="4" Column="1" />
+      <File FileName="Assets/UniversalMediaPlayer/Scripts/UniversalMediaPlayer.cs" Line="956" Column="26" />
+      <File FileName="Library/PackageCache/com.unity.multiplayer-hlapi@1.1.1/Runtime/NetworkAnimator.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
