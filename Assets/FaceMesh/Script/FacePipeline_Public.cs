@@ -55,7 +55,6 @@ partial class FacePipeline
         public bool IsFaceTracking
             => _isFaceTracking;
 
-
         #endregion
 
         #region Public methods

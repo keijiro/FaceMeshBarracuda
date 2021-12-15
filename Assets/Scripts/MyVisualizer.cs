@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Mathematics;
+using System.Collections.Generic;
 using UI = UnityEngine.UI;
 
 namespace MediaPipe.FaceMesh
@@ -9,7 +10,7 @@ namespace MediaPipe.FaceMesh
     {
         #region Editable attributes
 
-        [SerializeField] WebcamInput _webcam = null;
+        [SerializeField] MyWebcamInput _webcam = null;
         [Space]
         [SerializeField] ResourceSet _resources = null;
         [Space]
@@ -19,6 +20,8 @@ namespace MediaPipe.FaceMesh
         [SerializeField] Shader _maskShader = null;
         [SerializeField] Shader _cropShader = null;
         [SerializeField] Shader _shader = null;
+        [Space]
+        [SerializeField] MeshFilter meshFilter;
         #endregion
 
         #region Private members
@@ -26,6 +29,7 @@ namespace MediaPipe.FaceMesh
         FacePipeline _pipeline;
         Material _crop, _mask, _material;
         RenderTexture _croppedEyeRT, _maskedEyeRT;
+        Mesh mesh;
 
         #endregion
 
@@ -43,6 +47,9 @@ namespace MediaPipe.FaceMesh
             //RenderTexture確保
             _croppedEyeRT = new RenderTexture(256, 256, 0);
             _maskedEyeRT = new RenderTexture(1024, 1024, 0);
+
+            mesh = meshFilter.mesh;
+            mesh.SetIndices(mesh.GetIndices(0), MeshTopology.LineStrip, 0);
         }
 
         void OnDestroy()
@@ -74,68 +81,68 @@ namespace MediaPipe.FaceMesh
             Graphics.Blit(_webcam.Texture, _maskedEyeRT, _mask);
 
             //RawImageにRenderTextrueを反映
-            _rightEyeUI.texture = _croppedEyeRT;
+            if(_pipeline.IsFaceTracking)
+            {
+                _rightEyeUI.texture = _croppedEyeRT;
+            }
+            else
+            {
+                _rightEyeUI.texture = null;
+            }
+            //Debug.Log(_pipeline.RawRightEyeVertexBuffer.count);
 
             _rightEyeDebug.texture = _maskedEyeRT;
 
-            // Right eye
-           /* var dRE = MathUtil.ScaleOffset(1f, math.float2(0f, 0f));
-            _material.SetMatrix("_XForm", dRE);
-            _material.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
-            _material.SetPass(3);
-            Graphics.Blit(_webcam.Texture, _maskedEyeRT, _material);
-           */
-        }
 
-        void OnRenderObject()
-        {
-            // Main view overlay
-            var mv = float4x4.Translate(math.float3(-0.875f, -0.5f, 0));
-            _material.SetBuffer("_Vertices", _pipeline.RefinedFaceVertexBuffer);
-            _material.SetPass(1);
-            Graphics.DrawMeshNow(_resources.faceLineTemplate, mv);
+            //computebufferから頂点データ取得
+            float4[] vertexData = new float4[_pipeline.RawRightEyeVertexBuffer.count];
 
-            // Face view
-            // Face mesh
-            var fF = MathUtil.ScaleOffset(0.5f, math.float2(0.125f, -0.5f));
-            _material.SetBuffer("_Vertices", _pipeline.RefinedFaceVertexBuffer);
-            _material.SetPass(0);
-            Graphics.DrawMeshNow(_resources.faceMeshTemplate, fF);
+            _pipeline.RawRightEyeVertexBuffer.GetData(vertexData);
 
-            // Left eye
-            var fLE = math.mul(fF, _pipeline.LeftEyeCropMatrix);
-            _material.SetMatrix("_XForm", fLE);
-            _material.SetBuffer("_Vertices", _pipeline.RawLeftEyeVertexBuffer);
-            _material.SetPass(3);
-            Graphics.DrawProceduralNow(MeshTopology.Lines, 64, 1);
+            //頂点を描画
+            List<Vector3> meshVert = new List<Vector3>();
 
-            // Right eye
-            var fRE = math.mul(fF, _pipeline.RightEyeCropMatrix);
-            _material.SetMatrix("_XForm", fRE);
-            _material.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
-            _material.SetPass(3);
-            Graphics.DrawProceduralNow(MeshTopology.Lines, 64, 1);
+            foreach(float4 vertex in vertexData)
+            {
+                meshVert.Add(vertex.xyz);
+            }
 
-            // Debug views
-            // Face mesh
-            var dF = MathUtil.ScaleOffset(0.5f, math.float2(0.125f, 0));
-            _material.SetBuffer("_Vertices", _pipeline.RawFaceVertexBuffer);
-            _material.SetPass(1);
-            Graphics.DrawMeshNow(_resources.faceLineTemplate, dF);
+            var vertices = new List<Vector3> {
+                  new Vector3 (0.5f, 0.5f, 0),
+                  new Vector3 (-0.5f, 0.5f, 0),
+                  new Vector3 (0.5f, -0.5f, 0),
+                  new Vector3 (-0.5f, -0.5f, 0),
+             };
+            var triangles = new List<int> {
+                  1,
+                  0,
+                  2,
+                  1,
+                  2,
+                  3
+             };
 
-            // Left eye
-            var dLE = MathUtil.ScaleOffset(0.25f, math.float2(0.625f, 0.25f));
-            _material.SetMatrix("_XForm", dLE);
-            _material.SetBuffer("_Vertices", _pipeline.RawLeftEyeVertexBuffer);
-            _material.SetPass(3);
-            Graphics.DrawProceduralNow(MeshTopology.Lines, 64, 1);
+           //mesh.SetVertices(meshVert);
 
-            // Right eye
-            var dRE = MathUtil.ScaleOffset(1f, math.float2(0f, 0f));
-            _material.SetMatrix("_XForm", dRE);
-            _material.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
-            _material.SetPass(3);
-            Graphics.DrawProceduralNow(MeshTopology.Lines, 64, 1);
+            foreach(var vert in mesh.vertices)
+            {
+            //    Debug.Log(vert);
+            }
+
+
+            //mesh.SetVertices(vertices);
+
+            //_material.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
+
+            //Graphics.DrawMesh(mesh, transform.position, transform.rotation, _material, 0);
+
+
+            //Debug.Log(_pipeline.RawRightEyeVertexBuffer.GetData)
+
+            meshFilter.GetComponent<Renderer>().material = new Material(_mask);
+
+            _mask.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
+
         }
 
         #endregion

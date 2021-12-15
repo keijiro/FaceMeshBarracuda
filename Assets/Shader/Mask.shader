@@ -74,9 +74,9 @@ Shader "Hidden/MediaPipe/FaceMesh/Mask"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = fixed4(1,1,1,1) + i.color;
-                 col = fixed4(1,1,1,1);
-                return col;
+                //fixed4 col = fixed4(1,1,1,1) + i.color;
+                // col = fixed4(1,1,1,1);
+                return i.color;
             }
             ENDCG
         }

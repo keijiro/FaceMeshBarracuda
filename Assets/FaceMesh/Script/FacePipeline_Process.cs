@@ -19,6 +19,9 @@ partial class FacePipeline
     float4 GetFaceVertex(int index)
       => _landmarkDetector.face.VertexArray.ElementAt(index);
 
+        //tracking status
+        bool _isFaceTracking = false;
+
     void RunPipeline(Texture input)
     {
         // Face detection
@@ -26,12 +29,21 @@ partial class FacePipeline
 
         // Cancel if the face detection score is too low.
         var face = _faceDetector.Detections.FirstOrDefault();
-        if (face.score < 0.5f) return;
+        if (face.score < 0.5f)
+            {
+                _isFaceTracking = false;
+                return;
+            }
 
-        // Try updating the face region with the detection result. It's
-        // actually updated only when there is a noticeable jump from the last
-        // frame.
-        _faceRegion.TryUpdateWithDetection(face);
+            else
+            {
+                _isFaceTracking = true;
+            }
+
+            // Try updating the face region with the detection result. It's
+            // actually updated only when there is a noticeable jump from the last
+            // frame.
+            _faceRegion.TryUpdateWithDetection(face);
 
         // Face region cropping
         _preprocess.SetMatrix("_Xform", _faceRegion.CropMatrix);
