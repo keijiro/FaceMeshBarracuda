@@ -49,11 +49,18 @@ partial class FacePipeline
     public float4x4 RightEyeCropMatrix
       => _reyeRegion.CropMatrix;
 
-    #endregion
+        #endregion
 
-    #region Public methods
+        #region Access for status
+        public bool IsFaceTracking
+            => _isFaceTracking;
 
-    public FacePipeline(ResourceSet resources)
+
+        #endregion
+
+        #region Public methods
+
+        public FacePipeline(ResourceSet resources)
       => AllocateObjects(resources);
 
     public void Dispose()
