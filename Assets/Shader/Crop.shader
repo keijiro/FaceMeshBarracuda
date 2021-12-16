@@ -1,45 +1,57 @@
 Shader "Hidden/MediaPipe/FaceMesh/Crop"
 {
-    Properties
+     Properties
     {
-        _MainTex("", 2D) = "" {}
+        _MainTex ("Texture", 2D) = "white" {}
     }
-
-    CGINCLUDE
-
-    #include "UnityCG.cginc"
-
-    sampler2D _MainTex;
-    float _Size;
-    float4x4 _Xform;
-
-    float4 Fragment(float4 vertex : SV_Position,
-                    float2 uv : TEXCOORD0) : SV_Target
-    {
-        //拡大行列の宣言
-        float4x4 resizeMatrix = { 1, 0, 0, 0,
-                                  0, 1, 0, 0,
-                                  0, 0, 1, 0,
-                                  0, 0, 0, 1 };  
-        //拡大率の適用
-        _Xform = mul( _Xform, resizeMatrix);
-
-        //クロップ
-        uv = mul(_Xform, float4(uv, 0, 1)).xy;
-        return tex2D(_MainTex, uv);
-    }
-
-    ENDCG
-
     SubShader
     {
-        Cull Off ZTest Always ZWrite Off
+        Tags { "RenderType"="Opaque" }
+        LOD 100
+
         Pass
         {
             CGPROGRAM
-            #pragma vertex vert_img
-            #pragma fragment Fragment
+            #pragma vertex vert
+            #pragma fragment frag
+            // make fog work
+            #pragma multi_compile_fog
+
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                UNITY_FOG_COORDS(1)
+                float4 vertex : SV_POSITION;
+            };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            float4x4 _Xform;
+
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                return o;
+            }
+
+            fixed4 frag (v2f i) : SV_Target
+            {
+               //クロップ
+                float2 uv = mul(_Xform, float4(i.uv, 0, 1)).xy;
+                return tex2D(_MainTex, uv);
+            }
             ENDCG
         }
     }
+
 }

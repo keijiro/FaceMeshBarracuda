@@ -20,6 +20,7 @@ namespace MediaPipe.FaceMesh
         [SerializeField] Shader _maskShader = null;
         [SerializeField] Shader _cropShader = null;
         [SerializeField] Shader _shader = null;
+        [SerializeField] ComputeShader _eyeLandmarks = null;
         [Space]
         [SerializeField] MeshFilter meshFilter;
         #endregion
@@ -68,7 +69,7 @@ namespace MediaPipe.FaceMesh
             //_rightEyeUI.texture = _pipeline.CroppedRightEyeTexture;
 
             //シェーダーに変換行列を適用
-           _crop.SetMatrix("_Xform", _pipeline.RightEyeCropMatrix);
+            _crop.SetMatrix("_Xform", _pipeline.RightEyeCropMatrix);
 
             //_mask.SetMatrix("_Xform", _pipeline.RightEyeCropMatrix);
 
@@ -81,56 +82,46 @@ namespace MediaPipe.FaceMesh
             Graphics.Blit(_webcam.Texture, _maskedEyeRT, _mask);
 
             //RawImageにRenderTextrueを反映
-            if(_pipeline.IsFaceTracking)
+           // if (_pipeline.IsFaceTracking)
             {
                 _rightEyeUI.texture = _croppedEyeRT;
             }
-            else
+            //else
             {
-                _rightEyeUI.texture = null;
+            //    _rightEyeUI.texture = null;
             }
             //Debug.Log(_pipeline.RawRightEyeVertexBuffer.count);
 
             _rightEyeDebug.texture = _maskedEyeRT;
 
 
-            //computebufferから頂点データ取得
-            float4[] vertexData = new float4[_pipeline.RawRightEyeVertexBuffer.count];
+            //buffer初期化
+            ComputeBuffer vertexBuffer = _pipeline.RawRightEyeVertexBuffer;
 
-            _pipeline.RawRightEyeVertexBuffer.GetData(vertexData);
+            //computebufferから頂点データ取得してcomputeShaderに渡す
+            _eyeLandmarks.SetBuffer(0, "Vertecies", vertexBuffer);
+            //処理実行
+            _eyeLandmarks.Dispatch(0, 1, 1, 1);
+
+            //処理結果にアクセス
+            float4[] vertexData = new float4[vertexBuffer.count];
+
+            vertexBuffer.GetData(vertexData);
 
             //頂点を描画
             List<Vector3> meshVert = new List<Vector3>();
 
-            foreach(float4 vertex in vertexData)
+            foreach (float4 vertex in vertexData)
             {
                 meshVert.Add(vertex.xyz);
             }
 
-            var vertices = new List<Vector3> {
-                  new Vector3 (0.5f, 0.5f, 0),
-                  new Vector3 (-0.5f, 0.5f, 0),
-                  new Vector3 (0.5f, -0.5f, 0),
-                  new Vector3 (-0.5f, -0.5f, 0),
-             };
-            var triangles = new List<int> {
-                  1,
-                  0,
-                  2,
-                  1,
-                  2,
-                  3
-             };
+            mesh.SetVertices(meshVert);
 
-           //mesh.SetVertices(meshVert);
-
-            foreach(var vert in mesh.vertices)
+            foreach (var vert in mesh.vertices)
             {
-            //    Debug.Log(vert);
+                Debug.Log(vert);
             }
-
-
-            //mesh.SetVertices(vertices);
 
             //_material.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
 
@@ -143,9 +134,22 @@ namespace MediaPipe.FaceMesh
 
             _mask.SetBuffer("_Vertices", _pipeline.RawRightEyeVertexBuffer);
 
+
+           // var mv = float4x4.Translate(math.float3(-0.875f, -0.5f, 0));
+          //  _material.SetBuffer("_Vertices", _pipeline.RefinedFaceVertexBuffer);
+          //  Graphics.DrawMesh(_resources.faceLineTemplate, mv, _material, 0);
+
+            #endregion
         }
 
-        #endregion
+        void OnRenderObject()
+        {
+            // Main view overlay
+/*            var mv = float4x4.Translate(math.float3(-0.875f, -0.5f, 0));
+            _material.SetBuffer("_Vertices", _pipeline.RefinedFaceVertexBuffer);
+            _material.SetPass(1);
+            Graphics.DrawMeshNow(_resources.faceLineTemplate, mv);*/
+        }
     }
 
 } // namespace MediaPipe.FaceMesh
