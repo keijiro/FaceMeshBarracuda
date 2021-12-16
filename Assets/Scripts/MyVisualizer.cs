@@ -82,11 +82,11 @@ namespace MediaPipe.FaceMesh
             Graphics.Blit(_webcam.Texture, _maskedEyeRT, _mask);
 
             //RawImageにRenderTextrueを反映
-           // if (_pipeline.IsFaceTracking)
+            //if (_pipeline.IsFaceTracking)
             {
-                _rightEyeUI.texture = _croppedEyeRT;
+               _rightEyeUI.texture = _croppedEyeRT;
             }
-            //else
+            ///else
             {
             //    _rightEyeUI.texture = null;
             }

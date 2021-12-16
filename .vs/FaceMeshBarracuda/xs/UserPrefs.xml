@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shader/Crop.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyVisualizer.cs">
     <Files>
-      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="91" Column="15" />
+      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="85" Column="15" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="22" Column="19" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="21" Column="22" />
-      <File FileName="Assets/FaceMesh/Shader/Preprocess.shader" Line="1" Column="1" />
+      <File FileName="Assets/FaceMesh/Shader/Preprocess.shader" Line="14" Column="22" />
       <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/EyeLandmarkDetector.cs" />
       <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
       <File FileName="Assets/Visualizer/Shader/Visualizer.shader" />
@@ -12,7 +12,7 @@
       <File FileName="Assets/FaceMesh/Script/Utilities.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
       <File FileName="Assets/FaceMesh/Script/EyeRegion.cs" Line="9" Column="14" />
-      <File FileName="Assets/Shader/Crop.shader" Line="42" Column="49" />
+      <File FileName="Assets/Shader/Crop.shader" Line="56" Column="1" />
       <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/ResourceSet.cs" Line="15" Column="20" />
       <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="50" Column="32" />
       <File FileName="Assets/Shader/EyeLandmarks.compute" Line="35" Column="10" />
