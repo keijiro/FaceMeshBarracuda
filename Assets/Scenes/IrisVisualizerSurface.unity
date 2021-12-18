@@ -132,65 +132,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 285260035}
-  - component: {fileID: 285260034}
-  - component: {fileID: 285260033}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: LandmarksMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!23 &285260033
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285260031}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &285260034
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285260031}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_IsActive: 1
 --- !u!4 &285260035
 Transform:
   m_ObjectHideFlags: 0
@@ -741,6 +689,7 @@ GameObject:
   - component: {fileID: 2010591765}
   - component: {fileID: 2010591766}
   - component: {fileID: 2010591767}
+  - component: {fileID: 2010591768}
   m_Layer: 0
   m_Name: Visualizer
   m_TagString: Untagged
@@ -781,9 +730,7 @@ MonoBehaviour:
   _rightEyeDebug: {fileID: 1552042310}
   _maskShader: {fileID: 4800000, guid: b83448f35f97644ddb430350dfa16324, type: 3}
   _cropShader: {fileID: 4800000, guid: 4983ed1b3d4d84693957c77cac7adcb2, type: 3}
-  _shader: {fileID: 4800000, guid: cc0a1120a03754a469d6ac7f6cfe4947, type: 3}
-  _eyeLandmarks: {fileID: 7200000, guid: 32478ca06369e492aa20a1a4333428ea, type: 3}
-  meshFilter: {fileID: 285260034}
+  _drawLandmarksToMesh: {fileID: 2010591768}
 --- !u!114 &2010591767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,4 +745,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resolution: {x: 1080, y: 1080}
   _dummyImage: {fileID: 0}
-  defaultDeviceIndex: 1
+  defaultDeviceIndex: 0
+--- !u!114 &2010591768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010591762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22647d95f53c94d328a768400e117f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}

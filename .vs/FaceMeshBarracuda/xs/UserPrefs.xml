@@ -1,27 +1,11 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FaceMesh/Script/FaceRegion.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shader/Mask.shader">
     <Files>
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="14" Column="15" IsPinned="True" />
-      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="30" Column="17" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="18" Column="13" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="54" Column="34" />
-      <File FileName="Assets/FaceMesh/Shader/Preprocess.shader" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/EyeLandmarkDetector.cs" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" />
-      <File FileName="Assets/Shader/Mask.shader" />
-      <File FileName="Assets/FaceMesh/Script/Utilities.cs" />
-      <File FileName="Assets/FaceMesh/Script/EyeRegion.cs" Line="9" Column="14" />
-      <File FileName="Assets/Shader/Crop.shader" Line="1" Column="1" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/ResourceSet.cs" />
-      <File FileName="Assets/Scripts/MyWebcamInput.cs" />
-      <File FileName="Assets/Shader/EyeLandmarks.compute" />
-      <File FileName="Assets/FaceMesh/Shader/Postprocess.compute" />
-      <File FileName="Assets/Shader/NewUnlitShader.shader" />
-      <File FileName="Assets/Scripts/MyEyeRegion.cs" Line="1" Column="1" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.blazeface@1.1.1/Script/FaceDetector.cs" Line="10" Column="29" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.blazeface@1.1.1/Script/Detection.cs" Line="6" Column="15" />
-      <File FileName="Assets/FaceMesh/Script/FaceRegion.cs" Line="10" Column="14" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="11" Column="15" IsPinned="True" />
+      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="77" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/DrawLandmarksToMesh.cs" Line="10" Column="37" />
+      <File FileName="Assets/Shader/Mask.shader" Line="49" Column="26" />
+      <File FileName="Assets/Shader/NewUnlitShader.shader" Line="44" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
