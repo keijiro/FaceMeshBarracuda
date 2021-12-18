@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72730bf354752f54f987500737914501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deviceName: OBS Virtual Camera
+  _deviceName: NDI Video
   _resolution: {x: 720, y: 720}
   _dummyImage: {fileID: 0}
 --- !u!4 &2010591765

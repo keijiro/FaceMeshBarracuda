@@ -1,29 +1,33 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyVisualizer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FaceMesh/Script/FaceRegion.cs">
     <Files>
-      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="85" Column="15" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="22" Column="19" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="21" Column="22" />
-      <File FileName="Assets/FaceMesh/Shader/Preprocess.shader" Line="14" Column="22" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="14" Column="15" IsPinned="True" />
+      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="30" Column="17" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="18" Column="13" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="54" Column="34" />
+      <File FileName="Assets/FaceMesh/Shader/Preprocess.shader" />
       <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/EyeLandmarkDetector.cs" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
+      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="1" Column="1" />
       <File FileName="Assets/Visualizer/Shader/Visualizer.shader" />
-      <File FileName="Assets/Shader/Mask.shader" Line="30" Column="23" />
+      <File FileName="Assets/Shader/Mask.shader" />
       <File FileName="Assets/FaceMesh/Script/Utilities.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
       <File FileName="Assets/FaceMesh/Script/EyeRegion.cs" Line="9" Column="14" />
-      <File FileName="Assets/Shader/Crop.shader" Line="56" Column="1" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/ResourceSet.cs" Line="15" Column="20" />
-      <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="50" Column="32" />
-      <File FileName="Assets/Shader/EyeLandmarks.compute" Line="35" Column="10" />
-      <File FileName="Assets/FaceMesh/Shader/Postprocess.compute" Line="30" Column="2" />
-      <File FileName="Assets/Shader/NewUnlitShader.shader" Line="58" Column="1" />
+      <File FileName="Assets/Shader/Crop.shader" Line="1" Column="1" />
+      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/ResourceSet.cs" />
+      <File FileName="Assets/Scripts/MyWebcamInput.cs" />
+      <File FileName="Assets/Shader/EyeLandmarks.compute" />
+      <File FileName="Assets/FaceMesh/Shader/Postprocess.compute" />
+      <File FileName="Assets/Shader/NewUnlitShader.shader" />
+      <File FileName="Assets/Scripts/MyEyeRegion.cs" Line="1" Column="1" />
+      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.blazeface@1.1.1/Script/FaceDetector.cs" Line="10" Column="29" />
+      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.blazeface@1.1.1/Script/Detection.cs" Line="6" Column="15" />
+      <File FileName="Assets/FaceMesh/Script/FaceRegion.cs" Line="10" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="497c3325-1be1-481e-8075-52313f70ac05" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d523324e-cb2c-4e59-b5f7-76378349fb58" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

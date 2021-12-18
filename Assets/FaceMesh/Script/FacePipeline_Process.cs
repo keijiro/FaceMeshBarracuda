@@ -25,7 +25,7 @@ partial class FacePipeline
     void RunPipeline(Texture input)
     {
         // Face detection
-        _faceDetector.ProcessImage(input);
+        _faceDetector.ProcessImage(input,0.25f);
 
         // Cancel if the face detection score is too low.
         var face = _faceDetector.Detections.FirstOrDefault();
