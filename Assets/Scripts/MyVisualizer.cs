@@ -19,7 +19,9 @@ namespace MediaPipe.FaceMesh
         [Space]
         [SerializeField] Shader _maskShader = null;
         [SerializeField] Shader _cropShader = null;
-        
+        [Space]
+        [SerializeField] DrawLandmarksToMesh _drawLandmarksToMesh = null;
+
         #endregion
 
         #region Private members
@@ -77,6 +79,8 @@ namespace MediaPipe.FaceMesh
             //RawImageにRenderTextrueを反映
             _rightEyeUI.texture = _maskedEyeRT;
 
+
+            _drawLandmarksToMesh.Draw(_pipeline.RawRightEyeVertexBuffer, _pipeline.CroppedRightEyeTexture);
             #endregion
         }
    }
