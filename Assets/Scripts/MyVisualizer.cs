@@ -80,9 +80,14 @@ namespace MediaPipe.FaceMesh
             _rightEyeUI.texture = _maskedEyeRT;
 
 
-            _drawLandmarksToMesh.Draw(_pipeline.RawRightEyeVertexBuffer, _pipeline.CroppedRightEyeTexture);
+            //_drawLandmarksToMesh.DrawEye(_pipeline.RawRightEyeVertexBuffer, _pipeline.CroppedRightEyeTexture);
+
+            //_drawLandmarksToMesh.DrawEye(_pipeline.RawLeftEyeVertexBuffer, _pipeline.CroppedLeftEyeTexture);
+
+            _drawLandmarksToMesh.DrawFace(_pipeline.RawFaceVertexBuffer, _pipeline.CroppedFaceTexture);
+
             #endregion
         }
-   }
+    }
 
 } // namespace MediaPipe.FaceMesh

@@ -14,6 +14,23 @@ namespace MediaPipe.FaceMesh
         Mesh _mesh;
         Material _material;
 
+        class MeshParams
+        {
+         public   List<Vector3> meshVert;
+
+         public   List<Vector2> UVs;
+
+         public   List<int> triangles;
+
+         public   MeshParams()
+            {
+                meshVert = new();
+                UVs = new();
+                triangles = new();
+            }
+
+        }
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -29,15 +46,26 @@ namespace MediaPipe.FaceMesh
 
         public void DrawEye(ComputeBuffer vertexBuffer, Texture texture)
         {
+            UpdateMeshWithEye(_mesh, vertexBuffer);
 
+            _material.SetTexture("_MainTex", texture);
 
+            Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material, 0);
 
+        }
+
+        public void DrawFace(ComputeBuffer vertexBuffer, Texture texture)
+        {
+            UpdateMeshWithFace(_mesh, vertexBuffer);
+
+            _material.SetTexture("_MainTex", texture);
+
+            Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material, 0);
 
         }
 
 
-        // Update is called once per frame
-        public void Draw(ComputeBuffer vertexBuffer, Texture texture)
+        void UpdateMeshWithEye(Mesh mesh, ComputeBuffer vertexBuffer)
         {
 
             //処理結果にアクセス
@@ -46,11 +74,7 @@ namespace MediaPipe.FaceMesh
             vertexBuffer.GetData(vertexData);
 
             //頂点を描画
-            List<Vector3> meshVert = new();
-
-            List<Vector2> UVs = new();
-
-            List<int> triangles = new();
+            MeshParams meshParams = new MeshParams();
 
             try
             {
@@ -58,9 +82,9 @@ namespace MediaPipe.FaceMesh
                 for (int i = 5; i < 22; i++)//目の周りの頂点だけを選択
                 //for (int i = 21; i < 38; i++)//目の周りをやや広めに選択
                 {
-                    meshVert.Add(vertexData[i].xyz);
+                    meshParams.meshVert.Add(vertexData[i].xyz);
 
-                    UVs.Add(vertexData[i].xy);
+                    meshParams.UVs.Add(vertexData[i].xy);
                 }
 
                 //ポリゴンを設定
@@ -73,7 +97,7 @@ namespace MediaPipe.FaceMesh
                         i+1, i+9, i+10
                         };
 
-                    triangles.AddRange(triangle);
+                    meshParams.triangles.AddRange(triangle);
                 }
             }
 
@@ -82,11 +106,54 @@ namespace MediaPipe.FaceMesh
 
             }
 
-            UpdateMesh(_mesh, meshVert, UVs, triangles);
+            UpdateMesh(mesh, meshParams.meshVert, meshParams.UVs, meshParams.triangles);
 
-            Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material, 0);
 
         }
+
+        void UpdateMeshWithFace(Mesh mesh, ComputeBuffer vertexBuffer)
+        {
+
+            //処理結果にアクセス
+            float4[] vertexData = new float4[vertexBuffer.count];
+
+            vertexBuffer.GetData(vertexData);
+
+            //頂点を描画
+            MeshParams meshParams = new MeshParams();
+
+            try
+            {
+                //頂点とUV座標を設定
+                for (int i = 0; i < vertexData.Length; i++)//顔のメッシュを設定
+                {
+                    meshParams.meshVert.Add(vertexData[i].xyz);
+
+                    meshParams.UVs.Add(vertexData[i].xy);
+                }
+
+                //ポリゴンを設定
+                for (int i = 0; i < 7; i++)
+                {
+
+                    int[] triangle =
+                        {
+                        i, i+9, i+1,
+                        i+1, i+9, i+10
+                        };
+
+                    meshParams.triangles.AddRange(triangle);
+                }
+            }
+
+            catch
+            {
+
+            }
+            UpdateMesh(mesh, meshParams.meshVert, meshParams.UVs, meshParams.triangles);
+        }
+
+
 
         private void UpdateMesh(Mesh mesh, List<Vector3> meshVert, List<Vector2> UVs, List<int> triangles)
         {
