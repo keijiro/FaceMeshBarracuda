@@ -691,6 +691,7 @@ GameObject:
   - component: {fileID: 2010591767}
   - component: {fileID: 2010591768}
   - component: {fileID: 2010591769}
+  - component: {fileID: 2010591770}
   m_Layer: 0
   m_Name: Visualizer
   m_TagString: Untagged
@@ -732,6 +733,7 @@ MonoBehaviour:
   _maskShader: {fileID: 4800000, guid: b83448f35f97644ddb430350dfa16324, type: 3}
   _cropShader: {fileID: 4800000, guid: 4983ed1b3d4d84693957c77cac7adcb2, type: 3}
   _eyeContourMesh: {fileID: 2010591769}
+  _faceMesh: {fileID: 2010591770}
 --- !u!114 &2010591767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,3 +774,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c28a77dc364fbfbcc47b6cdb62ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2010591770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010591762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9c387f3c628481c9b1433468c80efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resource: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}

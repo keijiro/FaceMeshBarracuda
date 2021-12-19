@@ -22,7 +22,7 @@ namespace MediaPipe.FaceMesh
         [Space]
         //[SerializeField] DrawLandmarksToMesh _drawLandmarksToMesh = null;
         [SerializeField] EyeContourMesh _eyeContourMesh = null;
-
+        [SerializeField] FaceMesh _faceMesh = null;
 
         #endregion
 
@@ -90,7 +90,11 @@ namespace MediaPipe.FaceMesh
 
             _eyeContourMesh.UpdateMesh(_pipeline.RawRightEyeVertexBuffer);
 
-            _eyeContourMesh.Draw(_pipeline.CroppedRightEyeTexture);
+            //_eyeContourMesh.Draw(_pipeline.CroppedRightEyeTexture);
+
+            _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer);
+
+            _faceMesh.Draw(_pipeline.CroppedFaceTexture);
 
             #endregion
         }

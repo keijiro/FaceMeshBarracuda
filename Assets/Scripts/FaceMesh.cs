@@ -2,17 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceMesh : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+namespace MediaPipe.FaceMesh
+{
+    public class FaceMesh : MonoBehaviour
     {
-        
+        [SerializeField] ResourceSet _resource;
+
+        Mesh _mesh;
+        Material _material;
+
+        void Start()
+        {
+
+            Shader shader = Shader.Find("Hidden/MediaPipe/FaceMesh/FaceMesh");
+
+            _material = new Material(shader);
+
+            _mesh = _resource.faceMeshTemplate;
+
+        }
+
+
+        public void UpdateMesh(ComputeBuffer vertexBuffer)
+        {
+            _material.SetBuffer("_Vertices", vertexBuffer);
+        }
+
+        public void Draw(Texture texture)
+        {
+            _material.SetTexture("_MainTex", texture);
+
+            Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material, 0);
+        }
     }
 }
