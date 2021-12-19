@@ -14,7 +14,7 @@ namespace MediaPipe.FaceMesh
         Mesh _mesh;
         Material _material;
 
-        bool isFaceTriangleReversed = true;
+        bool isFaceTriangleReversed;
 
         class MeshParams
         {
@@ -43,7 +43,7 @@ namespace MediaPipe.FaceMesh
             _mesh = new Mesh();
             _mesh.SetIndices(_mesh.GetIndices(0), MeshTopology.Triangles, 0);
 
-
+            isFaceTriangleReversed = true;
         }
 
         public void DrawEye(ComputeBuffer vertexBuffer, Texture texture)
@@ -132,7 +132,8 @@ namespace MediaPipe.FaceMesh
             {
                 foreach(float4 vertex in vertexData)
                 {
-                    meshParams.meshVert.Add(vertex.xyz); 
+                    meshParams.meshVert.Add(vertex.xyz);
+                    meshParams.UVs.Add(vertex.xy);
                 }
             }
 
@@ -143,6 +144,9 @@ namespace MediaPipe.FaceMesh
 
             //頂点座標をコピー
             mesh.SetVertices(meshParams.meshVert);
+
+            //UV設定
+            mesh.SetUVs(0, meshParams.UVs);
 
             //trianglesを逆順にして設定
             if (isFaceTriangleReversed)
