@@ -9,10 +9,12 @@ namespace MediaPipe.FaceMesh
 
     public class DrawLandmarksToMesh : MonoBehaviour
     {
-        //[SerializeField] Shader _shader = null;
+        [SerializeField] ResourceSet _resources = null;
 
         Mesh _mesh;
         Material _material;
+
+        bool isFaceTriangleReversed = true;
 
         class MeshParams
         {
@@ -39,24 +41,27 @@ namespace MediaPipe.FaceMesh
             _material = new Material(shader);
 
             _mesh = new Mesh();
-            _mesh.SetIndices(_mesh.GetIndices(0), MeshTopology.LineStrip, 0);
+            _mesh.SetIndices(_mesh.GetIndices(0), MeshTopology.Triangles, 0);
 
 
         }
 
         public void DrawEye(ComputeBuffer vertexBuffer, Texture texture)
         {
-            UpdateMeshWithEye(_mesh, vertexBuffer);
+            UpdateMeshWithEye(ref _mesh, vertexBuffer);
 
             _material.SetTexture("_MainTex", texture);
 
             Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material, 0);
 
         }
+
+
+
 
         public void DrawFace(ComputeBuffer vertexBuffer, Texture texture)
         {
-            UpdateMeshWithFace(_mesh, vertexBuffer);
+            UpdateMeshWithFace(ref _mesh, vertexBuffer);
 
             _material.SetTexture("_MainTex", texture);
 
@@ -65,7 +70,7 @@ namespace MediaPipe.FaceMesh
         }
 
 
-        void UpdateMeshWithEye(Mesh mesh, ComputeBuffer vertexBuffer)
+        void UpdateMeshWithEye(ref Mesh mesh, ComputeBuffer vertexBuffer)
         {
 
             //処理結果にアクセス
@@ -111,7 +116,7 @@ namespace MediaPipe.FaceMesh
 
         }
 
-        void UpdateMeshWithFace(Mesh mesh, ComputeBuffer vertexBuffer)
+        void UpdateMeshWithFace(ref Mesh mesh, ComputeBuffer vertexBuffer)
         {
 
             //処理結果にアクセス
@@ -119,30 +124,15 @@ namespace MediaPipe.FaceMesh
 
             vertexBuffer.GetData(vertexData);
 
-            //頂点を描画
             MeshParams meshParams = new MeshParams();
 
+            mesh = _resources.faceMeshTemplate;
+           
             try
             {
-                //頂点とUV座標を設定
-                for (int i = 0; i < vertexData.Length; i++)//顔のメッシュを設定
+                foreach(float4 vertex in vertexData)
                 {
-                    meshParams.meshVert.Add(vertexData[i].xyz);
-
-                    meshParams.UVs.Add(vertexData[i].xy);
-                }
-
-                //ポリゴンを設定
-                for (int i = 0; i < 7; i++)
-                {
-
-                    int[] triangle =
-                        {
-                        i, i+9, i+1,
-                        i+1, i+9, i+10
-                        };
-
-                    meshParams.triangles.AddRange(triangle);
+                    meshParams.meshVert.Add(vertex.xyz); 
                 }
             }
 
@@ -150,7 +140,18 @@ namespace MediaPipe.FaceMesh
             {
 
             }
-            UpdateMesh(mesh, meshParams.meshVert, meshParams.UVs, meshParams.triangles);
+
+            //頂点座標をコピー
+            mesh.SetVertices(meshParams.meshVert);
+
+            //trianglesを逆順にして設定
+            if (isFaceTriangleReversed)
+            {
+                meshParams.triangles.AddRange(mesh.triangles);
+                meshParams.triangles.Reverse();
+                mesh.SetTriangles(meshParams.triangles, 0);
+                isFaceTriangleReversed = false;
+            }
         }
 
 
