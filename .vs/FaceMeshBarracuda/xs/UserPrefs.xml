@@ -1,18 +1,13 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FaceMesh/Script/ResourceSet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shader/FaceMesh.shader">
     <Files>
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="11" Column="15" IsPinned="True" />
-      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="97" Column="58" IsPinned="True" />
-      <File FileName="Assets/Scripts/DrawLandmarksToMesh.cs" Line="156" Column="60" />
-      <File FileName="Assets/Shader/Mask.shader" Line="1" Column="39" />
-      <File FileName="Assets/Shader/NewUnlitShader.shader" Line="44" Column="26" />
-      <File FileName="Assets/FaceMesh/Shader/Postprocess.compute" Line="1" Column="1" />
-      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" Line="17" Column="44" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="13" Column="52" />
-      <File FileName="Assets/Scripts/EyeMesh.cs" Line="83" Column="1" />
-      <File FileName="Assets/Shader/MeshFromBuffer.shader" Line="1" Column="8" />
-      <File FileName="Assets/Scripts/FaceMesh.cs" Line="10" Column="30" />
-      <File FileName="Assets/FaceMesh/Script/ResourceSet.cs" Line="11" Column="21" />
+      <File FileName="Assets/Scripts/MyVisualizer.cs" Line="13" Column="26" IsPinned="True" />
+      <File FileName="Assets/Shader/MeshFromBuffer.shader" Line="44" Column="50" />
+      <File FileName="Assets/Scripts/FaceMesh.cs" Line="22" Column="48" />
+      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="21" Column="48" />
+      <File FileName="Assets/Scripts/EyeContourMesh.cs" Line="1" Column="1" />
+      <File FileName="Assets/Shader/FaceMesh.shader" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
