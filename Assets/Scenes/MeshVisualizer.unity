@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &428095832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1564970721}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2010591767}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.MyWebcamInput, Assembly-CSharp
         m_MethodName: ChangeDevice
         m_Mode: 1
@@ -287,7 +287,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1564970721}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c28a77dc364fbfbcc47b6cdb62ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: bc72c709b4c434310b41209a01e5377b, type: 3}
 --- !u!4 &1043356185
 Transform:
   m_ObjectHideFlags: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c28a77dc364fbfbcc47b6cdb62ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: bc72c709b4c434310b41209a01e5377b, type: 3}
 --- !u!4 &1062770914
 Transform:
   m_ObjectHideFlags: 0
@@ -410,7 +412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062770912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.72, y: -0.27, z: 0}
+  m_LocalPosition: {x: -0.72, y: -0.27, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -521,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9c387f3c628481c9b1433468c80efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: a150b1ad602b44868bac8f27d9542b47, type: 3}
   _resource: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
 --- !u!4 &1478166156
 Transform:
@@ -566,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a814f6b3d4dd74b09b27baf87987105b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformShader: {fileID: 4800000, guid: 54c3cd2a65a9c40c7b1fd1a419fdf040, type: 3}
   _resource: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
 --- !u!4 &1534671964
 Transform:
@@ -613,8 +617,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 428095832}
   - {fileID: 494589329}
+  - {fileID: 428095832}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -812,9 +816,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2010591762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72730bf354752f54f987500737914501, type: 3}
+  m_Script: {fileID: 11500000, guid: 0429ef1c5ec58476c95695740defc86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deviceName: NDI Video
   _resolution: {x: 1080, y: 1080}
   _dummyImage: {fileID: 0}
+  defaultDeviceIndex: 0

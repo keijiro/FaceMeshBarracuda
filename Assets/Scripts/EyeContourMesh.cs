@@ -6,6 +6,8 @@ namespace MediaPipe.FaceMesh
 {
     public class EyeContourMesh : MonoBehaviour
     {
+
+        [SerializeField] Shader _shader;
         Mesh _mesh;
         Material _material;
 
@@ -29,9 +31,7 @@ namespace MediaPipe.FaceMesh
         void Start()
         {
 
-            Shader shader = Shader.Find("Hidden/MediaPipe/FaceMesh/EyeContourMesh");
-
-            _material = new Material(shader);
+            _material = new Material(_shader);
 
             _mesh = new Mesh();
 
@@ -70,7 +70,14 @@ namespace MediaPipe.FaceMesh
       
         public void UpdateMesh(ComputeBuffer vertexBuffer)
         {
-            _material.SetBuffer("_Vertices", vertexBuffer);
+            try
+            {
+                _material.SetBuffer("_Vertices", vertexBuffer);
+            }
+            catch
+            {
+
+            }
         }
 
         public void Draw(Texture texture)

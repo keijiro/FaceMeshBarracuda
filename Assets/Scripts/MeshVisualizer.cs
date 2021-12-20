@@ -10,7 +10,7 @@ namespace MediaPipe.FaceMesh
     {
         #region Editable attributes
 
-        [SerializeField] WebcamInput _webcam = null;
+        [SerializeField] MyWebcamInput _webcam = null;
         [Space]
         [SerializeField] ResourceSet _resources = null;
         [Space]

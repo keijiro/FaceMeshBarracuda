@@ -7,6 +7,7 @@ namespace MediaPipe.FaceMesh
 {
     public class FaceMesh : MonoBehaviour
     {
+        [SerializeField] Shader _shader;
         [SerializeField] ResourceSet _resource;
 
         Mesh _mesh;
@@ -15,9 +16,7 @@ namespace MediaPipe.FaceMesh
         void Start()
         {
 
-            Shader shader = Shader.Find("Hidden/MediaPipe/FaceMesh/FaceMesh");
-
-            _material = new Material(shader);
+            _material = new Material(_shader);
 
             _mesh = _resource.faceMeshTemplate;
 
@@ -26,7 +25,14 @@ namespace MediaPipe.FaceMesh
 
         public void UpdateMesh(ComputeBuffer vertexBuffer)
         {
-            _material.SetBuffer("_Vertices", vertexBuffer);
+            try
+            {
+                _material.SetBuffer("_Vertices", vertexBuffer);
+            }
+            catch
+            {
+
+            }
         }
 
         public void Draw(Texture texture)
