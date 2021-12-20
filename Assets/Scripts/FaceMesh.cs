@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -33,6 +34,12 @@ namespace MediaPipe.FaceMesh
             {
 
             }
+        }
+
+        public void UpdateMesh(ComputeBuffer vertexBuffer, float4x4 cropMatrix)
+        {
+            _material.SetMatrix("_Xform", cropMatrix);
+            UpdateMesh(vertexBuffer);
         }
 
         public void Draw(Texture texture)

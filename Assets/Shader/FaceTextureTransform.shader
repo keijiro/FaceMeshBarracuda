@@ -40,7 +40,20 @@ Shader "Hidden/MediaPipe/FaceMesh/FaceTextureTransform"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(float4(v.uv,0,0));
+
+                //原点を合わせる
+                //(-0.5,-0.5)平行移動する行列
+                float4x4 t ={
+                1,0,0,-0.5,
+                0,1,0,-0.5,
+                0,0,1,0,
+                0,0,0,1
+                };
+
+                o.vertex = mul(t,float4(v.uv,0,1));
+
+                o.vertex = UnityObjectToClipPos(o.vertex);
+
                 o.uv = TRANSFORM_TEX(_Vertices[v.vid].xy, _MainTex);
                 return o;
             }

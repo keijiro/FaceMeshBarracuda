@@ -36,12 +36,31 @@ Shader "Hidden/MediaPipe/FaceMesh/FaceMesh"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             StructuredBuffer<float4> _Vertices;
+            float4x4 _Xform;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(_Vertices[v.vid]);
+
+                //座標変換
+                o.vertex = mul(_Xform,_Vertices[v.vid]);
+
+                //原点を合わせる
+                //(-0.5,-0.5)平行移動する行列
+                float4x4 t ={
+                1,0,0,-0.5,
+                0,1,0,-0.5,
+                0,0,1,0,
+                0,0,0,1
+                };
+
+                o.vertex = mul(t,o.vertex);
+
+                //座標変換してからUnityObjectToClipPos変換
+                o.vertex = UnityObjectToClipPos(o.vertex);
+
                 o.uv = TRANSFORM_TEX(_Vertices[v.vid].xy, _MainTex);
+
                 return o;
             }
 
