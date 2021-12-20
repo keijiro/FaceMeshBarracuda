@@ -51,7 +51,7 @@ namespace MediaPipe.FaceMesh
             _pipeline.ProcessImage(_webcam.Texture);
 
             //Update and draw mesh
-            _rightEyeContourMesh.UpdateMesh(_pipeline.RawRightEyeVertexBuffer, _pipeline.LeftEyeCropMatrix);//なぜかLeftEyeCropMatrixじゃないとだめ
+            _rightEyeContourMesh.UpdateMesh(_pipeline.RawRightEyeVertexBuffer, _pipeline.RightEyeCropMatrix);
 
             _rightEyeContourMesh.Draw(_pipeline.CroppedRightEyeTexture);
 

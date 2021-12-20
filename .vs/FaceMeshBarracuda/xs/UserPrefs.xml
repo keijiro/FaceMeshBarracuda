@@ -1,19 +1,18 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EyeContourMesh.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Visualizer/Script/Visualizer.cs">
     <Files>
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="11" Column="15" IsPinned="True" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="97" Column="43" IsPinned="True" />
       <File FileName="Assets/Scripts/FaceMesh.cs" Line="42" Column="38" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="13" Column="20" />
-      <File FileName="Assets/Scripts/EyeContourMesh.cs" Line="84" Column="21" />
+      <File FileName="Assets/Scripts/EyeContourMesh.cs" Line="87" Column="38" />
       <File FileName="Assets/Shader/FaceMesh.shader" Line="56" Column="1" />
       <File FileName="Assets/Scripts/old/MyWebcamInput.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="54" Column="43" />
+      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="54" Column="94" />
       <File FileName="Assets/Shader/FaceTextureTransform.shader" Line="53" Column="49" />
-      <File FileName="Assets/Shader/EyeContourMesh.shader" Line="45" Column="58" />
+      <File FileName="Assets/Shader/EyeContourMesh.shader" Line="47" Column="17" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="21" Column="19" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="18" Column="29" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.iris@1.1.0/Script/EyeLandmarkDetector.cs" Line="19" Column="21" />
-      <File FileName="Assets/Shader/IrisCenteringVisualize.shader" Line="1" Column="1" />
+      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />

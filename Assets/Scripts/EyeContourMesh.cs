@@ -83,6 +83,9 @@ namespace MediaPipe.FaceMesh
 
         public void UpdateMesh(ComputeBuffer vertexBuffer, float4x4 cropMatrix)
         {
+            var fF = MathUtil.ScaleOffset(1f, math.float2(0f, 0f));
+            cropMatrix = math.mul(fF, cropMatrix);
+
             _material.SetMatrix("_Xform", cropMatrix);
             UpdateMesh(vertexBuffer);
         }

@@ -9,6 +9,7 @@ Shader "Hidden/MediaPipe/FaceMesh/EyeContourMesh"
     {
         Tags { "RenderType"="Opaque" }
         LOD 100
+        Cull off
 
         Pass
         {
