@@ -77,7 +77,7 @@ namespace MediaPipe.FaceMesh
         {
             _pipeline = new FacePipeline(_resources);
 
-            _webCamViewRT = new RenderTexture(_webcam.Texture.width, _webcam.Texture.height, 0);
+            _webCamViewRT = new RenderTexture(1024, 1024, 0);
         }
 
         void OnDestroy()

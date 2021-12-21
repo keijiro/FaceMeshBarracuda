@@ -1,83 +1,47 @@
-using UnityEngine;
-using Unity.Mathematics;
+using System.Collections;
 using System.Collections.Generic;
-using UI = UnityEngine.UI;
+using Unity.Mathematics;
+using UnityEngine;
+
 
 namespace MediaPipe.FaceMesh
 {
-
-    public sealed class FaceSwap : MonoBehaviour
+    public class FaceSwap : MonoBehaviour
     {
-        #region Editable attributes
 
-        [SerializeField] MyWebcamInput _webcam = null;
-        [Space]
-        [SerializeField] ResourceSet _resources = null;
-        [Space]
-        [SerializeField] UI.RawImage _webCamUI = null;
-        [Space]
+        [SerializeField] PipeLineManager _pipeline = null;
         [SerializeField] FaceMesh _faceMesh = null;
         [SerializeField] FaceMeshTransformed _faceMeshTransformed = null;
-        [Space]
-        [SerializeField] RenderTexture _faceTextureUVMapped = null;
+        [SerializeField] RenderTexture _faceUVMappedRT = null;
 
-        #endregion
-
-        #region Private members
-
-        FacePipeline _pipeline;
-
-        RenderTexture _webCamViewRT;
-
-        #endregion
-
-        #region MonoBehaviour implementation
-
+        // Start is called before the first frame update
         void Start()
         {
-            _pipeline = new FacePipeline(_resources);
 
-            _webCamViewRT = new RenderTexture(1024, 1024, 0);
         }
 
-        void OnDestroy()
+        // Update is called once per frame
+        void Update()
         {
-            _pipeline.Dispose();
+            _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer,_pipeline.FaceCropMatrix);
+
+            _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);
+
+            _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
+
+            _faceMesh.Draw(_faceUVMappedRT);
         }
 
-        void LateUpdate()
+        public void SaveTexture()
         {
-            // Processing on the face pipeline
-            _pipeline.ProcessImage(_webcam.Texture);
+            System.DateTime UnixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            long now = (long)(System.DateTime.Now - UnixEpoch).TotalSeconds;
 
-            _webCamUI.texture = _webcam.Texture;
-
-            //Update and draw mesh
-
-            //UVマッピングした顔テクスチャを更新
-            try
-            {
-                _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);
-
-                _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
-            }
-
-            catch { }
+            string filePath = "Assets/" + now + ".png";
+            Debug.Log(filePath);
+            TextureController.SaveImage(_faceUVMappedRT, filePath);
 
 
-
-            try
-            {
-                _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer, _pipeline.FaceCropMatrix);
-
-                _faceMesh.Draw(_faceTextureUVMapped);
-            }
-            catch { }
-
-         
-
-            #endregion
         }
     }
-
-} // namespace MediaPipe.FaceMesh
+}
