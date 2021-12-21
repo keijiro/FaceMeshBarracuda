@@ -1,24 +1,25 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Visualizer/Script/Visualizer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MeshVisualizer.cs">
     <Files>
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="97" Column="43" IsPinned="True" />
-      <File FileName="Assets/Scripts/FaceMesh.cs" Line="42" Column="38" />
-      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="13" Column="20" />
-      <File FileName="Assets/Scripts/EyeContourMesh.cs" Line="87" Column="38" />
-      <File FileName="Assets/Shader/FaceMesh.shader" Line="56" Column="1" />
-      <File FileName="Assets/Scripts/old/MyWebcamInput.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="54" Column="94" />
-      <File FileName="Assets/Shader/FaceTextureTransform.shader" Line="53" Column="49" />
-      <File FileName="Assets/Shader/EyeContourMesh.shader" Line="47" Column="17" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="21" Column="19" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="18" Column="29" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FaceMesh.cs" />
+      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="12" Column="47" />
+      <File FileName="Assets/Scripts/EyeContourMesh.cs" />
+      <File FileName="Assets/Shader/FaceMesh.shader" />
+      <File FileName="Assets/Scripts/old/MyWebcamInput.cs" />
+      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="96" Column="1" />
+      <File FileName="Assets/Shader/FaceTextureTransform.shader" />
+      <File FileName="Assets/Shader/EyeContourMesh.shader" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
+      <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
+      <File FileName="Assets/Shader/FaceMeshUVMapped.shader" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d8d61110-0502-47a6-9c66-c10f5f165f48" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c6231fca-4ede-419a-85ed-e0d2a060f2cc" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
