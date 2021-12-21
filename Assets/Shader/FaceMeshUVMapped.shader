@@ -60,7 +60,7 @@ Shader "Hidden/MediaPipe/FaceMesh/FaceMeshUVMappded"
                 //座標変換してからUnityObjectToClipPos変換
                 o.vertex = UnityObjectToClipPos(o.vertex);
 
-                o.uv = TRANSFORM_TEX(_Vertices[v.vid].xy, _MainTex);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
                 return o;
             }

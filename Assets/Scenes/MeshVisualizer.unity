@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2010591767}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.MyWebcamInput, Assembly-CSharp
         m_MethodName: ChangeDevice
         m_Mode: 1
@@ -345,7 +345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1043356184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1062770912
 GameObject:
@@ -390,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1062770913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +417,70 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1101515356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101515359}
+  - component: {fileID: 1101515357}
+  - component: {fileID: 1101515358}
+  m_Layer: 0
+  m_Name: PipeLineManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1101515357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101515356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87774407e7c5d423680d9133ef3f51a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _webcam: {fileID: 1101515358}
+  _resources: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
+  _webCamUI: {fileID: 494589330}
+--- !u!114 &1101515358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101515356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0429ef1c5ec58476c95695740defc86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resolution: {x: 720, y: 720}
+  _dummyImage: {fileID: 0}
+  defaultDeviceIndex: 0
+--- !u!4 &1101515359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101515356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1237145880
 GameObject:
@@ -510,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1478166155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +601,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1534671962
 GameObject:
@@ -571,6 +634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transformShader: {fileID: 4800000, guid: 54c3cd2a65a9c40c7b1fd1a419fdf040, type: 3}
   _resource: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
+  _camera: {fileID: 0}
 --- !u!4 &1534671964
 Transform:
   m_ObjectHideFlags: 0
@@ -584,7 +648,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1564970720
 GameObject:
@@ -734,7 +798,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1598763956
 MonoBehaviour:
@@ -765,7 +829,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2010591765}
   - component: {fileID: 2010591766}
-  - component: {fileID: 2010591767}
   m_Layer: 0
   m_Name: Visualizer
   m_TagString: Untagged
@@ -786,7 +849,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2010591766
 MonoBehaviour:
@@ -800,25 +863,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150fed6532aae4925b632cac0c032751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _webcam: {fileID: 2010591767}
-  _resources: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
-  _webCamUI: {fileID: 494589330}
+  _pipeline: {fileID: 1101515357}
   _faceMesh: {fileID: 1478166155}
   _faceMeshTransformed: {fileID: 1534671963}
   _rightEyeContourMesh: {fileID: 1043356184}
   _leftEyeContourMesh: {fileID: 1062770913}
---- !u!114 &2010591767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010591762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0429ef1c5ec58476c95695740defc86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resolution: {x: 720, y: 720}
-  _dummyImage: {fileID: 0}
-  defaultDeviceIndex: 0

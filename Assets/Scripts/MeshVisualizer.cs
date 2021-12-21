@@ -10,12 +10,7 @@ namespace MediaPipe.FaceMesh
     {
         #region Editable attributes
 
-        [SerializeField] MyWebcamInput _webcam = null;
-        [Space]
-        [SerializeField] ResourceSet _resources = null;
-        [Space]
-        [SerializeField] UI.RawImage _webCamUI = null;
-        [Space]
+        [SerializeField] PipeLineManager _pipeline = null;
         [SerializeField] FaceMesh _faceMesh = null;
         [SerializeField] FaceMeshTransformed _faceMeshTransformed = null;
         [SerializeField] EyeContourMesh _rightEyeContourMesh = null;
@@ -25,9 +20,6 @@ namespace MediaPipe.FaceMesh
 
         #region Private members
 
-        FacePipeline _pipeline;
-
-        RenderTexture _webCamViewRT;
 
         #endregion
 
@@ -35,23 +27,16 @@ namespace MediaPipe.FaceMesh
 
         void Start()
         {
-            _pipeline = new FacePipeline(_resources);
-
-            _webCamViewRT = new RenderTexture(1024, 1024, 0);
+           
         }
 
         void OnDestroy()
         {
-            _pipeline.Dispose();
+           
         }
 
         void LateUpdate()
         {
-            // Processing on the face pipeline
-            _pipeline.ProcessImage(_webcam.Texture);
-
-            _webCamUI.texture = _webcam.Texture;
-
             //Update and draw mesh
             try
             {

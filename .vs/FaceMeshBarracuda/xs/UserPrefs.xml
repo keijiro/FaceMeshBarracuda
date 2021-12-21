@@ -1,19 +1,21 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MeshVisualizer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PipeLineManager.cs">
     <Files>
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="97" Column="43" IsPinned="True" />
-      <File FileName="Assets/Scripts/FaceMesh.cs" />
+      <File FileName="Assets/Scripts/FaceMesh.cs" Line="42" Column="38" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="12" Column="47" />
       <File FileName="Assets/Scripts/EyeContourMesh.cs" />
       <File FileName="Assets/Shader/FaceMesh.shader" />
       <File FileName="Assets/Scripts/old/MyWebcamInput.cs" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="96" Column="1" />
-      <File FileName="Assets/Shader/FaceTextureTransform.shader" />
+      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="67" Column="16" />
+      <File FileName="Assets/Shader/FaceTextureTransform.shader" Line="1" Column="1" />
       <File FileName="Assets/Shader/EyeContourMesh.shader" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
-      <File FileName="Assets/Shader/FaceMeshUVMapped.shader" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="28" Column="43" />
+      <File FileName="Assets/Shader/FaceMeshUVMapped.shader" Line="63" Column="42" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="73" Column="53" />
+      <File FileName="Assets/Scripts/FaceTextureGeneretor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
