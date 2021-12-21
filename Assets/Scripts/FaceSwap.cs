@@ -13,6 +13,10 @@ namespace MediaPipe.FaceMesh
         [SerializeField] FaceMesh _faceMesh = null;
         [SerializeField] FaceMeshTransformed _faceMeshTransformed = null;
         [SerializeField] RenderTexture _faceUVMappedRT = null;
+        [SerializeField] RenderTexture _faceSwappedRT = null;
+        [SerializeField] Texture _swapFaceTexture = null;
+        [SerializeField] Material _material = null;
+        [SerializeField] Material _material2 = null;
 
         // Start is called before the first frame update
         void Start()
@@ -23,13 +27,20 @@ namespace MediaPipe.FaceMesh
         // Update is called once per frame
         void Update()
         {
+            //mesh情報をアップデート
             _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer,_pipeline.FaceCropMatrix);
 
             _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);
 
+            //RenderTextureにFaceTextureを書き込み
             _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
 
-            _faceMesh.Draw(_faceUVMappedRT);
+            //renderTextureと取り込んだテクスチャを合成
+            _material.SetTexture("_MainTex", _faceUVMappedRT);
+            Graphics.Blit(_faceUVMappedRT,_faceSwappedRT, _material);
+            Graphics.Blit(_faceSwappedRT, _faceSwappedRT, _material2);
+
+            _faceMesh.Draw(_faceSwappedRT);
         }
 
         public void SaveTexture()

@@ -4,7 +4,7 @@ Shader "Hidden/MediaPipe/FaceMesh/FaceMeshUVMappded"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-
+        _OverTex("Texture", 2D) = "white" {}
     }
     SubShader
     {
@@ -74,5 +74,6 @@ Shader "Hidden/MediaPipe/FaceMesh/FaceMeshUVMappded"
             }
             ENDCG
         }
+
     }
 }
