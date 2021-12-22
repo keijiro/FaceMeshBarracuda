@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resolution: {x: 720, y: 720}
   _dummyImage: {fileID: 0}
-  defaultDeviceIndex: 1
+  defaultDeviceIndex: 0
 --- !u!114 &2010591768
 MonoBehaviour:
   m_ObjectHideFlags: 0

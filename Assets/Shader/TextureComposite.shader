@@ -1,4 +1,4 @@
-Shader "Unlit/TextureComposite"
+Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
 {
     Properties
     {

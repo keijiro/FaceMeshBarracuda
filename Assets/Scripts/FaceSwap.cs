@@ -14,21 +14,24 @@ namespace MediaPipe.FaceMesh
         [SerializeField] FaceMeshTransformed _faceMeshTransformed = null;
         [SerializeField] RenderTexture _faceUVMappedRT = null;
         [SerializeField] RenderTexture _faceSwappedRT = null;
-        [SerializeField] Texture _swapFaceTexture = null;
+        //[SerializeField] Texture _swapFaceTexture = null;
         [SerializeField] Material _material = null;
         [SerializeField] Material _material2 = null;
+        [SerializeField] Texture _texture1_1 = null;
+
+        CompositeTexture _composite;
 
         // Start is called before the first frame update
         void Start()
         {
-
+            _composite = new CompositeTexture();
         }
 
         // Update is called once per frame
         void Update()
         {
             //mesh情報をアップデート
-            _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer,_pipeline.FaceCropMatrix);
+            _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer, _pipeline.FaceCropMatrix);
 
             _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);
 
@@ -37,10 +40,12 @@ namespace MediaPipe.FaceMesh
 
             //renderTextureと取り込んだテクスチャを合成
             _material.SetTexture("_MainTex", _faceUVMappedRT);
-            Graphics.Blit(_faceUVMappedRT,_faceSwappedRT, _material);
+            Graphics.Blit(_faceUVMappedRT, _faceSwappedRT, _material);
             Graphics.Blit(_faceSwappedRT, _faceSwappedRT, _material2);
 
-            _faceMesh.Draw(_faceSwappedRT);
+            RenderTexture RT = _composite.Composite(_faceSwappedRT, _texture1_1, 0.5f, 1, 0.5f, 1); ;
+
+            _faceMesh.Draw(RT);
         }
 
         public void SaveTexture()
