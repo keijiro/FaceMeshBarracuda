@@ -1065,9 +1065,9 @@ MonoBehaviour:
   _faceMeshTransformed: {fileID: 1534671963}
   _faceUVMappedRT: {fileID: 8400000, guid: c909119ef2a754ba09199a18f1b459bf, type: 2}
   _faceSwappedRT: {fileID: 8400000, guid: e5fc020ed44f14cadb2c3cedad26ab8b, type: 2}
-  _swapFaceTexture: {fileID: 2800000, guid: dea1f46dbc698470ba790b4ae17b77a1, type: 3}
   _material: {fileID: 2100000, guid: e7c2bc72eb9614584abf4e67d29964c8, type: 2}
   _material2: {fileID: 2100000, guid: 92cc126108bb549adbb384cc58445246, type: 2}
+  _texture1_1: {fileID: 2800000, guid: cd32c3524ecbc433289c13492635c9ca, type: 3}
 --- !u!4 &1663121910
 Transform:
   m_ObjectHideFlags: 0

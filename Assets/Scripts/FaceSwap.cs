@@ -31,9 +31,8 @@ namespace MediaPipe.FaceMesh
         void Update()
         {
             //mesh情報をアップデート
-            _faceMesh.UpdateMesh(_pipeline.RawFaceVertexBuffer, _pipeline.FaceCropMatrix);
-
-            _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);
+            _faceMesh.UpdateMesh(_pipeline.RefinedFaceVertexBuffer);//Refinedを使うのでCropMatrix不要
+            _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);//用意されたmeshに貼り付けるのでrefinedだとだめ
 
             //RenderTextureにFaceTextureを書き込み
             _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
