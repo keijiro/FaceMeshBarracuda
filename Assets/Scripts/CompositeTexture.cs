@@ -19,7 +19,7 @@ public class CompositeTexture
         _renderTexture = new RenderTexture(1024, 1024, 0);
     }
 
-    public RenderTexture Composite(Texture baseTexture, Texture overTxtrure,
+    public void Composite(RenderTexture targetTexture, Texture overTxtrure,
         float _BlendStartU, float _BlendEndU, float _BlendStartV, float _BlendEndV)
     {
 
@@ -35,8 +35,7 @@ public class CompositeTexture
 
         _material.SetFloat("_BlendEndV", _BlendEndV);
 
-        Graphics.Blit(baseTexture, _renderTexture, _material);
+        Graphics.Blit(targetTexture, targetTexture, _material);
 
-        return _renderTexture;
     }
 }
