@@ -71,16 +71,19 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
                 // sample the texture
                 fixed4 main = tex2D(_MainTex, i.uv);
                 fixed4 sub = tex2D(_SubTex, pos);
-                fixed4 col = main;
+                //fixed4 col = main;
 
                 //指定の範囲だったら合成する
-                if(i.uv.x >= _BlendStartU && i.uv.y >= _BlendStartV)
-                {
-                    if(i.uv.x <= _BlendEndU && i.uv.y <= _BlendEndV)
-                    {
-                        col = main * (1-_Blend) + sub * _Blend;
-                    }
-                }
+                //条件がそろっていればconditionに1が入る
+                float condition = step(i.uv.x, _BlendEndU) * 
+                                    step(i.uv.y, _BlendEndV) *
+                                    step(_BlendStartU, i.uv.x) *
+                                    step(_BlendStartV, i.uv.y);
+
+                //condition = 1のときだけblendする
+                float blend = condition * _Blend;
+
+                fixed4 col = main * (1-blend) + sub * blend;
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
