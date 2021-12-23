@@ -24,6 +24,27 @@ public static class TextureController
 
     }
 
+    //texture2Dをまとめて保存
+    static public void SaveImages(Texture2D[] inputs, string dirPath)
+    {
+        int index = 0;
+
+        string timeStamp = TimeUtil.GetUnixTime(System.DateTime.Now).ToString();
+
+        foreach(Texture2D texture in inputs)
+        {
+            byte[] bytes = texture.EncodeToPNG();
+
+            string filePath = System.IO.Path.Combine(dirPath, timeStamp + "_" + index + ".png");
+
+            System.IO.File.WriteAllBytesAsync(filePath, bytes);
+
+            index++;
+
+            Debug.Log(filePath);
+        }
+    }
+
     //テクスチャを分割する
     static public Texture2D[] Split(Texture input, int row, int column　)
     {
@@ -49,6 +70,7 @@ public static class TextureController
                 //texture読み込み
                 Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32,false);
                 texture.ReadPixels(new Rect(width * x, height * y, width, height), 0, 0);
+                texture.Apply();
 
                 textures.Add(texture);
             }

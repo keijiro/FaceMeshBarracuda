@@ -22,6 +22,10 @@ namespace MediaPipe.FaceMesh
         [SerializeField] Texture _texture1_0 = null;
         [SerializeField] Texture _texture1_1 = null;
 
+        [Space]
+        [SerializeField] Texture[] splitFaces;
+
+
         CompositeTexture _composite;
 
         // Start is called before the first frame update
@@ -43,24 +47,34 @@ namespace MediaPipe.FaceMesh
             //renderTextureと取り込んだテクスチャを合成;
             Graphics.CopyTexture(_faceUVMappedRT, _faceSwappedRT);
 
-            _composite.Composite(_faceSwappedRT, _texture0_1, 0, 0.5f, 0.5f, 1);
-            _composite.Composite(_faceSwappedRT, _texture1_0, 0.5f, 1f, 0, 0.5f);
-            _composite.Composite(_faceSwappedRT, _texture1_1, 0.5f, 1, 0.5f, 1);
+            int index = 0;
+
+            foreach(Texture splitFace in splitFaces)
+            {
+                _composite.Composite(_faceSwappedRT, splitFace, 5,5,index);
+                index++;
+            }
+
+            //_composite.Composite(_faceSwappedRT, _texture0_1, 0, 0.5f, 0.5f, 1);
+            //_composite.Composite(_faceSwappedRT, _texture1_0, 0.5f, 1f, 0, 0.5f);
+           // _composite.Composite(_faceSwappedRT, _texture1_1, 0.5f, 1, 0.5f, 1);
 
             //合成結果をメッシュ上に描画
             _faceMesh.Draw(_faceSwappedRT);
         }
 
+
         public void SaveTexture()
         {
-            System.DateTime UnixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
-            long now = (long)(System.DateTime.Now - UnixEpoch).TotalSeconds;
+            //System.DateTime UnixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            //  long now = (long)(System.DateTime.Now - UnixEpoch).TotalSeconds;
 
-            string filePath = "Assets/" + now + ".png";
-            Debug.Log(filePath);
-            TextureController.SaveImage(_faceUVMappedRT, filePath);
+            //  string filePath = "Assets/" + now + ".png";
+            //  Debug.Log(filePath);
+            //  TextureController.SaveImage(_faceUVMappedRT, filePath);
 
-
+            Texture2D[] splitTexture = TextureController.Split(_faceUVMappedRT, 5, 5);
+            TextureController.SaveImages(splitTexture, "Assets/SplitFaces");
         }
     }
 }

@@ -22,8 +22,9 @@ public class CompositeTexture
     public void Composite(RenderTexture targetTexture, Texture overTxtrure,
         float _BlendStartU, float _BlendEndU, float _BlendStartV, float _BlendEndV)
     {
-
-        //_material.SetTexture("_MainTex", baseTexture);
+        //載せるテクスチャがなければ何もしない
+        if (overTxtrure == null)
+            return;
 
         _material.SetTexture("_SubTex", overTxtrure);
 
@@ -38,6 +39,22 @@ public class CompositeTexture
         Graphics.Blit(targetTexture, targetTexture, _material);
 
     }
+
+    //分割数とその中での番号を引数にする
+    public void Composite(RenderTexture targetTexture, Texture overTxtrure,
+        int row, int column, int index)
+    {
+        int x = index % 4;
+        int y = (int)index / 4;
+
+        float _BlendStartU = x / column;
+        float _BlendEndU = _BlendStartU + 1/column;
+        float _BlendStartV = y / row;
+        float _BlendEndV = _BlendStartV + 1/row;
+
+        Composite(targetTexture, overTxtrure, _BlendStartU, _BlendEndU, _BlendStartV, _BlendEndV);
+    }
+
 
     public void SetBlend(float blend)
     {
