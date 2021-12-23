@@ -38,4 +38,11 @@ public class CompositeTexture
         Graphics.Blit(targetTexture, targetTexture, _material);
 
     }
+
+    public void SetBlend(float blend)
+    {
+        _material.SetFloat("_Blend", blend);
+    }
+
+    //todo blend演出を発火させるメソッドを作成する
 }

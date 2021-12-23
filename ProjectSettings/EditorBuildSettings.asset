@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MeshVisualizer.unity
-    guid: b122356de3e374851993888448cdea58
+    path: Assets/Scenes/FaceSwap.unity
+    guid: da17562880c6040649f0d1d6082fd6c6
   m_configObjects: {}
