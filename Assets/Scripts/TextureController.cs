@@ -45,6 +45,7 @@ public static class TextureController
         }
     }
 
+    //todo Asyncにしたい
     //テクスチャを分割する
     static public Texture2D[] Split(Texture input, int row, int column　)
     {

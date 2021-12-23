@@ -44,13 +44,13 @@ public class CompositeTexture
     public void Composite(RenderTexture targetTexture, Texture overTxtrure,
         int row, int column, int index)
     {
-        int x = index % 4;
-        int y = (int)index / 4;
+        int x = index % column;
+        int y = (int)index / column;
 
-        float _BlendStartU = x / column;
-        float _BlendEndU = _BlendStartU + 1/column;
-        float _BlendStartV = y / row;
-        float _BlendEndV = _BlendStartV + 1/row;
+        float _BlendStartU = (float)x / (float)column;
+        float _BlendEndU = _BlendStartU + 1.0f/column;
+        float _BlendStartV = (float)y / (float)row;
+        float _BlendEndV = _BlendStartV + 1.0f/row;
 
         Composite(targetTexture, overTxtrure, _BlendStartU, _BlendEndU, _BlendStartV, _BlendEndV);
     }

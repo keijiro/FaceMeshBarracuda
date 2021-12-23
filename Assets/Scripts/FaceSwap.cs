@@ -15,16 +15,12 @@ namespace MediaPipe.FaceMesh
 
         [SerializeField] RenderTexture _faceUVMappedRT = null;
         [SerializeField] RenderTexture _faceSwappedRT = null;
-        //[SerializeField] Texture _swapFaceTexture = null;
-        //[SerializeField] Material _material = null;
-        //[SerializeField] Material _material2 = null;
-        [SerializeField] Texture _texture0_1 = null;
-        [SerializeField] Texture _texture1_0 = null;
-        [SerializeField] Texture _texture1_1 = null;
 
         [Space]
+        [SerializeField] Vector2Int splitNum;
+        [Space]
         [SerializeField] Texture[] splitFaces;
-
+        
 
         CompositeTexture _composite;
 
@@ -51,13 +47,9 @@ namespace MediaPipe.FaceMesh
 
             foreach(Texture splitFace in splitFaces)
             {
-                _composite.Composite(_faceSwappedRT, splitFace, 5,5,index);
+                _composite.Composite(_faceSwappedRT, splitFace, splitNum.y,splitNum.x,index);
                 index++;
             }
-
-            //_composite.Composite(_faceSwappedRT, _texture0_1, 0, 0.5f, 0.5f, 1);
-            //_composite.Composite(_faceSwappedRT, _texture1_0, 0.5f, 1f, 0, 0.5f);
-           // _composite.Composite(_faceSwappedRT, _texture1_1, 0.5f, 1, 0.5f, 1);
 
             //合成結果をメッシュ上に描画
             _faceMesh.Draw(_faceSwappedRT);
@@ -73,7 +65,7 @@ namespace MediaPipe.FaceMesh
             //  Debug.Log(filePath);
             //  TextureController.SaveImage(_faceUVMappedRT, filePath);
 
-            Texture2D[] splitTexture = TextureController.Split(_faceUVMappedRT, 5, 5);
+            Texture2D[] splitTexture = TextureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
             TextureController.SaveImages(splitTexture, "Assets/SplitFaces");
         }
     }
