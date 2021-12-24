@@ -358,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &494589329
 RectTransform:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -534,9 +534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87774407e7c5d423680d9133ef3f51a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _webcam: {fileID: 1101515358}
   _resources: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
-  _webCamUI: {fileID: 494589330}
+  _inputTexture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
 --- !u!114 &1101515358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0429ef1c5ec58476c95695740defc86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resolution: {x: 720, y: 720}
+  _targetRenderTexture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
   _dummyImage: {fileID: 0}
   defaultDeviceIndex: 0
 --- !u!4 &1101515359
@@ -641,6 +640,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1344516702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344516704}
+  - component: {fileID: 1344516703}
+  m_Layer: 0
+  m_Name: RightIrisMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1344516703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344516702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240ce0f60ea0e45cf8a7e53ae372920e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: 99ebb2bd1753e4dc9bdbcaab10ab993c, type: 3}
+--- !u!4 &1344516704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344516702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376657818
 GameObject:
@@ -1027,3 +1071,4 @@ MonoBehaviour:
   _faceMeshTransformed: {fileID: 1534671963}
   _rightEyeContourMesh: {fileID: 1043356184}
   _leftEyeContourMesh: {fileID: 1062770913}
+  _rightIrisMesh: {fileID: 1344516703}

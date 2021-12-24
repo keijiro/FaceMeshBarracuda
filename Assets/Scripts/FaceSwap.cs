@@ -44,7 +44,7 @@ namespace MediaPipe.FaceMesh
             Graphics.CopyTexture(_faceUVMappedRT, _faceSwappedRT);
 
             int index = 0;
-
+            
             foreach(Texture splitFace in splitFaces)
             {
                 _composite.Composite(_faceSwappedRT, splitFace, splitNum.y,splitNum.x,index);
@@ -55,6 +55,11 @@ namespace MediaPipe.FaceMesh
             _faceMesh.Draw(_faceSwappedRT);
         }
 
+        //todo Textureをランダムに入れ替える
+        public void SelectTexture()
+        {
+
+        }
 
         public void SaveTexture()
         {

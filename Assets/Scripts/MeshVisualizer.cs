@@ -15,6 +15,7 @@ namespace MediaPipe.FaceMesh
         [SerializeField] FaceMeshTransformed _faceMeshTransformed = null;
         [SerializeField] EyeContourMesh _rightEyeContourMesh = null;
         [SerializeField] EyeContourMesh _leftEyeContourMesh = null;
+        [SerializeField] IrisMesh _rightIrisMesh = null;
 
         #endregion
 
@@ -69,6 +70,15 @@ namespace MediaPipe.FaceMesh
                 _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);
 
                 _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
+            }
+
+            catch { }
+
+            try
+            {
+                _rightIrisMesh.UpdateMesh(_pipeline.RawRightEyeVertexBuffer);
+
+                _rightIrisMesh.Draw(_pipeline.CroppedRightEyeTexture);
             }
 
             catch { }
