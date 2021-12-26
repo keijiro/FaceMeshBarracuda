@@ -31,7 +31,7 @@ Shader "Hidden/MediaPipe/FaceMesh/FaceMeshUVMappded"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float4 color : COLOR;
+               //float4 color : COLOR;
             };
 
             sampler2D _MainTex;
