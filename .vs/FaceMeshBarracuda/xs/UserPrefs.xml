@@ -1,30 +1,31 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MeshVisualizer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shader/TextureComposite.shader">
     <Files>
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FaceMesh.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="88" Column="1" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" Line="58" Column="34" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="69" Column="15" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="61" Column="19" />
-      <File FileName="Assets/FaceMesh/Script/IndexTable.cs" Line="20" Column="26" />
-      <File FileName="Assets/Shader/FaceMesh.shader" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="48" Column="36" />
-      <File FileName="Assets/Scripts/TextureController.cs" Line="48" Column="21" />
-      <File FileName="Assets/Scripts/TimeUtil.cs" Line="22" Column="2" />
-      <File FileName="Assets/Scripts/old/MyWebcamInput.cs" Line="75" Column="73" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="25" Column="10" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" Line="81" Column="13" />
-      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" Line="82" Column="75" />
-      <File FileName="Assets/Shader/EyeContourMesh.shader" Line="62" Column="28" />
-      <File FileName="Assets/Scripts/IrisMesh.cs" Line="69" Column="48" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="18" Column="32" />
+      <File FileName="Assets/Scripts/FaceMesh.cs" />
+      <File FileName="Assets/Scripts/PipeLineManager.cs" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="25" Column="11" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
+      <File FileName="Assets/FaceMesh/Script/IndexTable.cs" />
+      <File FileName="Assets/Shader/FaceMesh.shader" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="5" Column="14" />
+      <File FileName="Assets/Scripts/TextureController.cs" />
+      <File FileName="Assets/Scripts/TimeUtil.cs" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
+      <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
+      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" />
+      <File FileName="Assets/Shader/EyeContourMesh.shader" />
+      <File FileName="Assets/Scripts/IrisMesh.cs" />
+      <File FileName="Assets/Scripts/MeshVisualizer.cs" />
+      <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="1" Column="1" />
+      <File FileName="Assets/Shader/TextureComposite.shader" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c6231fca-4ede-419a-85ed-e0d2a060f2cc" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="31cbf385-c7f3-42f7-8567-9512f2b6b86d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

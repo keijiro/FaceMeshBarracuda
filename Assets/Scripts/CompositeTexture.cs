@@ -36,8 +36,15 @@ public class CompositeTexture
 
         _material.SetFloat("_BlendEndV", _BlendEndV);
 
-        Graphics.Blit(targetTexture, targetTexture, _material);
+        //textureをコピーして、Blitを使ってターゲットに書き込む
+        RenderTexture tmpTexture = new RenderTexture(targetTexture.width, targetTexture.height, 0);
 
+        Graphics.CopyTexture(targetTexture, tmpTexture);
+
+        Graphics.Blit(tmpTexture, targetTexture, _material);
+
+        //メモリ確保
+        tmpTexture.Release();
     }
 
     //分割数とその中での番号を引数にする
