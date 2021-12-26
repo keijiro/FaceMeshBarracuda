@@ -8,4 +8,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FaceSwap.unity
     guid: da17562880c6040649f0d1d6082fd6c6
-  m_configObjects: {}
+  m_configObjects:
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 460ed5b04df0c4e639c0bbefb637bd61, type: 2}

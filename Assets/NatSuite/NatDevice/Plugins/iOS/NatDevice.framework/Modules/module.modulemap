@@ -1,0 +1,6 @@
+framework module NatDevice {
+  umbrella header "NatDevice.h"
+
+  export *
+  module * { export * }
+}

@@ -30,6 +30,12 @@ namespace MediaPipe.FaceMesh
             _composite = new CompositeTexture();
         }
 
+        private void OnDestroy()
+        {
+            _faceUVMappedRT.Release();
+            _faceSwappedRT.Release();
+        }
+
         // Update is called once per frame
         void Update()
         {

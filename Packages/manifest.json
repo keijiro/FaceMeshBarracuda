@@ -13,9 +13,12 @@
     "com.unity.ide.vscode": "1.2.4",
     "com.unity.recorder": "3.0.3",
     "com.unity.ugui": "1.0.0",
+    "com.unity.xr.arfoundation": "4.2.1",
+    "com.unity.xr.arkit": "4.2.1",
     "jp.keijiro.mediapipe.blazeface": "1.1.1",
     "jp.keijiro.mediapipe.facelandmark": "1.0.0",
     "jp.keijiro.mediapipe.iris": "1.1.0",
+    "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.audio": "1.0.0"
   }
 }
