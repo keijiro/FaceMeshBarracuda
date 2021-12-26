@@ -1,30 +1,37 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NatSuite/NatDevice/Runtime/MediaDevicePermissions.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NatSuite/Examples/MiniCam/MiniCam.cs">
     <Files>
-      <File FileName="Assets/NatSuite/NatDevice/README.md" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" />
-      <File FileName="Assets/Scripts/FaceMesh.cs" />
-      <File FileName="Assets/Scripts/PipeLineManager.cs" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
-      <File FileName="Assets/FaceMesh/Script/IndexTable.cs" />
-      <File FileName="Assets/Shader/FaceMesh.shader" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" />
-      <File FileName="Assets/Scripts/TextureController.cs" />
-      <File FileName="Assets/Scripts/TimeUtil.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
-      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" />
-      <File FileName="Assets/Shader/EyeContourMesh.shader" />
-      <File FileName="Assets/Scripts/IrisMesh.cs" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" />
-      <File FileName="Assets/Scripts/MyWebcamInput.cs" />
-      <File FileName="Assets/Shader/TextureComposite.shader" />
-      <File FileName="Assets/NatSuite/NatDevice/Runtime/MediaDevicePermissions.cs" Line="10" Column="21" />
-      <File FileName="Assets/NatSuite/NatDevice/Runtime/Internal/NativeCameraDevice.cs" Line="171" Column="36" />
-      <File FileName="Assets/NatSuite/Examples/MiniCam/MiniCam.cs" Line="44" Column="1" NotebookId="1" />
+      <File FileName="Assets/NatSuite/NatDevice/README.md" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" NotebookId="1" />
+      <File FileName="Assets/Scripts/FaceMesh.cs" NotebookId="1" />
+      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="87" Column="27" NotebookId="1" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" NotebookId="1" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="69" Column="18" NotebookId="1" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" NotebookId="1" />
+      <File FileName="Assets/FaceMesh/Script/IndexTable.cs" NotebookId="1" />
+      <File FileName="Assets/Shader/FaceMesh.shader" NotebookId="1" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" NotebookId="1" />
+      <File FileName="Assets/Scripts/TextureController.cs" NotebookId="1" />
+      <File FileName="Assets/Scripts/TimeUtil.cs" NotebookId="1" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="28" Column="25" NotebookId="1" />
+      <File FileName="Assets/Visualizer/Script/Visualizer.cs" NotebookId="1" />
+      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" NotebookId="1" />
+      <File FileName="Assets/Shader/EyeContourMesh.shader" NotebookId="1" />
+      <File FileName="Assets/Scripts/IrisMesh.cs" NotebookId="1" />
+      <File FileName="Assets/Scripts/MeshVisualizer.cs" NotebookId="1" />
+      <File FileName="Assets/Shader/TextureComposite.shader" NotebookId="1" />
+      <File FileName="Assets/NatSuite/NatDevice/Runtime/Internal/NativeCameraDevice.cs" Line="171" Column="36" NotebookId="1" />
+      <File FileName="Assets/NatSuite/NatDevice/Runtime/MediaDeviceQuery.cs" Line="93" Column="42" NotebookId="1" />
+      <File FileName="Assets/NatSuite/Examples/MiniCam/MiniCam.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.blazeface@1.1.1/Script/FaceDetector.cs" Line="36" Column="17" NotebookId="1" />
     </Files>
+    <FloatingWindows>
+      <FloatingWindow WindowId="1" X="0" Y="25" Width="1680" Height="997">
+        <Files>
+          <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="63" Column="39" />
+        </Files>
+      </FloatingWindow>
+    </FloatingWindows>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Threading.Tasks;
+using NatSuite.Devices;
 
 namespace MediaPipe.FaceMesh
 {
@@ -11,17 +14,12 @@ namespace MediaPipe.FaceMesh
         [SerializeField] RenderTexture _targetRenderTexture = null;
 
         [SerializeField] Texture2D _dummyImage = null;
+
         [SerializeField] uint defaultDeviceIndex;
 
         #endregion
 
         #region Internal objects
-
-        WebCamTexture _webcam;
-        Vector2Int _resolution = new Vector2Int(1920, 1080);
-        WebCamDevice[] devices;
-        uint currentDevice;
-
 
         #endregion
 
@@ -32,65 +30,67 @@ namespace MediaPipe.FaceMesh
 
         #endregion
 
+        MediaDeviceQuery query;
+
+        Texture2D previewTexture;
+
+        CameraDevice device;
+
         #region MonoBehaviour implementation
 
-        void Start()
+        async void Start()
         {
             if (_dummyImage != null) return;
 
-            devices = WebCamTexture.devices;
-
-            currentDevice = defaultDeviceIndex;
-
-            _resolution.x = _targetRenderTexture.width;
-            _resolution.y = _targetRenderTexture.height;
-
-            _webcam = new WebCamTexture(devices[currentDevice].name, _resolution.x, _resolution.y);
-
-            _webcam.Play();
-        }
-
-        void OnDestroy()
-        {
-            if (_webcam != null)
+            // Request camera permissions
+            if (!await MediaDeviceQuery.RequestPermissions<CameraDevice>())
             {
-                _webcam.Stop();
-                Destroy(_webcam);
+                Debug.LogError("User did not grant camera permissions");
+                return;
             }
+            // Create a device query for device cameras
+            query = new MediaDeviceQuery(MediaDeviceCriteria.FrontCamera);
+
+            device = query.current as CameraDevice;
+            
+            // Start camera preview           
+            previewTexture = await device.StartRunning();
+            Debug.Log($"Started camera preview with resolution {previewTexture.width}x{previewTexture.height}");
+            
         }
 
+  
         void Update()
         {
             if (_dummyImage != null) return;
-            if (!_webcam.didUpdateThisFrame) return;
+            if (previewTexture == null) return;
 
-            var aspect1 = (float)_webcam.width / _webcam.height;
-            var aspect2 = (float)_resolution.x / _resolution.y;
+            //1:1にクロップする
+            var aspect1 = (float)previewTexture.width / previewTexture.height;
+            var aspect2 = (float)_targetRenderTexture.width / _targetRenderTexture.height;
             var gap = aspect2 / aspect1;
 
-            var vflip = _webcam.videoVerticallyMirrored;
-            var scale = new Vector2(gap, vflip ? -1 : 1);
-            var offset = new Vector2((1 - gap) / 2, vflip ? 1 : 0);
+            var scale = new Vector2(gap, 1);
+            var offset = new Vector2((1 - gap) / 2, 0);
 
-            Graphics.Blit(_webcam, _targetRenderTexture, scale, offset);
+            Graphics.Blit(previewTexture, _targetRenderTexture, scale, offset);
 
         }
 
         //カメラ切り替え
-        public void ChangeDevice()
+        public async void ChangeDevice()
         {
-            //次のデバイスを選択。台数を超えたら最初に戻る
-            currentDevice++;
-            if (currentDevice >= devices.Length)
-            {
-                currentDevice = 0;
-            }
+            // Check that there is another camera to switch to
+            if (query.count < 2)
+                return;
+            // Stop current camera
+            device.StopRunning();
+            // Advance to next available camera
+            query.Advance();
+            // Start new camera
+            device = query.current as CameraDevice;
+            previewTexture = await device.StartRunning();
 
-            _webcam.Stop();
-            _webcam = new WebCamTexture(devices[currentDevice].name, _resolution.x, _resolution.y);
-            _webcam.Play();
-
-            Debug.Log("ChangeCameraDevice" + currentDevice);
         }
 
         #endregion
