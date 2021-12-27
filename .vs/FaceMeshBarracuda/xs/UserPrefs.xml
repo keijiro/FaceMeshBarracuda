@@ -1,37 +1,24 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shader/FaceMeshUVMapped.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TextureController.cs">
     <Files>
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="80" Column="21" IsPinned="True" />
       <File FileName="Assets/NatSuite/NatDevice/README.md" Line="1" Column="1" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="10" Column="38" />
       <File FileName="Assets/Scripts/FaceMesh.cs" />
-      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="87" Column="27" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="69" Column="18" />
+      <File FileName="Assets/Scripts/PipeLineManager.cs" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
       <File FileName="Assets/FaceMesh/Script/IndexTable.cs" />
-      <File FileName="Assets/Shader/FaceMesh.shader" Line="33" Column="19" />
+      <File FileName="Assets/Shader/FaceMesh.shader" />
       <File FileName="Assets/Scripts/CompositeTexture.cs" />
-      <File FileName="Assets/Scripts/TextureController.cs" />
-      <File FileName="Assets/Scripts/TimeUtil.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="28" Column="25" />
-      <File FileName="Assets/Visualizer/Script/Visualizer.cs" />
-      <File FileName="Assets/Visualizer/Shader/Visualizer.shader" />
-      <File FileName="Assets/Shader/EyeContourMesh.shader" Line="33" Column="19" />
-      <File FileName="Assets/Scripts/IrisMesh.cs" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" />
-      <File FileName="Assets/Shader/TextureComposite.shader" Line="1" Column="1" />
-      <File FileName="Assets/NatSuite/NatDevice/Runtime/Internal/NativeCameraDevice.cs" Line="171" Column="36" />
-      <File FileName="Assets/NatSuite/NatDevice/Runtime/MediaDeviceQuery.cs" Line="40" Column="16" />
-      <File FileName="Assets/NatSuite/Examples/MiniCam/MiniCam.cs" Line="93" Column="1" />
-      <File FileName="Library/PackageCache/jp.keijiro.mediapipe.blazeface@1.1.1/Script/FaceDetector.cs" Line="36" Column="17" />
-      <File FileName="Assets/Shader/FaceTextureTransform.shader" Line="33" Column="15" />
-      <File FileName="Assets/Shader/FaceMeshUVMapped.shader" Line="34" Column="18" />
+      <File FileName="Assets/Scripts/TextureController.cs" Line="6" Column="21" />
+      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="23" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="fb4baa64-5138-4f32-8541-e00fdf58468d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="dafe32ee-cc22-4d99-8d6a-43cfe1a99650" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bfd6167b-3055-4468-af0e-9b1cf4bf8496" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public static class TextureController
+public class TextureController
 {
+    CapturedDataManager _capturedDataManager;
 
-    static public void SaveImage(RenderTexture renderTexture, string filePath)
+    public  TextureController()
+    {
+        _capturedDataManager = new CapturedDataManager();
+    }
+    /*public void SaveImage(RenderTexture renderTexture, string filePath)
     {
         Texture2D tex = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
 
@@ -18,14 +23,13 @@ public static class TextureController
 
         byte[] bytes = tex.EncodeToPNG();
 
-        //Destroy(tex);
 
-        System.IO.File.WriteAllBytesAsync(filePath, bytes);
+        //System.IO.File.WriteAllBytesAsync(filePath, bytes);
 
-    }
+    }*/
 
     //texture2Dをまとめて保存
-    static public void SaveImages(Texture2D[] inputs, string dirPath)
+    public void SaveImages(Texture2D[] inputs, string dirPath)
     {
         int index = 0;
 
@@ -37,7 +41,7 @@ public static class TextureController
 
             string filePath = System.IO.Path.Combine(dirPath, timeStamp + "_" + index + ".png");
 
-            System.IO.File.WriteAllBytesAsync(filePath, bytes);
+            _capturedDataManager.SaveData(bytes, index);
 
             index++;
 
@@ -47,7 +51,7 @@ public static class TextureController
 
     //todo Asyncにしたい
     //テクスチャを分割する
-    static public Texture2D[] Split(Texture input, int row, int column　)
+    public Texture2D[] Split(Texture input, int row, int column　)
     {
         //分割後のテクスチャのサイズを計算
         int width = (int)input.width / column;

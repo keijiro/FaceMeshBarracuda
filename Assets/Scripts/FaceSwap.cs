@@ -24,10 +24,14 @@ namespace MediaPipe.FaceMesh
 
         CompositeTexture _composite;
 
+        TextureController _textureController;
+
         // Start is called before the first frame update
         void Start()
         {
             _composite = new CompositeTexture();
+
+            _textureController = new TextureController();
         }
 
         private void OnDestroy()
@@ -76,8 +80,9 @@ namespace MediaPipe.FaceMesh
             //  Debug.Log(filePath);
             //  TextureController.SaveImage(_faceUVMappedRT, filePath);
 
-            Texture2D[] splitTexture = TextureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
-            TextureController.SaveImages(splitTexture, "Assets/SplitFaces");
+            Texture2D[] splitTexture = _textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
+
+            _textureController.SaveImages(splitTexture, "Assets/SplitFaces");
         }
     }
 }
