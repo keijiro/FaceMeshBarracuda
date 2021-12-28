@@ -92,5 +92,10 @@ namespace MediaPipe.FaceMesh
 
             _textureController.SaveImages(splitTexture, "Assets/SplitFaces");
         }
+
+        public void DeleteAllTextures()
+        {
+            _textureController._capturedDataManager.DeleteAllData();
+        }
     }
 }

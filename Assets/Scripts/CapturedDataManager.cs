@@ -128,8 +128,6 @@ public class CapturedDataManager
 
         int count = query.Count();
 
-        //Debug.Log(count);
-
         int index = UnityEngine.Random.Range(0, count);
 
         List<CapturedData> captureds = query.ToList();
@@ -151,7 +149,19 @@ public class CapturedDataManager
 
    // }
 
-    public void DeleteAllData() { }
+    public void DeleteAllData()
+    {
+        foreach(CapturedData data in _capturedData)
+        {
+            string path = Path.Combine(_capturedFileDir, data.id + ".png");
+
+            File.Delete(path);
+        }
+
+        _capturedData.Clear();
+
+        UpdateJSON();
+    }
 
 
 
