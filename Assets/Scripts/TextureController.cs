@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class TextureController
 {
-    CapturedDataManager _capturedDataManager;
+    public CapturedDataManager _capturedDataManager { get; private set; } 
 
     public  TextureController()
     {
-        _capturedDataManager = new CapturedDataManager();
+        _capturedDataManager = new CapturedDataManager("Captured");
     }
     /*public void SaveImage(RenderTexture renderTexture, string filePath)
     {
@@ -39,14 +39,17 @@ public class TextureController
         {
             byte[] bytes = texture.EncodeToPNG();
 
-            string filePath = System.IO.Path.Combine(dirPath, timeStamp + "_" + index + ".png");
+          //  string filePath = System.IO.Path.Combine(dirPath, timeStamp + "_" + index + ".png");
 
             _capturedDataManager.SaveData(bytes, index);
 
             index++;
 
-            Debug.Log(filePath);
+          //  Debug.Log(filePath);
         }
+
+        //Jsonに保存
+        _capturedDataManager.UpdateJSON();
     }
 
     //todo Asyncにしたい

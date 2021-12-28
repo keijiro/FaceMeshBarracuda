@@ -66,9 +66,17 @@ namespace MediaPipe.FaceMesh
         }
 
         //todo Textureをランダムに入れ替える
-        public void SelectTexture()
+        public async void SelectTexture()
         {
+            //テクスチャ選択をリセット
+            for(int i=0; i<splitFaces.Length; i++)
+            {
+                splitFaces[i] = null;
 
+                ImageData imageData = await _textureController._capturedDataManager.GetRandomData(i);
+
+                splitFaces[i] = imageData.texture;
+            }
         }
 
         public void SaveTexture()

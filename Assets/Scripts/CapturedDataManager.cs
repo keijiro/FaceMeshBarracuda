@@ -4,25 +4,45 @@ using UnityEngine;
 using System.IO;
 using System;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
+
+//dbに保存するデータ
 public class CapturedData
 {
-    public string _id;
-    public int _partId;
+    public string id;
+    public int partId;
+}
+
+//Textureとidを同時に渡す時に使う
+public struct ImageData
+{
+    public CapturedData capturedData { get; set; }
+    public Texture texture { get; set; }
 }
 
 public class CapturedDataManager 
 {
-    IEnumerable<CapturedData> _capturedData;
+    string _folderName;
 
-    string _capturedFileDir = Path.Combine(Application.streamingAssetsPath, "Captured");
+    List<CapturedData> _capturedData;
 
-    public CapturedDataManager()
+    string _capturedFileDir;
+
+    public CapturedDataManager(string folderName)
     {
-        _capturedData = new CapturedData[] { };    
+        //初期化
+        _folderName = folderName;
+
+        _capturedData = new();
+
+        _capturedFileDir = Path.Combine(Application.streamingAssetsPath, _folderName);
+
+        LoadFromJSON();
     }
 
-    public void SaveData(byte[] data, int partId) {
+    public void SaveData(byte[] bytes, int partId) {
 
         //固有のIDを生成してファイルを保存
 
@@ -32,27 +52,107 @@ public class CapturedDataManager
 
         string filePath = Path.Combine(_capturedFileDir, id + ".png");
 
-        File.WriteAllBytesAsync(filePath, data);
+        File.WriteAllBytesAsync(filePath, bytes);
 
         //dbに情報を保存
         CapturedData dbData = new CapturedData();
 
-        dbData._id = id;
-        dbData._partId = partId;
+        dbData.id = id;
+        dbData.partId = partId;
 
-        _capturedData = _capturedData.Append(dbData);
+        _capturedData.Add(dbData);
 
-        //テキストに書き出し
-        Debug.Log(_capturedData.ToString());
+    }
+    public async void UpdateJSON()
+    {
+        //Jsonに書き出し
+        string json = JsonConvert.SerializeObject(_capturedData);
+
+        //jsonFilieを更新
+        StreamWriter writer = new StreamWriter(Path.Combine(_capturedFileDir, "CapturedData.json"), false);
+        await writer.WriteAsync(json);
+        writer.Close();
+    }
+
+    public async void LoadFromJSON()
+    {
+        //jsonを読み込んでListを更新
+        try
+        {
+            StreamReader reader = new StreamReader(Path.Combine(_capturedFileDir, "CapturedData.json"));
+            string json = await reader.ReadToEndAsync();
+
+            _capturedData = JsonConvert.DeserializeObject<List<CapturedData>>(json);
+        }
+        catch
+        {
+            Debug.Log("No JSON file.");
+        }
+    }
+
+    public async Task<ImageData> GetData(string inputId)
+    {
+        //idが一致するデータを探す
+        IEnumerable<CapturedData> query = _capturedData.Where(data => data.id == inputId);
+
+        ImageData imageData = new();
+
+        //一致した中の先頭を返す
+        foreach (CapturedData data in query)
+        {
+            imageData.capturedData = data;
+
+            //ファイル読み込み
+            string path = Path.Combine(_capturedFileDir, data.id + ".png");
+
+            byte[] bytes = await File.ReadAllBytesAsync(path);
+
+            Texture2D texture = new Texture2D(1, 1);
+
+            texture.LoadImage(bytes);
+
+            imageData.texture = texture;
+
+            return imageData;
+        }
+
+        //一致しなければ空を返す
+        return imageData;
 
     }
 
-    public void GetData(string id) { }
+    public async Task<ImageData> GetRandomData(int partId)
+    {
+        //partIdが一致したデータの中からランダムに1つを返す
+        IEnumerable<CapturedData> query = _capturedData.Where(data => data.partId == partId);
 
-    public void GetRandomData(int partId) { }
+        int count = query.Count();
+
+        //Debug.Log(count);
+
+        int index = UnityEngine.Random.Range(0, count);
+
+        List<CapturedData> captureds = query.ToList();
+
+        CapturedData captured = captureds[index];
+
+        ImageData imageData = await GetData(captured.id);
+
+        return imageData;
+
+    }
 
     //public void GetAllData() { }
 
-    public void GetRawDB() { }
+    public void GetRawJson() { }
+
+    //public ImageData DeleteData(string id)
+   // {
+
+   // }
+
+    public void DeleteAllData() { }
+
+
 
 }
