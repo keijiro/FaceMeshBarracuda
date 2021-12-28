@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using System.Threading.Tasks;
 
 
 namespace MediaPipe.FaceMesh
@@ -65,8 +66,8 @@ namespace MediaPipe.FaceMesh
             _faceMesh.Draw(_faceSwappedRT);
         }
 
-        //todo Textureをランダムに入れ替える
-        public async void SelectTexture()
+
+        public async void SelectTexture()//asyncで困ることがあるかも？
         {
             //テクスチャ選択をリセット
             for(int i=0; i<splitFaces.Length; i++)
@@ -79,6 +80,7 @@ namespace MediaPipe.FaceMesh
             }
         }
 
+
         public void SaveTexture()
         {
             //System.DateTime UnixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
@@ -88,9 +90,10 @@ namespace MediaPipe.FaceMesh
             //  Debug.Log(filePath);
             //  TextureController.SaveImage(_faceUVMappedRT, filePath);
 
-            Texture2D[] splitTexture = _textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
+            Texture2D[] splitTexture =_textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
 
             _textureController.SaveImages(splitTexture, "Assets/SplitFaces");
+
         }
 
         public void DeleteAllTextures()

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading.Tasks;
+using UnityEngine.Rendering;
 
 public class TextureController
 {
@@ -31,28 +32,37 @@ public class TextureController
     //texture2Dをまとめて保存
     public void SaveImages(Texture2D[] inputs, string dirPath)
     {
-        int index = 0;
-
+        
         string timeStamp = TimeUtil.GetUnixTime(System.DateTime.Now).ToString();
 
-        foreach(Texture2D texture in inputs)
+        List<byte[]> bytesList = new List<byte[]>();
+
+        //バイトデータ読み込み
+        foreach (Texture2D texture in inputs)
         {
-            byte[] bytes = texture.EncodeToPNG();
+            bytesList.Add(texture.GetRawTextureData());
+        }
 
-          //  string filePath = System.IO.Path.Combine(dirPath, timeStamp + "_" + index + ".png");
+        int index = 0;
 
+        foreach (byte[] rawData in bytesList)
+        {
+            //テクスチャのバイト化と保存
+
+            byte[] bytes = ImageConversion.EncodeArrayToPNG
+            (rawData,
+            UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_SRGB,
+            (uint)inputs[index].width,
+            (uint)inputs[index].height);
             _capturedDataManager.SaveData(bytes, index);
 
             index++;
-
-          //  Debug.Log(filePath);
         }
 
         //Jsonに保存
         _capturedDataManager.UpdateJSON();
     }
 
-    //todo Asyncにしたい
     //テクスチャを分割する
     public Texture2D[] Split(Texture input, int row, int column　)
     {
@@ -71,18 +81,32 @@ public class TextureController
         //配列作成して入れていく
         List<Texture2D> textures = new();
 
+        //ここが重い
         for(int y = 0; y<row; y++)
         {
-            for(int x = 0; x<column; x++)
+            for (int x = 0; x < column; x++)
             {
                 //texture読み込み
-                Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32,false);
+                Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
                 texture.ReadPixels(new Rect(width * x, height * y, width, height), 0, 0);
                 texture.Apply();
 
                 textures.Add(texture);
+                
+                //読み込み失敗した
+               /* AsyncGPUReadback.Request(renderTexture, 0, request =>
+                {
+                    var data = request.GetData<Color32>();
+                    Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+                    texture.LoadRawTextureData(data);
+                    texture.Apply();
+                });
+               */
             }
         }
+        RenderTexture.active = null;
+
+        renderTexture.Release();
 
         return textures.ToArray();
 
