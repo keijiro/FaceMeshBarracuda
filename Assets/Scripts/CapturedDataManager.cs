@@ -37,7 +37,10 @@ public class CapturedDataManager
 
         _capturedData = new();
 
-        _capturedFileDir = Path.Combine(Application.streamingAssetsPath, _folderName);
+        _capturedFileDir = Path.Combine(Application.persistentDataPath, _folderName);
+
+        if(!Directory.Exists(_capturedFileDir))
+            Directory.CreateDirectory(_capturedFileDir);
 
         LoadFromJSON();
     }
@@ -69,9 +72,9 @@ public class CapturedDataManager
         string json = JsonConvert.SerializeObject(_capturedData);
 
         //jsonFilieを更新
-        StreamWriter writer = new StreamWriter(Path.Combine(_capturedFileDir, "CapturedData.json"), false);
-        await writer.WriteAsync(json);
-        writer.Close();
+        string path = Path.Combine(_capturedFileDir, "CapturedData.json");
+
+        await File.WriteAllTextAsync(path, json);
     }
 
     public async void LoadFromJSON()
@@ -79,10 +82,18 @@ public class CapturedDataManager
         //jsonを読み込んでListを更新
         try
         {
-            StreamReader reader = new StreamReader(Path.Combine(_capturedFileDir, "CapturedData.json"));
+            StreamReader reader = File.OpenText(Path.Combine(_capturedFileDir, "CapturedData.json"));
             string json = await reader.ReadToEndAsync();
 
+            Debug.Log(json);
+
             _capturedData = JsonConvert.DeserializeObject<List<CapturedData>>(json);
+
+            //_capturedData==nullにならないようにする
+            if (_capturedData==null)
+            {
+                _capturedData = new();
+            }
         }
         catch
         {
