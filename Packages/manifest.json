@@ -9,6 +9,8 @@
     }
   ],
   "dependencies": {
+    "jp.keijiro.osc-jack": "1.0.3",
+    "jp.keijiro.klak.ndi": "2.0.2",
     "com.unity.ide.visualstudio": "2.0.12",
     "com.unity.ide.vscode": "1.2.4",
     "com.unity.recorder": "3.0.3",

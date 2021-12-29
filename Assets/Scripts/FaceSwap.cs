@@ -70,13 +70,18 @@ namespace MediaPipe.FaceMesh
         public async void SelectTexture()//asyncで困ることがあるかも？
         {
             //テクスチャ選択をリセット
-            for(int i=0; i<splitFaces.Length; i++)
+            for (int i = 0; i < splitFaces.Length; i++)
             {
                 splitFaces[i] = null;
+            }
 
+            //指定したテクスチャを入れ替える
+            for (int i = 0; i < splitFaces.Length; i++)
+            {
                 ImageData imageData = await _textureController._capturedDataManager.GetRandomData(i);
 
                 splitFaces[i] = imageData.texture;
+  
             }
         }
 
