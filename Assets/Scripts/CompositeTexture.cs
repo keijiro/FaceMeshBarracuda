@@ -45,6 +45,7 @@ public class CompositeTexture
 
         //メモリ確保
         tmpTexture.Release();
+        MonoBehaviour.Destroy(tmpTexture);
     }
 
     //分割数とその中での番号を引数にする

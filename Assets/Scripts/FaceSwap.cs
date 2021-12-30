@@ -59,9 +59,9 @@ namespace MediaPipe.FaceMesh
 
             int index = 0;
             
-            foreach(ImageData splitFaceData in _splitFacesData)
+            for(int i=0; i < _splitFacesData.Count; i++)
             {
-                _composite.Composite(_faceSwappedRT, splitFaceData.texture, splitFaceData.capturedData.rect);
+                _composite.Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
                 index++;
             }
 

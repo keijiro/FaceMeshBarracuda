@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FaceSwap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NatSuite/NatDevice/Runtime/Internal/NativeCameraDevice.cs">
     <Files>
-      <File FileName="Assets/Scripts/FaceSwap.cs" Line="28" Column="21" IsPinned="True" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="27" Column="16" IsPinned="True" />
       <File FileName="Assets/NatSuite/NatDevice/README.md" Line="1" Column="1" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="10" Column="38" />
       <File FileName="Assets/Scripts/FaceMesh.cs" Line="1" Column="1" />
@@ -10,9 +10,10 @@
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="1" Column="1" />
       <File FileName="Assets/FaceMesh/Script/IndexTable.cs" Line="1" Column="1" />
       <File FileName="Assets/Shader/FaceMesh.shader" Line="33" Column="19" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TextureController.cs" Line="9" Column="24" />
-      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="25" Column="14" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="44" Column="8" />
+      <File FileName="Assets/Scripts/TextureController.cs" Line="45" Column="66" />
+      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="110" Column="1" />
+      <File FileName="Assets/NatSuite/NatDevice/Runtime/Internal/NativeCameraDevice.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
