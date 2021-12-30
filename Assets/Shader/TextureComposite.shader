@@ -5,6 +5,7 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
         _MainTex ("Texture", 2D) = "white" {}
         _SubTex ("SubTexture", 2D) = "white" {}
         _Blend("Blend",Range (0, 1)) = 1
+        _Emission ("Emission Amount", Range (0, 1)) = 0.0
 
         _BlendStartU("Blend Start U",Range (0, 1)) = 0
         _BlendEndU("Blend End U",Range (0, 1)) = 1
@@ -49,6 +50,8 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
             float _BlendStartV;
             float _BlendEndV;
 
+            float _Emission;
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -83,7 +86,9 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
                 //condition = 1のときだけblendする
                 float blend = condition * _Blend;
 
-                fixed4 col = main * (1-blend) + sub * blend;
+                float emission = condition * _Emission;
+
+                fixed4 col = main * (1-blend) + sub * (blend + emission);
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);

@@ -97,8 +97,8 @@ namespace MediaPipe.FaceMesh
 
                 //合成時のシェーダーエフェクトを実行
                 CompositeTexture composite = new CompositeTexture();
-               ///////////////
-
+                ///////////////
+                composite.StartSwaping();
                 ///////////////
                 _composites.Add(composite);
 

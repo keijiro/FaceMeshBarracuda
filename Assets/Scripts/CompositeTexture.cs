@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
+
 
 public class CompositeTexture :IDisposable
 {
@@ -107,10 +109,27 @@ public class CompositeTexture :IDisposable
 
     }
 
-    public void SetBlend(float blend)
+    //todo blend演出を発火させるメソッドを作成する
+    public void StartSwaping()
     {
-        _material.SetFloat("_Blend", blend);
+        //初期値設定
+
+        //透明度
+        _material.SetFloat("_Blend", 0);
+
+        //発光
+        _material.SetFloat("_Emission", 0f);
+
+        //アニメーションシークエンス設定
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(_material.DOFloat(1f, "_Blend", 0.2f));
+
+        sequence.Join(_material.DOFloat(0.75f, "_Emission", 0.25f));
+
+        sequence.Append(_material.DOFloat(0f, "_Emission", 1.0f));
+
+        sequence.Play();
     }
 
-    //todo blend演出を発火させるメソッドを作成する
 }
