@@ -72,7 +72,11 @@ namespace MediaPipe.FaceMesh
 
         public async void SelectTexture()//asyncで困ることがあるかも？
         {
-            //テクスチャ選択をリセット
+            //テクスチャ選択をリセット、メモリ開放
+            foreach(ImageData data in _splitFacesData)
+            {
+                data.Dispose();
+            }
             _splitFacesData.Clear();
 
             //入れ替えが一定の面積を占めるまで、テクスチャを入れ替える
@@ -124,6 +128,12 @@ namespace MediaPipe.FaceMesh
             Debug.Log(imageData.Length);
 
             _textureController.SaveImages(imageData);
+
+            //メモリ開放
+            foreach (ImageData data in imageData)
+            {
+                data.Dispose();
+            }
         }
 
         public void SaveTextureRandom()
@@ -133,6 +143,12 @@ namespace MediaPipe.FaceMesh
             Debug.Log(imageData.Length);
 
             _textureController.SaveImages(imageData);
+
+            //メモリ開放
+            foreach(ImageData data in imageData)
+            {
+                data.Dispose();
+            }
         }
 
 

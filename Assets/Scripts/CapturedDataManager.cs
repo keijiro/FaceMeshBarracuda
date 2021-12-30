@@ -18,10 +18,36 @@ public class CapturedData
 }
 
 //Textureとidを同時に渡す時に使う
-public struct ImageData
+public class ImageData : IDisposable
 {
     public CapturedData capturedData { get; set; }
     public Texture2D texture { get; set; }
+
+    bool _disposed = false;
+
+    public void Dispose()
+    {
+        // Dispose of unmanaged resources.
+        Dispose(true);
+        // Suppress finalization.
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // TODO: Dispose managed resources here.
+                MonoBehaviour.Destroy(texture);
+                capturedData = null;
+            }
+
+            // Note disposing has been done.
+            _disposed = true;
+        }
+    }
 }
 
 public class CapturedDataManager 
@@ -80,8 +106,8 @@ public class CapturedDataManager
         dbData.rect = rect;
 
         _capturedData.Add(dbData);
-
     }
+
     public async void UpdateJSON()
     {
         //Jsonに書き出し
@@ -144,6 +170,7 @@ public class CapturedDataManager
         }
 
         //一致しなければ空を返す
+        imageData.Dispose();
         return imageData;
 
     }
@@ -178,6 +205,8 @@ public class CapturedDataManager
         CapturedData captured = _capturedData[index];
 
         ImageData imageData = await GetData(captured.id);
+
+        captured = null;
 
         return imageData;
 
