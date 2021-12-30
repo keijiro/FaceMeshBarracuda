@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 
 //dbに保存するデータ
@@ -52,8 +53,22 @@ public class CapturedDataManager
 
         string timeStamp = TimeUtil.GetUnixTime(DateTime.Now).ToString();
 
-        string id = timeStamp + "_" + rect.x + rect.y + rect.width + rect.height;
+        //ハッシュ化
+        HMACMD5 csp = new();
+        byte[] targetBytes = System.Text.Encoding.UTF8.GetBytes(timeStamp + rect.x + rect.y + rect.width + rect.height);
 
+        byte[] hash =  csp.ComputeHash(targetBytes);
+
+        System.Text.StringBuilder hashStr = new();
+
+        foreach(byte hashByte in hash)
+        {
+            hashStr.Append(hashByte.ToString("x2"));
+        }
+
+        string id = hashStr.ToString();
+
+        //ファイル保存
         string filePath = Path.Combine(_capturedFileDir, id + ".png");
 
         File.WriteAllBytesAsync(filePath, bytes);
