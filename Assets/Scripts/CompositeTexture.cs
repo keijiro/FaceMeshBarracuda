@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using DG.Tweening;
 
-public class CompositeTexture 
+
+public class CompositeTexture :IDisposable
 {
     Shader _shader;
 
@@ -17,6 +20,34 @@ public class CompositeTexture
         _material = new Material(_shader);
 
         _renderTexture = new RenderTexture(1024, 1024, 0);
+    }
+
+    bool _disposed = false;
+
+
+    public void Dispose()
+    {
+        // Dispose of unmanaged resources.
+        Dispose(true);
+        // Suppress finalization.
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // TODO: Dispose managed resources here.
+                MonoBehaviour.Destroy(_material);
+                _renderTexture.Release();
+                MonoBehaviour.Destroy(_renderTexture);
+            }
+
+            // Note disposing has been done.
+            _disposed = true;
+        }
     }
 
     public void Composite(RenderTexture targetTexture, Texture overTxtrure,
@@ -45,6 +76,7 @@ public class CompositeTexture
 
         //メモリ確保
         tmpTexture.Release();
+        MonoBehaviour.Destroy(tmpTexture);
     }
 
     //分割数とその中での番号を引数にする
@@ -62,11 +94,47 @@ public class CompositeTexture
         Composite(targetTexture, overTxtrure, _BlendStartU, _BlendEndU, _BlendStartV, _BlendEndV);
     }
 
-
-    public void SetBlend(float blend)
+    //Rectの計算
+    public void Composite(RenderTexture targetTexture, Texture overTxtrure,
+        Rect rect)
     {
-        _material.SetFloat("_Blend", blend);
+        float _BlendStartU = rect.x / (float)targetTexture.width;
+        float _BlendEndU = (rect.x + rect.width) / (float)targetTexture.width;
+        float _BlendStartV = rect.y / (float)targetTexture.height;
+        float _BlendEndV = (rect.y + rect.height) / (float)targetTexture.height;
+
+        
+
+        Composite(targetTexture, overTxtrure, _BlendStartU, _BlendEndU, _BlendStartV, _BlendEndV);
+
     }
 
     //todo blend演出を発火させるメソッドを作成する
+    public void StartSwaping()
+    {
+        //初期値設定
+
+        //透明度
+        _material.SetFloat("_Blend", 0);
+
+        //発光
+        _material.SetFloat("_Emission", 0f);
+
+        //歪み
+        _material.SetFloat("_Distortion", 0.5f);
+
+        //アニメーションシークエンス設定
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(_material.DOFloat(1f, "_Blend", 0.2f));
+
+        sequence.Join(_material.DOFloat(0.75f, "_Emission", 0.25f));
+
+        sequence.Append(_material.DOFloat(0f, "_Emission", 1.0f));
+
+        sequence.Join(_material.DOFloat(0f, "_Distortion", 1.0f));
+
+        sequence.Play();
+    }
+
 }

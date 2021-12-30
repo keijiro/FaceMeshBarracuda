@@ -5,6 +5,8 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
         _MainTex ("Texture", 2D) = "white" {}
         _SubTex ("SubTexture", 2D) = "white" {}
         _Blend("Blend",Range (0, 1)) = 1
+        _Emission ("Emission Amount", Range (0, 1)) = 0.0
+        _Distortion ("Distortion Amount", Range (0, 1)) = 0.0
 
         _BlendStartU("Blend Start U",Range (0, 1)) = 0
         _BlendEndU("Blend End U",Range (0, 1)) = 1
@@ -49,6 +51,14 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
             float _BlendStartV;
             float _BlendEndV;
 
+            float _Emission;
+            float _Distortion;
+
+            float GetRandomNumber(float2 texCoord, int Seed)
+            {
+                return frac(sin(dot(texCoord.xy, float2(12.9898, 78.233)) + Seed) * 43758.5453);
+            }
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -68,6 +78,16 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
                 fixed2 pos = fixed2((i.uv.x - _BlendStartU) * 1/u_scale,
                                      (i.uv.y - _BlendStartV) * 1/v_scale);
 
+                //Randomise for distortion
+                float randomX = GetRandomNumber(i.uv,1)-0.5;
+                float randomY = GetRandomNumber(i.uv,2)-0.5;
+
+                //randomX = sin(i.uv*13);
+                //randomY = cos(i.uv*17);
+
+                pos.x = pos.x + randomX*_Distortion;
+                pos.y = pos.y + randomY*_Distortion;
+
                 // sample the texture
                 fixed4 main = tex2D(_MainTex, i.uv);
                 fixed4 sub = tex2D(_SubTex, pos);
@@ -83,7 +103,9 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
                 //condition = 1のときだけblendする
                 float blend = condition * _Blend;
 
-                fixed4 col = main * (1-blend) + sub * blend;
+                float emission = condition * _Emission;
+
+                fixed4 col = main * (1-blend) + sub * (blend + emission);
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);

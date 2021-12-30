@@ -6,20 +6,48 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 
 //dbに保存するデータ
 public class CapturedData
 {
     public string id;
-    public int partId;
+    public Rect rect;
+    //public int partId;
 }
 
 //Textureとidを同時に渡す時に使う
-public struct ImageData
+public class ImageData : IDisposable
 {
     public CapturedData capturedData { get; set; }
-    public Texture texture { get; set; }
+    public Texture2D texture { get; set; }
+
+    bool _disposed = false;
+
+    public void Dispose()
+    {
+        // Dispose of unmanaged resources.
+        Dispose(true);
+        // Suppress finalization.
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // TODO: Dispose managed resources here.
+                MonoBehaviour.Destroy(texture);
+                capturedData = null;
+            }
+
+            // Note disposing has been done.
+            _disposed = true;
+        }
+    }
 }
 
 public class CapturedDataManager 
@@ -45,14 +73,28 @@ public class CapturedDataManager
         LoadFromJSON();
     }
 
-    public void SaveData(byte[] bytes, int partId) {
+    public void SaveData(byte[] bytes, Rect rect) {
 
         //固有のIDを生成してファイルを保存
 
         string timeStamp = TimeUtil.GetUnixTime(DateTime.Now).ToString();
 
-        string id = timeStamp + "_" + partId;
+        //ハッシュ化
+        HMACMD5 csp = new();
+        byte[] targetBytes = System.Text.Encoding.UTF8.GetBytes(timeStamp + rect.x + rect.y + rect.width + rect.height);
 
+        byte[] hash =  csp.ComputeHash(targetBytes);
+
+        System.Text.StringBuilder hashStr = new();
+
+        foreach(byte hashByte in hash)
+        {
+            hashStr.Append(hashByte.ToString("x2"));
+        }
+
+        string id = hashStr.ToString();
+
+        //ファイル保存
         string filePath = Path.Combine(_capturedFileDir, id + ".png");
 
         File.WriteAllBytesAsync(filePath, bytes);
@@ -61,11 +103,11 @@ public class CapturedDataManager
         CapturedData dbData = new CapturedData();
 
         dbData.id = id;
-        dbData.partId = partId;
+        dbData.rect = rect;
 
         _capturedData.Add(dbData);
-
     }
+
     public async void UpdateJSON()
     {
         //Jsonに書き出し
@@ -128,24 +170,43 @@ public class CapturedDataManager
         }
 
         //一致しなければ空を返す
+        imageData.Dispose();
         return imageData;
 
     }
 
-    public async Task<ImageData> GetRandomData(int partId)
-    {
-        //partIdが一致したデータの中からランダムに1つを返す
-        IEnumerable<CapturedData> query = _capturedData.Where(data => data.partId == partId);
+    /* public async Task<ImageData> GetRandomData(int partId)
+     {
+         //partIdが一致したデータの中からランダムに1つを返す
+         IEnumerable<CapturedData> query = _capturedData.Where(data => data.partId == partId);
 
-        int count = query.Count();
+         int count = query.Count();
+
+         int index = UnityEngine.Random.Range(0, count);
+
+         List<CapturedData> captureds = query.ToList();
+
+         CapturedData captured = captureds[index];
+
+         ImageData imageData = await GetData(captured.id);
+
+         return imageData;
+
+     }*/
+
+    public async Task<ImageData> GetRandomData()
+    {
+        //データの中からランダムに1つを返す
+        
+        int count = _capturedData.Count();
 
         int index = UnityEngine.Random.Range(0, count);
 
-        List<CapturedData> captureds = query.ToList();
-
-        CapturedData captured = captureds[index];
+        CapturedData captured = _capturedData[index];
 
         ImageData imageData = await GetData(captured.id);
+
+        captured = null;
 
         return imageData;
 

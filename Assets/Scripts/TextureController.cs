@@ -29,8 +29,10 @@ public class TextureController
 
     }*/
 
+    public float _texturePercentage = 2f / 3f;
+
     //texture2Dをまとめて保存
-    public void SaveImages(Texture2D[] inputs, string dirPath)
+    public void SaveImages(ImageData[] inputs)
     {
         
         string timeStamp = TimeUtil.GetUnixTime(System.DateTime.Now).ToString();
@@ -38,9 +40,9 @@ public class TextureController
         List<byte[]> bytesList = new List<byte[]>();
 
         //バイトデータ読み込み
-        foreach (Texture2D texture in inputs)
+        foreach (ImageData imageData in inputs)
         {
-            bytesList.Add(texture.GetRawTextureData());
+            bytesList.Add(imageData.texture.GetRawTextureData());
         }
 
         int index = 0;
@@ -52,9 +54,9 @@ public class TextureController
             byte[] bytes = ImageConversion.EncodeArrayToPNG
             (rawData,
             UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_SRGB,
-            (uint)inputs[index].width,
-            (uint)inputs[index].height);
-            _capturedDataManager.SaveData(bytes, index);
+            (uint)inputs[index].texture.width,
+            (uint)inputs[index].texture.height);
+            _capturedDataManager.SaveData(bytes, inputs[index].capturedData.rect);
 
             index++;
         }
@@ -63,8 +65,9 @@ public class TextureController
         _capturedDataManager.UpdateJSON();
     }
 
+    //todo 戻り値をImageData[]にする
     //テクスチャを分割する
-    public Texture2D[] Split(Texture input, int row, int column　)
+    public ImageData[] Split(Texture input, int row, int column　)
     {
         //分割後のテクスチャのサイズを計算
         int width = (int)input.width / column;
@@ -79,7 +82,7 @@ public class TextureController
         RenderTexture.active = renderTexture;
 
         //配列作成して入れていく
-        List<Texture2D> textures = new();
+        List<ImageData> resultData = new();
 
         //ここが重い
         for(int y = 0; y<row; y++)
@@ -88,10 +91,17 @@ public class TextureController
             {
                 //texture読み込み
                 Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
-                texture.ReadPixels(new Rect(width * x, height * y, width, height), 0, 0);
+                Rect rect = new Rect(width * x, height * y, width, height);
+                texture.ReadPixels(rect, 0, 0);
                 texture.Apply();
 
-                textures.Add(texture);
+                ImageData data = new ImageData();
+                data.capturedData = new CapturedData();
+                data.capturedData.id = "";
+                data.capturedData.rect = rect;
+                data.texture = texture;
+
+                resultData.Add(data);
                 
                 //読み込み失敗した
                /* AsyncGPUReadback.Request(renderTexture, 0, request =>
@@ -108,7 +118,79 @@ public class TextureController
 
         renderTexture.Release();
 
-        return textures.ToArray();
+        return resultData.ToArray();
+
+    }
+
+    public ImageData[] SplitRandom(Texture input)
+    {
+        //変換用のRenderTextureにコピー
+        RenderTexture renderTexture = new RenderTexture(input.width, input.height, 32);
+        Graphics.Blit(input, renderTexture);
+        RenderTexture.active = renderTexture;
+
+        //テクスチャ面積
+        float rectSize = input.width * input.height;
+
+        //今までの合計面積
+        float resultsSize = 0;
+
+        //配列作成して入れていく
+        List<ImageData> resultData = new();
+
+        //生成したテクスチャが全体の一定割合以上になるまで繰り返す
+        while(resultsSize < rectSize　* _texturePercentage)
+        {
+            //ランダムな短形を生成
+            int width = Random.Range(input.width / 16, input.width / 4);
+            int height = Random.Range(input.height / 16, input.height / 4);
+            int x = Random.Range(0, input.width);
+            int y = Random.Range(0, input.height);
+            //テクスチャ範囲をはみ出ないようにする
+            if (x + width > input.width)
+                width = input.width - x;
+            if (y + height > input.height)
+                height = input.height - y;
+
+            Rect rect = new Rect(x, y, width, height);
+
+            //短形がこれまでの短形と被っていないか判定
+            bool isSepareted = true;
+
+            foreach(ImageData result in resultData)
+            {
+                if (rect.Overlaps(result.capturedData.rect))
+                {
+                    isSepareted = false;
+                    break;
+                }
+            }
+
+            //被っていない短形なら処理を進める
+            if (isSepareted)
+            {
+                //テクスチャに短形範囲をコピー
+                Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+                //Graphics.CopyTexture(input, 0, 0, x, y, width, height, texture, 0, 0, 0, 0);
+                texture.ReadPixels(rect, 0, 0);
+
+                ImageData imageData = new();
+                imageData.capturedData = new();
+                imageData.texture = texture;
+                imageData.capturedData.id = "";
+                imageData.capturedData.rect = rect;
+
+                resultData.Add(imageData);
+
+                //面積の総和を更新
+                resultsSize += rect.size.x * rect.size.y;
+            }
+        }
+        RenderTexture.active = null;
+
+        renderTexture.Release();
+
+        return resultData.ToArray();
 
     }
 }

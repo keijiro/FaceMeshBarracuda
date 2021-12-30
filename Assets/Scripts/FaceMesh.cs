@@ -10,6 +10,7 @@ namespace MediaPipe.FaceMesh
     {
         [SerializeField] Shader _shader;
         [SerializeField] ResourceSet _resource;
+        [SerializeField] Camera _targetCamera = null;
 
         Mesh _mesh;
         Material _material;
@@ -46,7 +47,7 @@ namespace MediaPipe.FaceMesh
         {
             _material.SetTexture("_MainTex", texture);
 
-            Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material, 0);
+            Graphics.DrawMesh(_mesh, transform.position, transform.rotation, _material,7,_targetCamera);
         }
     }
 }

@@ -18,21 +18,22 @@ namespace MediaPipe.FaceMesh
         [SerializeField] RenderTexture _faceSwappedRT = null;
 
         [Space]
-        [SerializeField] Vector2Int splitNum;
-        [Space]
-        [SerializeField] Texture[] splitFaces;
-        
+        [SerializeField] Vector2Int grid;
 
-        CompositeTexture _composite;
+        List<ImageData> _splitFacesData;
+
+        List<CompositeTexture> _composites;
 
         TextureController _textureController;
 
         // Start is called before the first frame update
         void Start()
         {
-            _composite = new CompositeTexture();
+            _composites = new();
 
             _textureController = new TextureController();
+
+            _splitFacesData = new();
         }
 
         private void OnDestroy()
@@ -56,9 +57,9 @@ namespace MediaPipe.FaceMesh
 
             int index = 0;
             
-            foreach(Texture splitFace in splitFaces)
+            for(int i=0; i < _splitFacesData.Count; i++)
             {
-                _composite.Composite(_faceSwappedRT, splitFace, splitNum.y,splitNum.x,index);
+                _composites[i].Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
                 index++;
             }
 
@@ -69,37 +70,120 @@ namespace MediaPipe.FaceMesh
 
         public async void SelectTexture()//asyncで困ることがあるかも？
         {
-            //テクスチャ選択をリセット
-            for (int i = 0; i < splitFaces.Length; i++)
+            //テクスチャ選択をリセット、メモリ開放
+            foreach(ImageData data in _splitFacesData)
             {
-                splitFaces[i] = null;
+                data.Dispose();
             }
+            _splitFacesData.Clear();
 
-            //指定したテクスチャを入れ替える
-            for (int i = 0; i < splitFaces.Length; i++)
+            foreach(CompositeTexture composite in _composites)
             {
-                ImageData imageData = await _textureController._capturedDataManager.GetRandomData(i);
-
-                splitFaces[i] = imageData.texture;
-  
+                composite.Dispose();
             }
+            _composites.Clear();
+
+            //入れ替えが一定の面積を占めるまで、テクスチャを入れ替える
+            float swappedSize = 0;
+            float textureSize = _faceSwappedRT.width * _faceSwappedRT.height;
+            const int block = 8;//面積を調べるときに何ピクセルごとにサンプルするか
+            
+            while(swappedSize < textureSize * _textureController._texturePercentage)
+            {
+                //保存されているデータを読み込み
+                ImageData imageData = await _textureController._capturedDataManager.GetRandomData();
+
+                //すでに同じデータを読み込んでいないか調べる
+                bool isIdentical = true;
+                foreach(ImageData data in _splitFacesData)
+                {
+                    if(imageData.capturedData.rect == data.capturedData.rect)
+                    {
+                        isIdentical = false;
+                        break;
+                    }
+                }
+                //もう読み込んだデータであれば処理をとばす
+                if (!isIdentical)
+                {
+                    continue;
+                }
+
+                _splitFacesData.Add(imageData);
+
+                //合成時のシェーダーエフェクトを実行
+                CompositeTexture composite = new CompositeTexture();
+                
+                composite.StartSwaping();
+      
+                _composites.Add(composite);
+
+                //置き換えられていないピクセル数を求める
+                swappedSize = textureSize;
+
+                for(int y=0; y<_faceSwappedRT.height; y+=block)
+                {
+                    for(int x=0; x<_faceSwappedRT.width; x+=block)
+                    {
+                        Rect identityRect = new Rect(x, y, block,block);
+
+                        bool isSepareted = true;
+
+                        foreach(ImageData data in _splitFacesData)
+                        {
+                            if (identityRect.Overlaps(data.capturedData.rect))
+                            {
+                                isSepareted = false;
+                                break;
+                            }
+                        }
+
+                        if (isSepareted)
+                        {
+                            swappedSize -= (block*block);
+                        }
+                    }
+                }
+            }
+            Debug.Log("SwapFinish");
         }
 
 
-        public void SaveTexture()
+        public void SaveTextureGrid()
         {
-            //System.DateTime UnixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
-            //  long now = (long)(System.DateTime.Now - UnixEpoch).TotalSeconds;
+            ImageData[] imageData = _textureController.Split(_faceUVMappedRT, grid.y, grid.x);
 
-            //  string filePath = "Assets/" + now + ".png";
-            //  Debug.Log(filePath);
-            //  TextureController.SaveImage(_faceUVMappedRT, filePath);
+            SaveImageData(imageData);
 
-            Texture2D[] splitTexture =_textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
-
-            _textureController.SaveImages(splitTexture, "Assets/SplitFaces");
+            Debug.Log(imageData.Length);
 
         }
+
+        public void SaveTextureRandom()
+        {
+            ImageData[] imageData = _textureController.SplitRandom(_faceUVMappedRT);
+
+            SaveImageData(imageData);
+
+            Debug.Log(imageData.Length);
+
+        }
+
+       void SaveImageData(ImageData[] imageData) {
+
+            _textureController.SaveImages(imageData);
+
+            //メモリ開放
+            foreach (ImageData data in imageData)
+            {
+                data.Dispose();
+            }
+
+        }
+
+
+
+
 
         public void DeleteAllTextures()
         {
