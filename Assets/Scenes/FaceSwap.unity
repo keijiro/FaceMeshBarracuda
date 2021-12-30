@@ -846,7 +846,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1663121909}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.FaceSwap, Assembly-CSharp
-        m_MethodName: SaveTexture
+        m_MethodName: SaveTextureRandom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1275,72 +1275,6 @@ MonoBehaviour:
   _faceMeshTransformed: {fileID: 1534671963}
   _faceUVMappedRT: {fileID: 8400000, guid: c909119ef2a754ba09199a18f1b459bf, type: 2}
   _faceSwappedRT: {fileID: 8400000, guid: e5fc020ed44f14cadb2c3cedad26ab8b, type: 2}
-  splitNum: {x: 8, y: 8}
-  splitFaces:
-  - {fileID: 0}
-  - {fileID: 2800000, guid: a8dbfec52e2fc46efa4a85fb5fdf52b4, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: b589d1076d691493db3a93c89cbeb96a, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 60fc8304200f34c9385e4ebd3a338c91, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 9eed75fca642f4dd295576b6cc941584, type: 3}
-  - {fileID: 2800000, guid: 0a9deb7e6204848b0bd4511f10ba3f3e, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: ce523e01c07994136b96760225c26d46, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 0c3b441f5f41e49258a5ddc92df732ba, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 00a9ff90a9960476293baf6a707e8d2c, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 7a42a097abb0f4804a3a6b2ccae22b8a, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 599577ab50dd74ba09fc17fd3694860e, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 1cd6e8303858d43f99c34bccc0c5c006, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 3757ee030757943c1bb433adf02aefd1, type: 3}
-  - {fileID: 2800000, guid: 09f9a394127d54c33a296d18c49a7f99, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: c97a905809a814f3e9c117f6bb731125, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 8c090ddad9eef4c39940852c8c450de7, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: f1ee330c92a8446c8bb6be1c66a9ca4f, type: 3}
-  - {fileID: 2800000, guid: f72452f3ba90049c9a77c32c8267ca1e, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 86b1e97b69dd54eb689faa9fde0313cc, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: bbe62d2fc195a4b289b30c46caf82e4e, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 5b0367e2dd478439cbf608aa7bbb298f, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: d462c7ab7c51a4953bd7f067869aace5, type: 3}
-  - {fileID: 2800000, guid: 0981a39910af84f2db80f54874dc7414, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 95402465cea964607bd62a7397c4e58b, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 5cb5c56d1470f4e56babe4cee52d0c57, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 70816217cd64a4f5897cc09b9ad7dab2, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: ad0973678960e4be1a1bfbe8101348d0, type: 3}
-  - {fileID: 2800000, guid: ff115d5bfe20d4a3db29467a180f8cc1, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 9e242ba2c32c04f628780caa96a59402, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 8a36b44af8a5140548d38c6f2f81e4c3, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 4f9e82756b76a4f4e9e349a77f5914f8, type: 3}
-  - {fileID: 2800000, guid: 585a1fc11cf7a4e2eaf15699c0000a72, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: b993898c5747b4d27a6594e7becfad12, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 0a1204ddad75d46a9bfa0e772a768f20, type: 3}
-  - {fileID: 0}
-  - {fileID: 2800000, guid: 0c8ab093d89f141ccbb6dfcd7fe7adcc, type: 3}
-  - {fileID: 0}
 --- !u!4 &1663121910
 Transform:
   m_ObjectHideFlags: 0

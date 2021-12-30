@@ -17,11 +17,12 @@ namespace MediaPipe.FaceMesh
         [SerializeField] RenderTexture _faceUVMappedRT = null;
         [SerializeField] RenderTexture _faceSwappedRT = null;
 
-        [Space]
-        [SerializeField] Vector2Int splitNum;
-        [Space]
-        [SerializeField] Texture[] splitFaces;
-        
+        //[Space]
+        //[SerializeField] Vector2Int splitNum;
+        //[Space]
+        //[SerializeField] List<Texture> splitFaces;
+        List<ImageData> _splitFacesData;
+
 
         CompositeTexture _composite;
 
@@ -33,6 +34,8 @@ namespace MediaPipe.FaceMesh
             _composite = new CompositeTexture();
 
             _textureController = new TextureController();
+
+            _splitFacesData = new();
         }
 
         private void OnDestroy()
@@ -56,9 +59,9 @@ namespace MediaPipe.FaceMesh
 
             int index = 0;
             
-            foreach(Texture splitFace in splitFaces)
+            foreach(ImageData splitFaceData in _splitFacesData)
             {
-                _composite.Composite(_faceSwappedRT, splitFace, splitNum.y,splitNum.x,index);
+                _composite.Composite(_faceSwappedRT, splitFaceData.texture, splitFaceData.capturedData.rect);
                 index++;
             }
 
@@ -70,19 +73,47 @@ namespace MediaPipe.FaceMesh
         public async void SelectTexture()//asyncで困ることがあるかも？
         {
             //テクスチャ選択をリセット
-            for (int i = 0; i < splitFaces.Length; i++)
-            {
-                splitFaces[i] = null;
-            }
+            _splitFacesData.Clear();
 
-            //指定したテクスチャを入れ替える
-            for (int i = 0; i < splitFaces.Length; i++)
+            //入れ替えが一定の面積を占めるまで、テクスチャを入れ替える
+            float swappedSize = 0;
+            float textureSize = _faceSwappedRT.width * _faceSwappedRT.height;
+            const int block = 8;//面積を調べるときに何ピクセルごとにサンプルするか
+            
+            while(swappedSize < textureSize * _textureController._texturePercentage)
             {
-                ImageData imageData = await _textureController._capturedDataManager.GetRandomData(i);
+                ImageData imageData = await _textureController._capturedDataManager.GetRandomData();
 
-                splitFaces[i] = imageData.texture;
-  
+                _splitFacesData.Add(imageData);
+
+                //置き換えられていないピクセル数を求める
+                swappedSize = textureSize;
+
+                for(int y=0; y<_faceSwappedRT.height; y+=block)
+                {
+                    for(int x=0; x<_faceSwappedRT.width; x+=block)
+                    {
+                        Rect identityRect = new Rect(x, y, block,block);
+
+                        bool isSepareted = true;
+
+                        foreach(ImageData data in _splitFacesData)
+                        {
+                            if (identityRect.Overlaps(data.capturedData.rect))
+                            {
+                                isSepareted = false;
+                                break;
+                            }
+                        }
+
+                        if (isSepareted)
+                        {
+                            swappedSize -= (block*block);
+                        }
+                    }
+                }
             }
+            Debug.Log("SwapFinish");
         }
 
 
@@ -95,11 +126,24 @@ namespace MediaPipe.FaceMesh
             //  Debug.Log(filePath);
             //  TextureController.SaveImage(_faceUVMappedRT, filePath);
 
-            Texture2D[] splitTexture =_textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
+           // Texture2D[] splitTexture =_textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
 
-            _textureController.SaveImages(splitTexture, "Assets/SplitFaces");
+            //textureController.SaveImages(splitTexture, "Assets/SplitFaces");
 
         }
+
+        public void SaveTextureRandom()
+        {
+            ImageData[] imageData = _textureController.SplitRandom(_faceUVMappedRT);
+
+            Debug.Log(imageData.Length);
+
+            _textureController.SaveImages(imageData);
+
+        }
+
+
+
 
         public void DeleteAllTextures()
         {

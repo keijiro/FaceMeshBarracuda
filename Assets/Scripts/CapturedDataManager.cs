@@ -12,14 +12,15 @@ using System.Threading.Tasks;
 public class CapturedData
 {
     public string id;
-    public int partId;
+    public Rect rect;
+    //public int partId;
 }
 
 //Textureとidを同時に渡す時に使う
 public struct ImageData
 {
     public CapturedData capturedData { get; set; }
-    public Texture texture { get; set; }
+    public Texture2D texture { get; set; }
 }
 
 public class CapturedDataManager 
@@ -45,13 +46,13 @@ public class CapturedDataManager
         LoadFromJSON();
     }
 
-    public void SaveData(byte[] bytes, int partId) {
+    public void SaveData(byte[] bytes, Rect rect) {
 
         //固有のIDを生成してファイルを保存
 
         string timeStamp = TimeUtil.GetUnixTime(DateTime.Now).ToString();
 
-        string id = timeStamp + "_" + partId;
+        string id = timeStamp + "_" + rect.x + rect.y + rect.width + rect.height;
 
         string filePath = Path.Combine(_capturedFileDir, id + ".png");
 
@@ -61,7 +62,7 @@ public class CapturedDataManager
         CapturedData dbData = new CapturedData();
 
         dbData.id = id;
-        dbData.partId = partId;
+        dbData.rect = rect;
 
         _capturedData.Add(dbData);
 
@@ -132,18 +133,34 @@ public class CapturedDataManager
 
     }
 
-    public async Task<ImageData> GetRandomData(int partId)
-    {
-        //partIdが一致したデータの中からランダムに1つを返す
-        IEnumerable<CapturedData> query = _capturedData.Where(data => data.partId == partId);
+    /* public async Task<ImageData> GetRandomData(int partId)
+     {
+         //partIdが一致したデータの中からランダムに1つを返す
+         IEnumerable<CapturedData> query = _capturedData.Where(data => data.partId == partId);
 
-        int count = query.Count();
+         int count = query.Count();
+
+         int index = UnityEngine.Random.Range(0, count);
+
+         List<CapturedData> captureds = query.ToList();
+
+         CapturedData captured = captureds[index];
+
+         ImageData imageData = await GetData(captured.id);
+
+         return imageData;
+
+     }*/
+
+    public async Task<ImageData> GetRandomData()
+    {
+        //データの中からランダムに1つを返す
+        
+        int count = _capturedData.Count();
 
         int index = UnityEngine.Random.Range(0, count);
 
-        List<CapturedData> captureds = query.ToList();
-
-        CapturedData captured = captureds[index];
+        CapturedData captured = _capturedData[index];
 
         ImageData imageData = await GetData(captured.id);
 

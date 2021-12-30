@@ -62,6 +62,20 @@ public class CompositeTexture
         Composite(targetTexture, overTxtrure, _BlendStartU, _BlendEndU, _BlendStartV, _BlendEndV);
     }
 
+    //Rectの計算
+    public void Composite(RenderTexture targetTexture, Texture overTxtrure,
+        Rect rect)
+    {
+        float _BlendStartU = rect.x / (float)targetTexture.width;
+        float _BlendEndU = (rect.x + rect.width) / (float)targetTexture.width;
+        float _BlendStartV = rect.y / (float)targetTexture.height;
+        float _BlendEndV = (rect.y + rect.height) / (float)targetTexture.height;
+
+        
+
+        Composite(targetTexture, overTxtrure, _BlendStartU, _BlendEndU, _BlendStartV, _BlendEndV);
+
+    }
 
     public void SetBlend(float blend)
     {
