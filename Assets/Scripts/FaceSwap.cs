@@ -17,8 +17,8 @@ namespace MediaPipe.FaceMesh
         [SerializeField] RenderTexture _faceUVMappedRT = null;
         [SerializeField] RenderTexture _faceSwappedRT = null;
 
-        //[Space]
-        //[SerializeField] Vector2Int splitNum;
+        [Space]
+        [SerializeField] Vector2Int grid;
         //[Space]
         //[SerializeField] List<Texture> splitFaces;
         List<ImageData> _splitFacesData;
@@ -117,19 +117,13 @@ namespace MediaPipe.FaceMesh
         }
 
 
-        public void SaveTexture()
+        public void SaveTextureGrid()
         {
-            //System.DateTime UnixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
-            //  long now = (long)(System.DateTime.Now - UnixEpoch).TotalSeconds;
+            ImageData[] imageData = _textureController.Split(_faceUVMappedRT, grid.y, grid.x);
 
-            //  string filePath = "Assets/" + now + ".png";
-            //  Debug.Log(filePath);
-            //  TextureController.SaveImage(_faceUVMappedRT, filePath);
+            Debug.Log(imageData.Length);
 
-           // Texture2D[] splitTexture =_textureController.Split(_faceUVMappedRT, splitNum.y, splitNum.x);
-
-            //textureController.SaveImages(splitTexture, "Assets/SplitFaces");
-
+            _textureController.SaveImages(imageData);
         }
 
         public void SaveTextureRandom()
@@ -139,7 +133,6 @@ namespace MediaPipe.FaceMesh
             Debug.Log(imageData.Length);
 
             _textureController.SaveImages(imageData);
-
         }
 
 

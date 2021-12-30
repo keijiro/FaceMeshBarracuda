@@ -67,7 +67,7 @@ public class TextureController
 
     //todo 戻り値をImageData[]にする
     //テクスチャを分割する
-    public Texture2D[] Split(Texture input, int row, int column　)
+    public ImageData[] Split(Texture input, int row, int column　)
     {
         //分割後のテクスチャのサイズを計算
         int width = (int)input.width / column;
@@ -82,7 +82,7 @@ public class TextureController
         RenderTexture.active = renderTexture;
 
         //配列作成して入れていく
-        List<Texture2D> textures = new();
+        List<ImageData> resultData = new();
 
         //ここが重い
         for(int y = 0; y<row; y++)
@@ -91,10 +91,17 @@ public class TextureController
             {
                 //texture読み込み
                 Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
-                texture.ReadPixels(new Rect(width * x, height * y, width, height), 0, 0);
+                Rect rect = new Rect(width * x, height * y, width, height);
+                texture.ReadPixels(rect, 0, 0);
                 texture.Apply();
 
-                textures.Add(texture);
+                ImageData data = new ImageData();
+                data.capturedData = new CapturedData();
+                data.capturedData.id = "";
+                data.capturedData.rect = rect;
+                data.texture = texture;
+
+                resultData.Add(data);
                 
                 //読み込み失敗した
                /* AsyncGPUReadback.Request(renderTexture, 0, request =>
@@ -111,7 +118,7 @@ public class TextureController
 
         renderTexture.Release();
 
-        return textures.ToArray();
+        return resultData.ToArray();
 
     }
 
@@ -135,8 +142,8 @@ public class TextureController
         while(resultsSize < rectSize　* _texturePercentage)
         {
             //ランダムな短形を生成
-            int width = Random.Range(input.width / 16, input.width / 2);
-            int height = Random.Range(input.height / 16, input.height / 2);
+            int width = Random.Range(input.width / 16, input.width / 4);
+            int height = Random.Range(input.height / 16, input.height / 4);
             int x = Random.Range(0, input.width);
             int y = Random.Range(0, input.height);
             //テクスチャ範囲をはみ出ないようにする
