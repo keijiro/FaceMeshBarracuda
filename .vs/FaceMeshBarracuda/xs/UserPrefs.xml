@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FaceSwap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/Demigiant/DOTween/readme.txt">
     <Files>
-      <File FileName="Assets/Scripts/FaceSwap.cs" Line="59" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="99" Column="28" IsPinned="True" />
       <File FileName="Assets/NatSuite/NatDevice/README.md" Line="1" Column="1" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="10" Column="38" />
       <File FileName="Assets/Scripts/FaceMesh.cs" Line="1" Column="1" />
       <File FileName="Assets/Shader/FaceMesh.shader" Line="33" Column="19" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="36" Column="1" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="5" Column="1" />
       <File FileName="Assets/Scripts/TextureController.cs" Line="45" Column="66" />
-      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="110" Column="1" />
+      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="21" Column="37" />
+      <File FileName="Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" Line="25" Column="1" />
+      <File FileName="Assets/Plugins/Demigiant/DOTween/readme.txt" Line="15" Column="60" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

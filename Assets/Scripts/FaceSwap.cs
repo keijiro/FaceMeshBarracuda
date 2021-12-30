@@ -90,11 +90,17 @@ namespace MediaPipe.FaceMesh
             
             while(swappedSize < textureSize * _textureController._texturePercentage)
             {
+                //保存されているデータを読み込み
                 ImageData imageData = await _textureController._capturedDataManager.GetRandomData();
 
                 _splitFacesData.Add(imageData);
 
-                _composites.Add(new CompositeTexture());
+                //合成時のシェーダーエフェクトを実行
+                CompositeTexture composite = new CompositeTexture();
+               ///////////////
+
+                ///////////////
+                _composites.Add(composite);
 
                 //置き換えられていないピクセル数を求める
                 swappedSize = textureSize;
