@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class CompositeTexture 
+public class CompositeTexture :IDisposable
 {
     Shader _shader;
 
@@ -17,6 +18,34 @@ public class CompositeTexture
         _material = new Material(_shader);
 
         _renderTexture = new RenderTexture(1024, 1024, 0);
+    }
+
+    bool _disposed = false;
+
+
+    public void Dispose()
+    {
+        // Dispose of unmanaged resources.
+        Dispose(true);
+        // Suppress finalization.
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // TODO: Dispose managed resources here.
+                MonoBehaviour.Destroy(_material);
+                _renderTexture.Release();
+                MonoBehaviour.Destroy(_renderTexture);
+            }
+
+            // Note disposing has been done.
+            _disposed = true;
+        }
     }
 
     public void Composite(RenderTexture targetTexture, Texture overTxtrure,

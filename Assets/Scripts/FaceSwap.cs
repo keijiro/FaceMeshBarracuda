@@ -19,19 +19,17 @@ namespace MediaPipe.FaceMesh
 
         [Space]
         [SerializeField] Vector2Int grid;
-        //[Space]
-        //[SerializeField] List<Texture> splitFaces;
+
         List<ImageData> _splitFacesData;
 
-
-        CompositeTexture _composite;
+        List<CompositeTexture> _composites;
 
         TextureController _textureController;
 
         // Start is called before the first frame update
         void Start()
         {
-            _composite = new CompositeTexture();
+            _composites = new();
 
             _textureController = new TextureController();
 
@@ -61,7 +59,7 @@ namespace MediaPipe.FaceMesh
             
             for(int i=0; i < _splitFacesData.Count; i++)
             {
-                _composite.Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
+                _composites[i].Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
                 index++;
             }
 
@@ -79,6 +77,12 @@ namespace MediaPipe.FaceMesh
             }
             _splitFacesData.Clear();
 
+            foreach(CompositeTexture composite in _composites)
+            {
+                composite.Dispose();
+            }
+            _composites.Clear();
+
             //入れ替えが一定の面積を占めるまで、テクスチャを入れ替える
             float swappedSize = 0;
             float textureSize = _faceSwappedRT.width * _faceSwappedRT.height;
@@ -89,6 +93,8 @@ namespace MediaPipe.FaceMesh
                 ImageData imageData = await _textureController._capturedDataManager.GetRandomData();
 
                 _splitFacesData.Add(imageData);
+
+                _composites.Add(new CompositeTexture());
 
                 //置き換えられていないピクセル数を求める
                 swappedSize = textureSize;
@@ -125,7 +131,23 @@ namespace MediaPipe.FaceMesh
         {
             ImageData[] imageData = _textureController.Split(_faceUVMappedRT, grid.y, grid.x);
 
+            SaveImageData(imageData);
+
             Debug.Log(imageData.Length);
+
+        }
+
+        public void SaveTextureRandom()
+        {
+            ImageData[] imageData = _textureController.SplitRandom(_faceUVMappedRT);
+
+            SaveImageData(imageData);
+
+            Debug.Log(imageData.Length);
+
+        }
+
+       void SaveImageData(ImageData[] imageData) {
 
             _textureController.SaveImages(imageData);
 
@@ -134,22 +156,9 @@ namespace MediaPipe.FaceMesh
             {
                 data.Dispose();
             }
+
         }
 
-        public void SaveTextureRandom()
-        {
-            ImageData[] imageData = _textureController.SplitRandom(_faceUVMappedRT);
-
-            Debug.Log(imageData.Length);
-
-            _textureController.SaveImages(imageData);
-
-            //メモリ開放
-            foreach(ImageData data in imageData)
-            {
-                data.Dispose();
-            }
-        }
 
 
 
