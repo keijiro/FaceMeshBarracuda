@@ -93,13 +93,29 @@ namespace MediaPipe.FaceMesh
                 //保存されているデータを読み込み
                 ImageData imageData = await _textureController._capturedDataManager.GetRandomData();
 
+                //すでに同じデータを読み込んでいないか調べる
+                bool isIdentical = true;
+                foreach(ImageData data in _splitFacesData)
+                {
+                    if(imageData.capturedData.rect == data.capturedData.rect)
+                    {
+                        isIdentical = false;
+                        break;
+                    }
+                }
+                //もう読み込んだデータであれば処理をとばす
+                if (!isIdentical)
+                {
+                    continue;
+                }
+
                 _splitFacesData.Add(imageData);
 
                 //合成時のシェーダーエフェクトを実行
                 CompositeTexture composite = new CompositeTexture();
-                ///////////////
+                
                 composite.StartSwaping();
-                ///////////////
+      
                 _composites.Add(composite);
 
                 //置き換えられていないピクセル数を求める

@@ -120,6 +120,9 @@ public class CompositeTexture :IDisposable
         //発光
         _material.SetFloat("_Emission", 0f);
 
+        //歪み
+        _material.SetFloat("_Distortion", 0.5f);
+
         //アニメーションシークエンス設定
         Sequence sequence = DOTween.Sequence();
 
@@ -128,6 +131,8 @@ public class CompositeTexture :IDisposable
         sequence.Join(_material.DOFloat(0.75f, "_Emission", 0.25f));
 
         sequence.Append(_material.DOFloat(0f, "_Emission", 1.0f));
+
+        sequence.Join(_material.DOFloat(0f, "_Distortion", 1.0f));
 
         sequence.Play();
     }
