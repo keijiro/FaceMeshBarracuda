@@ -26,6 +26,17 @@ namespace MediaPipe.FaceMesh
 
         TextureController _textureController;
 
+        float swappedSize;
+
+        float textureSize;
+
+        const int block = 8;//面積を調べるときに何ピクセルごとにサンプルするか
+
+        public bool isSwapping { get; private set; }
+
+        public bool isSwaped { get; private set; }
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -34,6 +45,13 @@ namespace MediaPipe.FaceMesh
             _textureController = new TextureController();
 
             _splitFacesData = new();
+
+            swappedSize = 0;
+
+            textureSize = _faceSwappedRT.width * _faceSwappedRT.height;
+
+            isSwapping = false;
+            isSwaped = false;
         }
 
         private void OnDestroy()
@@ -67,28 +85,54 @@ namespace MediaPipe.FaceMesh
             _faceMesh.Draw(_faceSwappedRT);
         }
 
-
-        public async void SelectTexture()//asyncで困ることがあるかも？
+        public void Reset()
         {
             //テクスチャ選択をリセット、メモリ開放
-            foreach(ImageData data in _splitFacesData)
+            foreach (ImageData data in _splitFacesData)
             {
                 data.Dispose();
             }
             _splitFacesData.Clear();
 
-            foreach(CompositeTexture composite in _composites)
+            foreach (CompositeTexture composite in _composites)
             {
                 composite.Dispose();
             }
             _composites.Clear();
 
+            swappedSize = 0;
+            isSwaped = false;
+            isSwapping = false;
+        }
+
+        //並列で繰り返しSelectTextureを実行する
+        public async void SwapTextureParallel(int num)
+        {
+            Reset();
+            isSwapping = true;
+
+            List<Task> tasks = new List<Task>();
+
+            //並列実行
+            for(int i=0; i<num; i++)
+            {
+                tasks.Add(SwapTexture());
+            }
+
+            //すべて終わるまで待つ
+            await Task.WhenAll(tasks.ToArray());
+
+            isSwapping = false;
+            isSwaped = true;
+
+            Debug.Log("Finish Swapping.");
+        }
+
+        public async Task SwapTexture()//asyncで困ることがあるかも？
+        {
             //入れ替えが一定の面積を占めるまで、テクスチャを入れ替える
-            float swappedSize = 0;
-            float textureSize = _faceSwappedRT.width * _faceSwappedRT.height;
-            const int block = 8;//面積を調べるときに何ピクセルごとにサンプルするか
-            
-            while(swappedSize < textureSize * _textureController._texturePercentage)
+
+            while (swappedSize < textureSize * _textureController._texturePercentage)
             {
                 //保存されているデータを読み込み
                 ImageData imageData = await _textureController._capturedDataManager.GetRandomData();
@@ -145,7 +189,6 @@ namespace MediaPipe.FaceMesh
                     }
                 }
             }
-            Debug.Log("SwapFinish");
         }
 
 
@@ -180,9 +223,6 @@ namespace MediaPipe.FaceMesh
             }
 
         }
-
-
-
 
 
         public void DeleteAllTextures()

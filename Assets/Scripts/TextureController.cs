@@ -6,30 +6,14 @@ using UnityEngine.Rendering;
 
 public class TextureController
 {
-    public CapturedDataManager _capturedDataManager { get; private set; } 
+    public CapturedDataManager _capturedDataManager { get; private set; }
+
+    public float _texturePercentage = 2f / 3f;
 
     public  TextureController()
     {
         _capturedDataManager = new CapturedDataManager("Captured");
     }
-    /*public void SaveImage(RenderTexture renderTexture, string filePath)
-    {
-        Texture2D tex = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
-
-        RenderTexture.active = renderTexture;
-
-        tex.ReadPixels(new Rect (0, 0, renderTexture.width, renderTexture.height),0,0);
-
-        tex.Apply();
-
-        byte[] bytes = tex.EncodeToPNG();
-
-
-        //System.IO.File.WriteAllBytesAsync(filePath, bytes);
-
-    }*/
-
-    public float _texturePercentage = 2f / 3f;
 
     //texture2Dをまとめて保存
     public void SaveImages(ImageData[] inputs)
