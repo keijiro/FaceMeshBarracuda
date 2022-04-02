@@ -440,7 +440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
+  m_Texture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0429ef1c5ec58476c95695740defc86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetRenderTexture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
+  _targetRenderTexture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
   _dummyImage: {fileID: 0}
   defaultDeviceIndex: 0
 --- !u!114 &2010591768
@@ -1974,7 +1974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resources: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
-  _inputTexture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
+  _inputTexture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
 --- !u!114 &2010591769
 MonoBehaviour:
   m_ObjectHideFlags: 0

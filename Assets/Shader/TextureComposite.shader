@@ -71,11 +71,8 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
             fixed4 frag (v2f i) : SV_Target
             {
                  //合成範囲のスケールを算出
-                //float u_scale = _BlendEndU - _BlendStartU;
-                //float v_scale = _BlendEndV - _BlendStartV;
-                //スケール算出しないことでクロップを有効にする
-                float u_scale = 1;
-                float v_scale = 1;
+                float u_scale = _BlendEndU - _BlendStartU;
+                float v_scale = _BlendEndV - _BlendStartV;
 
                 //Sub TextureのUV座標を算出
                 fixed2 pos = fixed2((i.uv.x - _BlendStartU) * 1/u_scale,
@@ -93,8 +90,8 @@ Shader "Hidden/MediaPipe/FaceMesh/TextureComposite"
 
                 // sample the texture
                 fixed4 main = tex2D(_MainTex, i.uv);
-                //fixed4 sub = tex2D(_SubTex, pos);
-                fixed4 sub = tex2D(_SubTex, i.uv);
+                fixed4 sub = tex2D(_SubTex, pos);
+                //fixed4 col = main;
 
                 //指定の範囲だったら合成する
                 //条件がそろっていればconditionに1が入る
