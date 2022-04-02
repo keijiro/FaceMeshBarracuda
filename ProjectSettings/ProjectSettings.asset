@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: KemushiBoy
   productName: FaceMeshBarracuda
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -155,7 +155,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.DefaultCompany.FaceMeshBarracuda
     Standalone: com.DefaultCompany.FaceMeshBarracuda
-    iPhone: com.DefaultCompany.FaceMeshBarracuda
+    iPhone: com.KemushiBoy.FaceMeshBarracuda
   buildNumber:
     Standalone: 0
     iPhone: 0

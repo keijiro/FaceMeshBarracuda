@@ -49,7 +49,11 @@ namespace MediaPipe.FaceMesh
                 return;
             }
             // Create a device query for device cameras
+#if UNITY_IOS
             query = new MediaDeviceQuery(MediaDeviceCriteria.FrontCamera);
+#else
+            query = new MediaDeviceQuery(MediaDeviceCriteria.CameraDevice);
+#endif
 
             device = query.current as CameraDevice;
             
@@ -93,7 +97,7 @@ namespace MediaPipe.FaceMesh
 
         }
 
-        #endregion
+#endregion
     }
 
 } // namespace MediaPipe.FaceMesh

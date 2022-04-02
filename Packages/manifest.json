@@ -9,12 +9,14 @@
     }
   ],
   "dependencies": {
+    "jp.keijiro.klak.ndi": "2.0.3",
     "com.unity.ide.visualstudio": "2.0.12",
     "com.unity.ide.vscode": "1.2.4",
-    "com.unity.postprocessing": "3.1.1",
+    "com.unity.postprocessing": "3.2.0",
     "com.unity.recorder": "3.0.3",
     "com.unity.ugui": "1.0.0",
-    "jp.keijiro.klak.ndi": "2.0.2",
+    "com.unity.xr.management": "4.2.1",
+
     "jp.keijiro.mediapipe.blazeface": "1.1.1",
     "jp.keijiro.mediapipe.facelandmark": "1.0.0",
     "jp.keijiro.mediapipe.iris": "1.1.0",

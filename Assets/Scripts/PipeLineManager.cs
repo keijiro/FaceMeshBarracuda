@@ -59,6 +59,13 @@ namespace MediaPipe.FaceMesh
         public bool IsFaceTracking
             => _pipeline.IsFaceTracking;
 
+
+        public void ProcessImage()
+            => _pipeline.ProcessImage(_inputTexture);
+
+        public void SetInputTextre(RenderTexture texture)
+            => _inputTexture = texture;
+
         #endregion
 
 

@@ -332,7 +332,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2010591767}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.MyWebcamInput, Assembly-CSharp
         m_MethodName: ChangeDevice
         m_Mode: 1
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
+  m_Texture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1663121909}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.FaceSwap, Assembly-CSharp
         m_MethodName: SaveTextureGrid
         m_Mode: 1
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1663121909}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.FaceSwap, Assembly-CSharp
         m_MethodName: SaveTextureRandom
         m_Mode: 1
@@ -1545,7 +1545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1663121910}
-  - component: {fileID: 1663121909}
+  - component: {fileID: 1663121911}
   m_Layer: 0
   m_Name: FaceSwap
   m_TagString: Untagged
@@ -1553,24 +1553,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1663121909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663121908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228b264febc544457b5761c5f555cbae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pipeline: {fileID: 2010591768}
-  _faceMesh: {fileID: 1478166155}
-  _faceMeshTransformed: {fileID: 1534671963}
-  _faceUVMappedRT: {fileID: 8400000, guid: c909119ef2a754ba09199a18f1b459bf, type: 2}
-  _faceSwappedRT: {fileID: 8400000, guid: e5fc020ed44f14cadb2c3cedad26ab8b, type: 2}
-  grid: {x: 8, y: 8}
 --- !u!4 &1663121910
 Transform:
   m_ObjectHideFlags: 0
@@ -1586,6 +1568,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1663121911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663121908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505d16edafc3f48588b0ad844968735d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pipeline: {fileID: 2010591768}
+  _faceMesh: {fileID: 1478166155}
+  _faceMeshTransformed: {fileID: 1534671963}
+  _faceImages:
+  - {fileID: 2800000, guid: 3d9d67f46c94f4e2a8009bc2615b14c5, type: 3}
+  - {fileID: 2800000, guid: 3d9d67f46c94f4e2a8009bc2615b14c5, type: 3}
+  - {fileID: 2800000, guid: 4995dff642cc049a28c9d3427c1f0de4, type: 3}
+  - {fileID: 2800000, guid: b8deea91920bc4608b5bcd820659dba3, type: 3}
+  _cameraInputTexture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
+  _faceUVMappedRT: {fileID: 8400000, guid: c909119ef2a754ba09199a18f1b459bf, type: 2}
+  _faceSwappedRT: {fileID: 8400000, guid: e5fc020ed44f14cadb2c3cedad26ab8b, type: 2}
+  _faceTextureCamera: {fileID: 223874630}
+  grid: {x: 2, y: 2}
 --- !u!1 &1761531103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,7 +1677,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1663121909}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.FaceSwap, Assembly-CSharp
         m_MethodName: SwapTextureParallel
         m_Mode: 3
@@ -1877,7 +1884,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1663121909}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MediaPipe.FaceMesh.FaceSwap, Assembly-CSharp
         m_MethodName: DeleteAllTextures
         m_Mode: 1
@@ -1936,7 +1943,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2010591770}
-  - component: {fileID: 2010591767}
   - component: {fileID: 2010591768}
   - component: {fileID: 2010591769}
   m_Layer: 0
@@ -1946,21 +1952,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2010591767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010591762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0429ef1c5ec58476c95695740defc86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetRenderTexture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
-  _dummyImage: {fileID: 0}
-  defaultDeviceIndex: 0
 --- !u!114 &2010591768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,7 +1965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resources: {fileID: 11400000, guid: 7dea2325d80e6af469e5633ac60efaea, type: 2}
-  _inputTexture: {fileID: 8400000, guid: d7448861a824c4af6a5604dce171d004, type: 2}
+  _inputTexture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
 --- !u!114 &2010591769
 MonoBehaviour:
   m_ObjectHideFlags: 0
