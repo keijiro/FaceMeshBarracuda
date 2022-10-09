@@ -56,6 +56,7 @@ namespace MediaPipe.FaceMesh
                 throw;
             }
 
+
             if (_pipeLine.IsFaceTracking)
             {
                 SendDetectEvent();
@@ -73,6 +74,7 @@ namespace MediaPipe.FaceMesh
             protected internal override void Enter()
             {
                 Debug.Log("Idle");
+                stateMachine.Context._faceSwap.SetDraw(false);
             }
 
             protected internal override void Update()
@@ -137,6 +139,7 @@ namespace MediaPipe.FaceMesh
             protected internal override void Enter()
             {
                 Debug.Log("Captured");
+                //一定時間たったらスワップに遷移する
                 stateMachine.SendEvent(StateEvent.Swap);
             }
 
@@ -158,6 +161,7 @@ namespace MediaPipe.FaceMesh
             {
                 Debug.Log("Swapping");
                 //フェイススワップ実行
+                stateMachine.Context._faceSwap.SetDraw(true);
                 stateMachine.Context._faceSwap.SwapTextureParallel(3);
                 stateMachine.SendEvent(StateEvent.Swaped);
             }
@@ -178,6 +182,7 @@ namespace MediaPipe.FaceMesh
             protected internal override void Enter()
             {
                 Debug.Log("Swapped");
+                //一定時間たったらまたスワップする
             }
 
             protected internal override void Update()

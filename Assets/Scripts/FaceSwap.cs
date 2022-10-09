@@ -36,6 +36,7 @@ namespace MediaPipe.FaceMesh
 
         public bool isSwaped { get; private set; }
 
+        bool _isDraw;
 
         // Start is called before the first frame update
         void Start()
@@ -52,6 +53,7 @@ namespace MediaPipe.FaceMesh
 
             isSwapping = false;
             isSwaped = false;
+            _isDraw = false;
         }
 
         private void OnDestroy()
@@ -63,26 +65,30 @@ namespace MediaPipe.FaceMesh
         // Update is called once per frame
         void Update()
         {
-            //mesh情報をアップデート
-            _faceMesh.UpdateMesh(_pipeline.RefinedFaceVertexBuffer);//Refinedを使うのでCropMatrix不要
-            _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);//用意されたmeshに貼り付けるのでrefinedだとだめ
-
-            //RenderTextureにFaceTextureを書き込み
-            _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
-
-            //renderTextureと取り込んだテクスチャを合成;
-            Graphics.CopyTexture(_faceUVMappedRT, _faceSwappedRT);
-
-            int index = 0;
-            
-            for(int i=0; i < _splitFacesData.Count; i++)
+            if (_isDraw)
             {
-                _composites[i].Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
-                index++;
-            }
 
-            //合成結果をメッシュ上に描画
-            _faceMesh.Draw(_faceSwappedRT);
+                //mesh情報をアップデート
+                _faceMesh.UpdateMesh(_pipeline.RefinedFaceVertexBuffer);//Refinedを使うのでCropMatrix不要
+                _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);//用意されたmeshに貼り付けるのでrefinedだとだめ
+
+                //RenderTextureにFaceTextureを書き込み
+                _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
+
+                //renderTextureと取り込んだテクスチャを合成;
+                Graphics.CopyTexture(_faceUVMappedRT, _faceSwappedRT);
+
+                int index = 0;
+
+                for (int i = 0; i < _splitFacesData.Count; i++)
+                {
+                    _composites[i].Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
+                    index++;
+                }
+
+                //合成結果をメッシュ上に描画
+                _faceMesh.Draw(_faceSwappedRT);
+            }
         }
 
         public void Reset()
@@ -228,6 +234,11 @@ namespace MediaPipe.FaceMesh
         public void DeleteAllTextures()
         {
             _textureController._capturedDataManager.DeleteAllData();
+        }
+
+        public void SetDraw(bool isDraw)
+        {
+            _isDraw = isDraw;
         }
     }
 }
