@@ -65,9 +65,7 @@ namespace MediaPipe.FaceMesh
         // Update is called once per frame
         void Update()
         {
-            if (_isDraw)
-            {
-
+          
                 //mesh情報をアップデート
                 _faceMesh.UpdateMesh(_pipeline.RefinedFaceVertexBuffer);//Refinedを使うのでCropMatrix不要
                 _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);//用意されたmeshに貼り付けるのでrefinedだとだめ
@@ -86,6 +84,7 @@ namespace MediaPipe.FaceMesh
                     index++;
                 }
 
+            if (_isDraw) { 
                 //合成結果をメッシュ上に描画
                 _faceMesh.Draw(_faceSwappedRT);
             }

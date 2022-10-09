@@ -17,6 +17,8 @@ namespace MediaPipe.FaceMesh
 
         [SerializeField] uint defaultDeviceIndex;
 
+        [SerializeField] bool _isMirror = true;
+
         #endregion
 
         #region Internal objects
@@ -74,8 +76,12 @@ namespace MediaPipe.FaceMesh
             var aspect2 = (float)_targetRenderTexture.width / _targetRenderTexture.height;
             var gap = aspect2 / aspect1;
 
+            if (_isMirror) gap = -gap;
+
             var scale = new Vector2(gap, 1);
             var offset = new Vector2((1 - gap) / 2, 0);
+
+            
 
             Graphics.Blit(previewTexture, _targetRenderTexture, scale, offset);
 

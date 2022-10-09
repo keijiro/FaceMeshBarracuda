@@ -2007,6 +2007,7 @@ MonoBehaviour:
   _targetRenderTexture: {fileID: 8400000, guid: fce0f77af6c6d49e6b3a3ab8b62f1aab, type: 2}
   _dummyImage: {fileID: 0}
   defaultDeviceIndex: 0
+  _isMirror: 1
 --- !u!114 &2010591768
 MonoBehaviour:
   m_ObjectHideFlags: 0

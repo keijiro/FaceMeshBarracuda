@@ -92,16 +92,21 @@ namespace MediaPipe.FaceMesh
 
         private class DetectingState : MyState
         {
+            float duration;
             protected internal override void Enter()
             {
                 Debug.Log("Detecting");
-
-                //認識したら一定時間カウントしてから次の状態に遷移する
-                stateMachine.SendEvent(StateEvent.Capture);
+                duration = 1.0f;
             }
 
             protected internal override void Update()
             {
+                //認識したら一定時間カウントしてから次の状態に遷移する
+                duration -= Time.deltaTime;
+                if(duration <= 0)
+                {
+                    stateMachine.SendEvent(StateEvent.Capture);
+                }
 
             }
 
@@ -136,16 +141,22 @@ namespace MediaPipe.FaceMesh
 
         private class CapturedState : MyState
         {
+            float duration;
             protected internal override void Enter()
             {
                 Debug.Log("Captured");
-                //一定時間たったらスワップに遷移する
-                stateMachine.SendEvent(StateEvent.Swap);
+                duration = 1.0f;
             }
 
             protected internal override void Update()
             {
-
+                //一定時間たったらスワップに遷移する
+                duration -= Time.deltaTime;
+                if (duration <= 0)
+                {
+                    stateMachine.SendEvent(StateEvent.Swap);
+                }
+                
             }
 
             protected internal override void Exit()
@@ -179,15 +190,21 @@ namespace MediaPipe.FaceMesh
 
         private class SwappedState : MyState
         {
+            float duration;
             protected internal override void Enter()
             {
                 Debug.Log("Swapped");
-                //一定時間たったらまたスワップする
+                duration = 10.0f;
             }
 
             protected internal override void Update()
             {
-
+                //一定時間たったらまたスワップする
+                duration -= Time.deltaTime;
+                if (duration <= 0)
+                {
+                    stateMachine.SendEvent(StateEvent.Swap);
+                }
             }
 
             protected internal override void Exit()
