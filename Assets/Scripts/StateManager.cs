@@ -25,6 +25,8 @@ namespace MediaPipe.FaceMesh
 
         ImtStateMachine<StateManager, StateEvent> stateMachine;
 
+        private float _lostBuffer = 0.2f;
+        private float _currentBuffer = 0;
 
         void Awake()
         {
@@ -60,13 +62,17 @@ namespace MediaPipe.FaceMesh
             if (_pipeLine.IsFaceTracking)
             {
                SendDetectEvent();
+                _currentBuffer = 0;
             }
             else
             {
-                SendLostEvent();
+                _currentBuffer += Time.deltaTime;
             }
 
-
+            if(_currentBuffer >= _lostBuffer)
+            {
+                SendLostEvent();
+            }
         }
 
         private class IdleState : MyState
