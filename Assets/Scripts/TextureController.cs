@@ -30,7 +30,7 @@ public class TextureController
         }
 
         int index = 0;
-
+        
         foreach (byte[] rawData in bytesList)
         {
             //テクスチャのバイト化と保存
@@ -47,6 +47,7 @@ public class TextureController
 
         //Jsonに保存
         _capturedDataManager.UpdateJSON();
+        
     }
 
     //todo 戻り値をImageData[]にする

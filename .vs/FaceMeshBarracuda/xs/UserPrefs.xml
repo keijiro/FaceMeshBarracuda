@@ -1,21 +1,22 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FaceMesh/Script/FacePipeline_Process.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" />
-      <File FileName="Assets/Scripts/MyWebcamInput.cs" />
-      <File FileName="Assets/Scripts/StateMachine.cs" />
-      <File FileName="Assets/Scripts/StateManager.cs" />
-      <File FileName="Assets/Scripts/MixedFaceGenerator.cs" />
-      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" />
-      <File FileName="Assets/Scripts/FaceMesh.cs" />
-      <File FileName="Assets/Shader/FaceMesh.shader" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" />
-      <File FileName="Assets/Shader/TextureComposite.shader" />
-      <File FileName="Assets/Scripts/TextureController.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="11" Column="15" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
+      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="77" Column="12" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="225" Column="36" />
+      <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateMachine.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateManager.cs" Line="132" Column="16" />
+      <File FileName="Assets/Scripts/MixedFaceGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FaceMesh.cs" Line="1" Column="1" />
+      <File FileName="Assets/Shader/FaceMesh.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="1" Column="1" />
+      <File FileName="Assets/Shader/TextureComposite.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TextureController.cs" Line="126" Column="39" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" Line="18" Column="13" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="30" Column="19" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="119" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

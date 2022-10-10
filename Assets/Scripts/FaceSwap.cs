@@ -211,6 +211,7 @@ namespace MediaPipe.FaceMesh
 
         public void SaveTextureRandom()
         {
+
             ImageData[] imageData = _textureController.SplitRandom(_faceUVMappedRT);
 
             SaveImageData(imageData);

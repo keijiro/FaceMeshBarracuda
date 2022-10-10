@@ -108,7 +108,7 @@ public class CapturedDataManager
         _capturedData.Add(dbData);
     }
 
-    public async void UpdateJSON()
+    public void UpdateJSON()
     {
         //Jsonに書き出し
         string json = JsonConvert.SerializeObject(_capturedData);
@@ -116,7 +116,8 @@ public class CapturedDataManager
         //jsonFilieを更新
         string path = Path.Combine(_capturedFileDir, "CapturedData.json");
 
-        await File.WriteAllTextAsync(path, json);
+        File.WriteAllText(path, json);
+
     }
 
     public async void LoadFromJSON()
@@ -202,13 +203,18 @@ public class CapturedDataManager
 
         int index = UnityEngine.Random.Range(0, count);
 
-        CapturedData captured = _capturedData[index];
+        if (_capturedData.Count > index)
+        {
+           CapturedData captured = _capturedData[index];
 
-        ImageData imageData = await GetData(captured.id);
+            ImageData imageData = await GetData(captured.id);
 
-        captured = null;
+            captured = null;
 
-        return imageData;
+            return imageData;
+        }
+
+        return null;
 
     }
 
