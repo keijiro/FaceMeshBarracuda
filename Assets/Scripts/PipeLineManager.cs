@@ -2,6 +2,9 @@ using UnityEngine;
 using Unity.Mathematics;
 using System.Collections.Generic;
 using UI = UnityEngine.UI;
+using System.Threading.Tasks;
+using System.Collections;
+
 
 namespace MediaPipe.FaceMesh
 {
@@ -81,17 +84,31 @@ namespace MediaPipe.FaceMesh
         {
             _pipeline = new FacePipeline(_resources);
 
+            StartCoroutine(ProcessImageCoroutine());
         }
+ 
 
         void OnDestroy()
         {
             _pipeline.Dispose();
         }
 
-        void LateUpdate()
+        void Update()
         {
             // Processing on the face pipeline
-            _pipeline.ProcessImage(_inputTexture);
+            //_pipeline.ProcessImage(_inputTexture);
+
+        }
+
+
+        IEnumerator ProcessImageCoroutine()
+        {
+            while (true)
+            {
+                ProcessImage();
+
+                yield return null;
+            }
 
         }
 

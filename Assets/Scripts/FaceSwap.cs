@@ -78,13 +78,15 @@ namespace MediaPipe.FaceMesh
 
                 int index = 0;
 
+            if (_isDraw)
+            {
                 for (int i = 0; i < _splitFacesData.Count; i++)
                 {
                     _composites[i].Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
                     index++;
                 }
 
-            if (_isDraw) { 
+           
                 //合成結果をメッシュ上に描画
                 _faceMesh.Draw(_faceSwappedRT);
             }

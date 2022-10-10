@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FaceSwap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FaceMesh/Script/FacePipeline_Process.cs">
     <Files>
-      <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PipeLineManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" />
+      <File FileName="Assets/Scripts/MyWebcamInput.cs" />
       <File FileName="Assets/Scripts/StateMachine.cs" />
-      <File FileName="Assets/Scripts/StateManager.cs" Line="9" Column="19" />
+      <File FileName="Assets/Scripts/StateManager.cs" />
       <File FileName="Assets/Scripts/MixedFaceGenerator.cs" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" />
       <File FileName="Assets/Scripts/FaceMesh.cs" />
@@ -11,16 +13,14 @@
       <File FileName="Assets/Scripts/CompositeTexture.cs" />
       <File FileName="Assets/Shader/TextureComposite.shader" />
       <File FileName="Assets/Scripts/TextureController.cs" />
-      <File FileName="Assets/Scripts/PipeLineManager.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
-      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
+      <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" Line="11" Column="15" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" Line="8" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="69f16fd6-e996-433c-8e96-79c8aaefa4bd" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="dc6538c6-45c9-4ffe-9cf1-97f5d7614b15" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

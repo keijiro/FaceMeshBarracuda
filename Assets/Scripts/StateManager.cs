@@ -59,7 +59,7 @@ namespace MediaPipe.FaceMesh
 
             if (_pipeLine.IsFaceTracking)
             {
-                SendDetectEvent();
+               SendDetectEvent();
             }
             else
             {

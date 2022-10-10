@@ -8,7 +8,7 @@ public class TextureController
 {
     public CapturedDataManager _capturedDataManager { get; private set; }
 
-    public float _texturePercentage = 2f / 3f;
+    public float _texturePercentage = 2f / 4f;
 
     public  TextureController()
     {
