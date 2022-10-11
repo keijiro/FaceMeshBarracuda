@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Fullscreen/Editor/FullscreenWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs">
     <Files>
-      <File FileName="Assets/Scripts/AutoRunner.cs" Line="19" Column="91" />
+      <File FileName="Assets/Scripts/AutoRunner.cs" Line="30" Column="10" />
       <File FileName="Assets/Scripts/PipeLineManager.cs" Line="77" Column="12" />
       <File FileName="Assets/Scripts/FaceSwap.cs" />
       <File FileName="Assets/Scripts/MyWebcamInput.cs" />
       <File FileName="Assets/Scripts/StateMachine.cs" />
-      <File FileName="Assets/Scripts/StateManager.cs" />
+      <File FileName="Assets/Scripts/StateManager.cs" Line="57" Column="1" />
       <File FileName="Assets/Scripts/MixedFaceGenerator.cs" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" />
       <File FileName="Assets/Scripts/FaceMesh.cs" />
@@ -17,11 +17,11 @@
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
-      <File FileName="Assets/Scripts/CapturedDataManager.cs" />
-      <File FileName="Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
+      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="125" Column="47" />
+      <File FileName="Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" Line="14" Column="1" />
       <File FileName="Assets/Scripts/AutoRunParams.cs" Line="3" Column="27" />
-      <File FileName="Assets/Fullscreen/Editor/FullscreenOnPlay.cs" Line="29" Column="98" />
-      <File FileName="Assets/Fullscreen/Editor/FullscreenWindow.cs" Line="27" Column="23" />
+      <File FileName="Assets/Fullscreen/Editor/FullscreenOnPlay.cs" Line="31" Column="30" />
+      <File FileName="Assets/Fullscreen/Editor/FullscreenWindow.cs" Line="30" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

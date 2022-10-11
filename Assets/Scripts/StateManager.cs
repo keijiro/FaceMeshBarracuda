@@ -32,7 +32,12 @@ namespace MediaPipe.FaceMesh
         {
             stateMachine = new ImtStateMachine<StateManager, StateEvent>(this);
 
-            stateMachine.AddAnyTransition<IdleState>(StateEvent.Lost);
+            stateMachine.AddTransition<DetectingState,IdleState>(StateEvent.Lost);
+            stateMachine.AddTransition<CapturingState,IdleState>(StateEvent.Lost);
+            stateMachine.AddTransition<CapturedState,IdleState>(StateEvent.Lost);
+            stateMachine.AddTransition<SwappingState,IdleState>(StateEvent.Lost);
+            stateMachine.AddTransition<SwappedState,IdleState>(StateEvent.Lost);
+
             stateMachine.AddTransition<IdleState, DetectingState>(StateEvent.Detect);
             stateMachine.AddTransition<DetectingState, CapturingState>(StateEvent.Capture);
             stateMachine.AddTransition<CapturingState, CapturedState>(StateEvent.Captured);
@@ -222,13 +227,13 @@ namespace MediaPipe.FaceMesh
         public void SendDetectEvent()
         {
             stateMachine.SendEvent(StateEvent.Detect);
-            Debug.Log("Send Detect Event");
+           // Debug.Log("Send Detect Event");
         }
 
         public void SendLostEvent()
         {
             stateMachine.SendEvent(StateEvent.Lost);
-            Debug.Log("Send Lost Event");
+           // Debug.Log("Send Lost Event");
         }
     }
 }
