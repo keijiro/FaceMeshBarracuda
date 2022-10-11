@@ -116,7 +116,14 @@ public class CapturedDataManager
         //jsonFilieを更新
         string path = Path.Combine(_capturedFileDir, "CapturedData.json");
 
-        File.WriteAllText(path, json);
+        try
+        {
+            File.WriteAllText(path, json);
+        }
+        catch(System.Exception exception)
+        {
+            Debug.LogError(exception.Message);
+        }
 
     }
 
