@@ -1,15 +1,15 @@
 {
   "dependencies": {
     "com.unity.barracuda": {
-      "version": "https://github.com/Unity-Technologies/barracuda-release.git",
+      "version": "2.0.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.6.0",
         "com.unity.modules.jsonserialize": "1.0.0",
         "com.unity.modules.imageconversion": "1.0.0"
       },
-      "hash": "80909e3320d7582cb8a70f52d027bfa1851abf50"
+      "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
       "version": "1.8.0",
@@ -28,7 +28,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.12",
+      "version": "2.0.16",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -37,7 +37,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
-      "version": "1.2.4",
+      "version": "1.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -51,7 +51,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.postprocessing": {
-      "version": "3.2.0",
+      "version": "3.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
