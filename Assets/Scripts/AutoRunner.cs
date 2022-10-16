@@ -1,11 +1,15 @@
 using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
 using FullscreenEditor;
+#endif
 
 [ExecuteInEditMode]
 public class AutoRunner : MonoBehaviour
 {
+#if UNITY_EDITOR
     EditorWindow gameView;
+#endif
 
     private void Awake()
     {
