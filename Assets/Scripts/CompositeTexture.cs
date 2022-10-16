@@ -17,6 +17,8 @@ public class CompositeTexture :IDisposable
     {
         _shader = Shader.Find("Hidden/MediaPipe/FaceMesh/TextureComposite");
 
+       //_shader = Shader.Find("Legacy Shaders/Diffuse");
+
         _material = new Material(_shader);
 
         _renderTexture = new RenderTexture(1024, 1024, 0);
@@ -68,15 +70,18 @@ public class CompositeTexture :IDisposable
         _material.SetFloat("_BlendEndV", _BlendEndV);
 
         //textureをコピーして、Blitを使ってターゲットに書き込む
-        RenderTexture tmpTexture = new RenderTexture(targetTexture.width, targetTexture.height, 0);
+
+        RenderTexture tmpTexture = RenderTexture.GetTemporary(targetTexture.descriptor);
 
         Graphics.CopyTexture(targetTexture, tmpTexture);
 
-        Graphics.Blit(tmpTexture, targetTexture, _material);
+        //Graphics.Blit(tmpTexture, targetTexture, _material, -1);
+
+        Graphics.Blit(tmpTexture, targetTexture, _material, -1);
 
         //メモリ確保
-        tmpTexture.Release();
-        MonoBehaviour.Destroy(tmpTexture);
+        RenderTexture.ReleaseTemporary(tmpTexture);
+
     }
 
     //分割数とその中での番号を引数にする
@@ -98,6 +103,7 @@ public class CompositeTexture :IDisposable
     public void Composite(RenderTexture targetTexture, Texture overTxtrure,
         Rect rect)
     {
+
         float _BlendStartU = rect.x / (float)targetTexture.width;
         float _BlendEndU = (rect.x + rect.width) / (float)targetTexture.width;
         float _BlendStartV = rect.y / (float)targetTexture.height;

@@ -66,27 +66,27 @@ namespace MediaPipe.FaceMesh
         void Update()
         {
           
-                //mesh情報をアップデート
-                _faceMesh.UpdateMesh(_pipeline.RefinedFaceVertexBuffer);//Refinedを使うのでCropMatrix不要
-                _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);//用意されたmeshに貼り付けるのでrefinedだとだめ
+        }
 
-                //RenderTextureにFaceTextureを書き込み
-                _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
+        private void LateUpdate()
+        {
+            //mesh情報をアップデート
+            _faceMesh.UpdateMesh(_pipeline.RefinedFaceVertexBuffer);//Refinedを使うのでCropMatrix不要
+            _faceMeshTransformed.UpdateMesh(_pipeline.RawFaceVertexBuffer);//用意されたmeshに貼り付けるのでrefinedだとだめ
 
-                //renderTextureと取り込んだテクスチャを合成;
-                Graphics.CopyTexture(_faceUVMappedRT, _faceSwappedRT);
+            //RenderTextureにFaceTextureを書き込み
+            _faceMeshTransformed.Draw(_pipeline.CroppedFaceTexture);
 
-                int index = 0;
+            //renderTextureと取り込んだテクスチャを合成;
+            Graphics.CopyTexture(_faceUVMappedRT, _faceSwappedRT);
 
             if (_isDraw)
             {
                 for (int i = 0; i < _splitFacesData.Count; i++)
                 {
                     _composites[i].Composite(_faceSwappedRT, _splitFacesData[i].texture, _splitFacesData[i].capturedData.rect);
-                    index++;
+                    i++;
                 }
-
-           
                 //合成結果をメッシュ上に描画
                 _faceMesh.Draw(_faceSwappedRT);
             }

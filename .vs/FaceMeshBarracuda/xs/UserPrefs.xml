@@ -1,23 +1,23 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Fullscreen/FullscreenEditor.asmdef">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shader/TextureComposite.shader">
     <Files>
-      <File FileName="Assets/Scripts/AutoRunner.cs" Line="3" Column="1" />
+      <File FileName="Assets/Scripts/AutoRunner.cs" Line="5" Column="7" />
       <File FileName="Assets/Scripts/PipeLineManager.cs" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" Line="85" Column="39" />
       <File FileName="Assets/Scripts/MyWebcamInput.cs" />
-      <File FileName="Assets/Scripts/StateMachine.cs" />
+      <File FileName="Assets/Scripts/StateMachine.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/StateManager.cs" Line="39" Column="78" />
       <File FileName="Assets/Scripts/MixedFaceGenerator.cs" />
       <File FileName="Assets/Scripts/FaceMeshTransformed.cs" />
       <File FileName="Assets/Scripts/FaceMesh.cs" />
-      <File FileName="Assets/Shader/FaceMesh.shader" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" />
-      <File FileName="Assets/Shader/TextureComposite.shader" />
-      <File FileName="Assets/Scripts/TextureController.cs" />
+      <File FileName="Assets/Shader/FaceMesh.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="101" Column="40" />
+      <File FileName="Assets/Shader/TextureComposite.shader" Line="72" Column="14" />
+      <File FileName="Assets/Scripts/TextureController.cs" Line="1" Column="1" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
-      <File FileName="Assets/Scripts/CapturedDataManager.cs" />
+      <File FileName="Assets/Scripts/CapturedDataManager.cs" Line="13" Column="14" />
       <File FileName="Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
       <File FileName="Assets/Scripts/AutoRunParams.cs" />
       <File FileName="Assets/Fullscreen/Editor/FullscreenOnPlay.cs" />
