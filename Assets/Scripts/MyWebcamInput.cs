@@ -15,9 +15,9 @@ namespace MediaPipe.FaceMesh
 
         [SerializeField] Texture2D _dummyImage = null;
 
-        [SerializeField] uint defaultDeviceIndex;
-
         [SerializeField] bool _isMirror = true;
+
+        [SerializeField] JsonSettings _jsonSettings;
 
         #endregion
 
@@ -38,6 +38,8 @@ namespace MediaPipe.FaceMesh
 
         CameraDevice device;
 
+        IMediaDevice defaultDevice;
+
         #region MonoBehaviour implementation
 
         async void Start()
@@ -50,12 +52,28 @@ namespace MediaPipe.FaceMesh
                 Debug.LogError("User did not grant camera permissions");
                 return;
             }
+
+            //load from Json
+            _isMirror = _jsonSettings._settings.isMirrored;
+
+            defaultDevice = _jsonSettings._settings.device;
+
             // Create a device query for device cameras
-#if UNITY_IOS
-            query = new MediaDeviceQuery(MediaDeviceCriteria.FrontCamera);
-#else
             query = new MediaDeviceQuery(MediaDeviceCriteria.CameraDevice);
-#endif
+
+            //search for default device.
+            if(defaultDevice != null)
+            {
+                for(int i=0; i<query.count; i++)
+                {
+                    if(defaultDevice == query.current)
+                    {
+                        break;
+                    }
+                    query.Advance();
+                }
+            }
+
 
             device = query.current as CameraDevice;
             
@@ -101,6 +119,15 @@ namespace MediaPipe.FaceMesh
             device = query.current as CameraDevice;
             previewTexture = await device.StartRunning();
 
+            //Update Json
+            _jsonSettings.UpdateSettings<IMediaDevice>("device", query.current);
+
+        }
+
+        public void SetMirrored(bool isMirror)
+        {
+            _isMirror = isMirror;
+            _jsonSettings.UpdateSettings<bool>("isMirrored", _isMirror);
         }
 
 #endregion

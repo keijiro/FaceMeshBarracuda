@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] GameObject MenuContainer;
     bool isMenuVisible = false;
     Texture2D invisibleCursor;
 
@@ -13,7 +14,7 @@ public class MenuManager : MonoBehaviour
         invisibleCursor = new Texture2D(1, 1,TextureFormat.RGBA32,false);
         invisibleCursor.SetPixel(0, 0, Color.clear);
 
-        SetCursorHide();
+        SetMenuHide();
     }
 
     // Update is called once per frame
@@ -32,6 +33,9 @@ public class MenuManager : MonoBehaviour
     {
         isMenuVisible = true;
 
+        if(MenuContainer != null)
+            MenuContainer.SetActive(true);
+
         SetCursorVisible();
 
     }
@@ -39,6 +43,9 @@ public class MenuManager : MonoBehaviour
     public void SetMenuHide()
     {
         isMenuVisible = false;
+
+        if (MenuContainer != null)
+            MenuContainer.SetActive(false);
 
         SetCursorHide();
     }

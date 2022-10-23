@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using System.Threading.Tasks;
-
+using UnityEngine.SceneManagement;
 
 namespace MediaPipe.FaceMesh
 {
@@ -236,6 +236,10 @@ namespace MediaPipe.FaceMesh
         public void DeleteAllTextures()
         {
             _textureController._capturedDataManager.DeleteAllData();
+
+            //シーン再読み込み
+            Scene loadScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(loadScene.name);
         }
 
         public void SetDraw(bool isDraw)
