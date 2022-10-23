@@ -1,19 +1,16 @@
 ﻿<Properties StartupConfiguration="{BBF7FAA5-C220-0EFA-82BB-F264D58CF59E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CompositeTexture.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyUtils/JsonSettings.cs">
     <Files>
       <File FileName="Assets/Scripts/AutoRunner.cs" Line="5" Column="7" />
       <File FileName="Assets/Scripts/PipeLineManager.cs" />
-      <File FileName="Assets/Scripts/FaceSwap.cs" Line="241" Column="61" />
-      <File FileName="Assets/Scripts/MyWebcamInput.cs" Line="20" Column="26" />
-      <File FileName="Assets/Scripts/StateMachine.cs" />
-      <File FileName="Assets/Scripts/StateManager.cs" />
-      <File FileName="Assets/Scripts/MixedFaceGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FaceSwap.cs" />
+      <File FileName="Assets/Scripts/MixedFaceGenerator.cs" />
+      <File FileName="Assets/Scripts/FaceMeshTransformed.cs" />
       <File FileName="Assets/Scripts/FaceMesh.cs" />
       <File FileName="Assets/Shader/FaceMesh.shader" />
-      <File FileName="Assets/Scripts/CompositeTexture.cs" Line="103" Column="17" />
-      <File FileName="Assets/Shader/TextureComposite.shader" Line="73" Column="16" />
-      <File FileName="Assets/Scripts/TextureController.cs" Line="11" Column="40" />
+      <File FileName="Assets/Scripts/CompositeTexture.cs" />
+      <File FileName="Assets/Shader/TextureComposite.shader" />
+      <File FileName="Assets/Scripts/TextureController.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Base.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Process.cs" />
       <File FileName="Assets/FaceMesh/Script/FacePipeline_Public.cs" />
@@ -23,33 +20,16 @@
       <File FileName="Assets/Fullscreen/Editor/FullscreenOnPlay.cs" />
       <File FileName="Assets/Fullscreen/Editor/FullscreenWindow.cs" />
       <File FileName="Assets/Fullscreen/FullscreenEditor.asmdef" />
-      <File FileName="Assets/Scripts/MeshVisualizer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MenuManager.cs" Line="17" Column="23" />
-      <File FileName="Assets/Scripts/AutoInvisibleCursor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Fullscreen/Editor/FixGameViewMouseInput.cs" Line="17" Column="108" />
-      <File FileName="Assets/Scripts/JsonSettings.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MeshVisualizer.cs" />
+      <File FileName="Assets/Scripts/MenuManager.cs" />
+      <File FileName="Assets/Fullscreen/Editor/FixGameViewMouseInput.cs" />
+      <File FileName="Assets/Scripts/MyUtils/MyWebcamInput.cs" Line="20" Column="31" />
+      <File FileName="Assets/Scripts/MyUtils/JsonSettings.cs" Line="19" Column="5" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="FaceMeshBarracuda" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Fullscreen" expanded="True">
-                <Node name="Editor" expanded="True" />
-              </Node>
-              <Node name="Scripts" expanded="True">
-                <Node name="CompositeTexture.cs" selected="True" />
-              </Node>
-              <Node name="Shader" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="965375ed-bece-4d6c-b2b2-c3460ce34f8b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bbd66aca-6a11-4766-b887-9165773595f7" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

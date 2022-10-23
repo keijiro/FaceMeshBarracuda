@@ -14,10 +14,8 @@ public class JsonSettings : MonoBehaviour
     //ここを書き換える
     public class Settings
     {
-        [JsonProperty("Device")]
-        public NatSuite.Devices.IMediaDevice device { get; set; }
+        public string deviceID { get; set; }
 
-        [JsonProperty("IsMirrored")]
         public bool isMirrored { get; set; }
     }
 

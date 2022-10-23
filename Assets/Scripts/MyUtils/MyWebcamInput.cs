@@ -38,7 +38,7 @@ namespace MediaPipe.FaceMesh
 
         CameraDevice device;
 
-        IMediaDevice defaultDevice;
+        string defaultDeviceID;
 
         #region MonoBehaviour implementation
 
@@ -56,17 +56,17 @@ namespace MediaPipe.FaceMesh
             //load from Json
             _isMirror = _jsonSettings._settings.isMirrored;
 
-            defaultDevice = _jsonSettings._settings.device;
+            defaultDeviceID = _jsonSettings._settings.deviceID;
 
             // Create a device query for device cameras
             query = new MediaDeviceQuery(MediaDeviceCriteria.CameraDevice);
 
             //search for default device.
-            if(defaultDevice != null)
+            if(defaultDeviceID != null)
             {
                 for(int i=0; i<query.count; i++)
                 {
-                    if(defaultDevice == query.current)
+                    if(defaultDeviceID == query.current.uniqueID)
                     {
                         break;
                     }
@@ -120,7 +120,7 @@ namespace MediaPipe.FaceMesh
             previewTexture = await device.StartRunning();
 
             //Update Json
-            _jsonSettings.UpdateSettings<IMediaDevice>("device", query.current);
+            _jsonSettings.UpdateSettings<string>("deviceID", query.current.uniqueID);
 
         }
 
