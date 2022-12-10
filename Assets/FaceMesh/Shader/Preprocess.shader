@@ -13,7 +13,7 @@ Shader "Hidden/MediaPipe/FaceMesh/Preprocess"
     float4x4 _Xform;
 
     float4 Fragment(float4 vertex : SV_Position,
-                    float2 uv : TEXCOORD0) : SV_Target
+                    half2 uv : TEXCOORD0) : SV_Target
     {
         uv = mul(_Xform, float4(uv, 0, 1)).xy;
         return tex2D(_MainTex, uv);
