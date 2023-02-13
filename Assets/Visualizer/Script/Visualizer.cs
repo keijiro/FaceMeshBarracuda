@@ -1,22 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Unity.Mathematics;
-using UI = UnityEngine.UI;
-
-namespace MediaPipe.FaceMesh {
+using Klak.TestTools;
+using MediaPipe.FaceMesh;
 
 public sealed class Visualizer : MonoBehaviour
 {
     #region Editable attributes
 
-    [SerializeField] WebcamInput _webcam = null;
+    [SerializeField] ImageSource _source = null;
     [Space]
     [SerializeField] ResourceSet _resources = null;
     [SerializeField] Shader _shader = null;
     [Space]
-    [SerializeField] UI.RawImage _mainUI = null;
-    [SerializeField] UI.RawImage _faceUI = null;
-    [SerializeField] UI.RawImage _leftEyeUI = null;
-    [SerializeField] UI.RawImage _rightEyeUI = null;
+    [SerializeField] RawImage _mainUI = null;
+    [SerializeField] RawImage _faceUI = null;
+    [SerializeField] RawImage _leftEyeUI = null;
+    [SerializeField] RawImage _rightEyeUI = null;
 
     #endregion
 
@@ -44,10 +44,10 @@ public sealed class Visualizer : MonoBehaviour
     void LateUpdate()
     {
         // Processing on the face pipeline
-        _pipeline.ProcessImage(_webcam.Texture);
+        _pipeline.ProcessImage(_source.Texture);
 
         // UI update
-        _mainUI.texture = _webcam.Texture;
+        _mainUI.texture = _source.Texture;
         _faceUI.texture = _pipeline.CroppedFaceTexture;
         _leftEyeUI.texture = _pipeline.CroppedLeftEyeTexture;
         _rightEyeUI.texture = _pipeline.CroppedRightEyeTexture;
@@ -106,5 +106,3 @@ public sealed class Visualizer : MonoBehaviour
 
     #endregion
 }
-
-} // namespace MediaPipe.FaceMesh
