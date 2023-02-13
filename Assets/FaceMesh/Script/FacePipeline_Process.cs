@@ -17,7 +17,7 @@ partial class FacePipeline
 
     // Vertex retrieval from the face landmark detector
     float4 GetFaceVertex(int index)
-      => _landmarkDetector.face.VertexArray.ElementAt(index);
+      => _landmarkDetector.face.VertexArray[index];
 
     void RunPipeline(Texture input)
     {
@@ -25,7 +25,8 @@ partial class FacePipeline
         _faceDetector.ProcessImage(input);
 
         // Cancel if the face detection score is too low.
-        var face = _faceDetector.Detections.FirstOrDefault();
+        if (_faceDetector.Detections.IsEmpty) return;
+        var face = _faceDetector.Detections[0];
         if (face.score < 0.5f) return;
 
         // Try updating the face region with the detection result. It's

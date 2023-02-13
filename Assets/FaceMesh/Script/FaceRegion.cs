@@ -53,7 +53,7 @@ sealed class FaceRegion
         UpdateMatrices();
     }
 
-    public void TryUpdateWithDetection(in FaceDetector.Detection face)
+    public void TryUpdateWithDetection(in Detection face)
     {
         var box = AddPadding(new BoundingBox(face));
         var angle = MathUtil.Angle(face.nose - face.mouth) - math.PI / 2;
